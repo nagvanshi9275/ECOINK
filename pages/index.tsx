@@ -2,13 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/Hero";
-import {
-  ArrowRight,
-  Shield,
-  Award,
-  Users,
-  Clock,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/data";
 import Testimonials from "@/components/Testimonials";
@@ -64,24 +58,19 @@ const installations = [
 // Why Choose Us Features
 const features = [
   {
-    icon: Shield,
-    title: "Quality Guaranteed",
-    description: "Premium materials and expert craftsmanship with 10-year warranty on all installations.",
+    image: "/Quality_Joinery_Across_Melbourne-removebg-preview.png",
+    title: "Quality Joinery",
+    description: "Premium materials and expert craftsmanship delivering quality joinery across Melbourne.",
   },
   {
-    icon: Award,
-    title: "30+ Years Experience",
-    description: "Three decades of transforming Melbourne homes with custom cabinetry solutions.",
+    image: "/Over_10_Years_Experience-removebg-preview.png",
+    title: "10+ Years Experience",
+    description: "Over a decade of transforming Melbourne homes with custom cabinetry solutions.",
   },
   {
-    icon: Users,
-    title: "Customer First",
-    description: "Personalized service from design to installation, ensuring your complete satisfaction.",
-  },
-  {
-    icon: Clock,
-    title: "On-Time Delivery",
-    description: "We respect your time with reliable scheduling and punctual project completion.",
+    image: "/Family_Owned___Operated_since_2018-removebg-preview.png",
+    title: "Family Owned",
+    description: "Family owned and operated since 2018, ensuring personalized customer service.",
   },
 ];
 
@@ -127,16 +116,21 @@ export default function Home() {
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => {
-              const IconComponent = feature.icon;
               return (
                 <div
                   key={index}
                   className="text-center p-8 bg-gray-50 rounded-2xl hover:bg-orange-50 hover:shadow-xl transition-all duration-300 group"
                 >
-                  <div className="w-16 h-16 mx-auto bg-white border-2 border-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm">
-                    <IconComponent className="w-8 h-8 text-orange-500 group-hover:text-white transition-colors" />
+                  <div className="w-48 h-48 mx-auto bg-white border-2 border-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:border-orange-500 group-hover:scale-110 transition-all duration-300 shadow-sm overflow-hidden p-4">
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      width={160}
+                      height={160}
+                      className="object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">
                     {feature.title}
@@ -179,36 +173,34 @@ export default function Home() {
           </div>
 
           {/* Installation Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
             {installations.map((item) => (
-              <Link key={item.id} href={item.href} className="group">
-                <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2">
-                  {/* Background Image */}
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+              <Link key={item.id} href={item.href} className="group block h-full">
+                <article className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
 
-                  {/* Gradient Overlay - Hidden initially, shown on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  {/* Content - Hidden initially, shown on hover */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                    <div className="w-12 h-1 bg-orange-500 mb-4 rounded-full" />
-                    <h3 className="text-2xl font-bold text-white mb-2">
+                  {/* Content Container */}
+                  <div className="flex flex-col flex-1 p-4 sm:p-6">
+                    <h3 className="text-sm sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors line-clamp-1">
                       {item.title}
                     </h3>
-                    <p className="text-gray-300 mb-4 line-clamp-2">
+                    <p className="text-xs sm:text-base text-gray-600 mb-4 line-clamp-2 md:line-clamp-3 flex-1">
                       {item.description}
                     </p>
-                    <div className="inline-flex items-center text-orange-400 font-bold uppercase tracking-wider text-sm group-hover:text-orange-300 transition-colors">
+                    <div className="mt-auto pt-2 flex items-center text-[10px] sm:text-sm font-bold text-orange-500 uppercase tracking-wider group-hover:gap-2 transition-all">
                       View Details
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
-                </div>
+                </article>
               </Link>
             ))}
           </div>
@@ -261,33 +253,40 @@ export default function Home() {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
             {projects.map((project) => (
-              <Link key={project.id} href={`/projects/${project.id}`} className="block group">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
+              <Link key={project.id} href={`/projects/${project.id}`} className="block group h-full">
+                <article className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Badge */}
+                    <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
+                      <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-orange-500 text-white text-[10px] sm:text-xs font-bold rounded-full shadow-lg">
+                        {project.location}
+                      </span>
+                    </div>
+                  </div>
 
-                  {/* Gradient Overlay - Hidden until hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  {/* Overlay Content - Hidden until hover */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                    <span className="text-orange-400 text-sm font-bold uppercase tracking-wider mb-2">
-                      {project.location}
-                    </span>
-                    <h3 className="text-xl font-bold text-white mb-4 drop-shadow-md">
+                  {/* Content Container */}
+                  <div className="flex flex-col flex-1 p-4 sm:p-6">
+                    <h3 className="text-sm sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors line-clamp-1">
                       {project.title}
                     </h3>
-                    <Button asChild size="sm" className="bg-orange-500 hover:bg-orange-600 text-white font-bold border-none shadow-lg cursor-pointer">
-                      <span>View Project</span>
-                    </Button>
+                    <p className="text-xs sm:text-base text-gray-600 mb-4 line-clamp-2 flex-1">
+                      {project.description}
+                    </p>
+                    <div className="mt-auto pt-2 flex items-center text-[10px] sm:text-sm font-bold text-orange-500 uppercase tracking-wider group-hover:gap-2 transition-all">
+                      View Project
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                </div>
+                </article>
               </Link>
             ))}
           </div>

@@ -102,7 +102,7 @@ export default function BlogDetail() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 lg:pt-12">
 
                     {/* 1️⃣ New Hero Section (Card Style) */}
-                    <div className="bg-[#0F172A] rounded-[2.5rem] p-6 sm:p-8 lg:p-12 text-white flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12 relative overflow-hidden mb-12 sm:mb-16">
+                    <div className="bg-[#545B63] rounded-[2.5rem] p-6 sm:p-8 lg:p-12 text-white flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12 relative overflow-hidden mb-12 sm:mb-16">
                         {/* Hero Image */}
                         <div className="w-full lg:w-1/2 h-[250px] sm:h-[350px] lg:h-[400px] relative rounded-3xl overflow-hidden shadow-2xl">
                             <Image
