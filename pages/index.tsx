@@ -283,8 +283,8 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-white mb-4 drop-shadow-md">
                       {project.title}
                     </h3>
-                    <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white font-bold border-none shadow-lg">
-                      View Project
+                    <Button asChild size="sm" className="bg-orange-500 hover:bg-orange-600 text-white font-bold border-none shadow-lg cursor-pointer">
+                      <span>View Project</span>
                     </Button>
                   </div>
                 </div>

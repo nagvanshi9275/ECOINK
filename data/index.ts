@@ -355,6 +355,7 @@ export const furnitureFeatures: FeatureCard[] = [
     },
 ];
 
+// This variable `projects` was referenced in the detail page but was missing in the data file.
 export const projects = [
     {
         id: "project-1",
@@ -397,6 +398,27 @@ export const projects = [
         location: "Richmond",
         image: "/kitchen1.jpg",
         description: "Custom architectural joinery including timber wall paneling and hidden storage.",
+    },
+    {
+        id: "project-7",
+        title: "Elegant Master Bedroom",
+        location: "Camberwell",
+        image: "/bedroom1.jpg",
+        description: "Built-in robes with mirror sliding doors and optimized storage.",
+    },
+    {
+        id: "project-8",
+        title: "Spa-Inspired Bathroom",
+        location: "Kew",
+        image: "/bathromr.jpg",
+        description: "Double vanity with integrated lighting and rainfall shower custom enclosure.",
+    },
+    {
+        id: "project-9",
+        title: "Home Office Setup",
+        location: "Malvern",
+        image: "/room copy.jpg",
+        description: "Custom desk with built-in shelving and cable management solutions.",
     },
 ];
 
