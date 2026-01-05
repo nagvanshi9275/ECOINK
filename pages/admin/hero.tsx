@@ -165,41 +165,41 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
 
     return (
         <AdminLayout>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900 font-outfit">Hero Section Management</h1>
-                    <p className="text-gray-500">Customize the main banner and services slider.</p>
+                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 font-outfit uppercase tracking-tight">Hero Section</h1>
+                    <p className="text-gray-500 text-sm md:text-base">Customize the main banner and services slider.</p>
                 </div>
                 <Button
                     onClick={handleSaveGlobal}
-                    className="bg-orange-500 text-white font-bold hover:bg-orange-600 shadow-lg shadow-orange-500/20"
+                    className="w-full sm:w-auto bg-orange-500 text-white font-bold h-12 px-6 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
                 >
-                    <Save size={18} className="mr-2" /> Save Global Changes
+                    <Save size={18} className="mr-2" /> Save Changes
                 </Button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
 
                 {/* Left Col: Hero Services Slider */}
-                <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <div className="flex justify-between items-start mb-6">
+                <div className="xl:col-span-2 bg-white p-4 md:p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
                         <div>
-                            <h2 className="text-lg font-bold text-gray-900 mb-1">Hero Services (Slider Content)</h2>
-                            <p className="text-sm text-gray-400">Manage your homepage slider services. We recommend {RECOMMENDED_COUNT} service cards for the best layout.</p>
+                            <h2 className="text-xl font-extrabold text-gray-900 mb-2 font-outfit uppercase">Services Slider Content</h2>
+                            <p className="text-sm text-gray-400">Manage your homepage slider services. We recommend {RECOMMENDED_COUNT} service cards.</p>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <div className={`px-3 py-1 rounded-full text-xs font-bold ${heroes.length < RECOMMENDED_COUNT ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'}`}>
-                                {heroes.length} / {RECOMMENDED_COUNT} Active
+                        <div className="flex items-center gap-3 w-full md:w-auto">
+                            <div className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest flex-1 md:flex-none text-center ${heroes.length < RECOMMENDED_COUNT ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'}`}>
+                                {heroes.length} / {RECOMMENDED_COUNT} Slots
                             </div>
                             {heroes.length < RECOMMENDED_COUNT && (
-                                <button onClick={handlePopulateDefaults} className="flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold hover:bg-blue-100 transition-colors">
-                                    <Wand2 size={12} /> Auto-Fill
+                                <button onClick={handlePopulateDefaults} className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest hover:bg-blue-100 transition-colors shadow-sm">
+                                    <Wand2 size={14} /> Auto-Fill
                                 </button>
                             )}
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                         {heroes.map((hero) => (
                             <div key={hero.id} className="border border-gray-200 rounded-xl p-4 bg-gray-50 flex flex-col gap-3 relative group">
                                 <button

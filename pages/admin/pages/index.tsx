@@ -23,13 +23,13 @@ export default function PagesAdmin({ initialPages }: PagesProps) {
 
     return (
         <AdminLayout>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 font-outfit uppercase tracking-tight">Custom Pages</h1>
                     <p className="text-gray-500 text-sm md:text-base">Manage static and dynamic pages of your website.</p>
                 </div>
                 <Link href="/admin/pages/new">
-                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all">
+                    <Button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all">
                         <Plus size={18} className="mr-2" /> Create New Page
                     </Button>
                 </Link>
@@ -48,9 +48,50 @@ export default function PagesAdmin({ initialPages }: PagesProps) {
                 </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            {/* Mobile View: Cards */}
+            <div className="lg:hidden space-y-4 mb-8">
+                {filtered.map((page) => (
+                    <div key={page.id} className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <div className="flex items-start justify-between gap-3">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center shrink-0">
+                                    <FileText size={20} />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-gray-900 line-clamp-1">{page.title}</h3>
+                                    <p className="text-xs font-mono text-gray-400">/{page.slug}</p>
+                                </div>
+                            </div>
+                            <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-full shrink-0 ${page.isPublished ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'}`}>
+                                {page.isPublished ? 'Live' : 'Draft'}
+                            </span>
+                        </div>
+                        <div className="flex items-center justify-between pt-2 border-t border-gray-50">
+                            <span className="text-[10px] text-gray-400 font-medium">Updated <FormattedDate date={page.updatedAt} /></span>
+                            <div className="flex gap-1">
+                                <Link href={`/${page.slug}`} target="_blank">
+                                    <button className="p-2 text-gray-400 hover:text-blue-600 rounded-lg"><Eye size={18} /></button>
+                                </Link>
+                                <Link href={`/admin/pages/${page.id}`}>
+                                    <button className="p-2 text-gray-400 hover:text-orange-600 rounded-lg"><Edit size={18} /></button>
+                                </Link>
+                                <button onClick={() => handleDelete(page.id)} className="p-2 text-gray-400 hover:text-red-600 rounded-lg"><Trash2 size={18} /></button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                {filtered.length === 0 && (
+                    <div className="bg-white p-12 rounded-2xl border border-gray-100 text-center text-gray-400">
+                        <FileText size={48} className="mx-auto mb-4 opacity-10" />
+                        <p>No pages found.</p>
+                    </div>
+                )}
+            </div>
+
+            {/* Desktop View: Table */}
+            <div className="hidden lg:block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left min-w-[800px] lg:min-w-0">
+                    <table className="w-full text-left">
                         <thead>
                             <tr className="bg-gray-50 text-[10px] font-black uppercase tracking-widest text-gray-400 border-b border-gray-100">
                                 <th className="px-6 py-4">Page Title</th>
@@ -95,17 +136,6 @@ export default function PagesAdmin({ initialPages }: PagesProps) {
                                     </td>
                                 </tr>
                             ))}
-
-                            {filtered.length === 0 && (
-                                <tr>
-                                    <td colSpan={5} className="px-6 py-20 text-center text-gray-400">
-                                        <div className="flex flex-col items-center justify-center">
-                                            <FileText size={48} className="mb-4 opacity-10" />
-                                            <p>No pages found matching your search.</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            )}
                         </tbody>
                     </table>
                 </div>

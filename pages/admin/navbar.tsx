@@ -45,13 +45,13 @@ export default function NavbarAdmin({ initialItems }: NavbarProps) {
 
     return (
         <AdminLayout>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900">Navigation Menu</h1>
-                    <p className="text-gray-500">Manage your website's header navigation and links.</p>
+                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 font-outfit uppercase tracking-tight">Navigation Menu</h1>
+                    <p className="text-gray-500 text-sm md:text-base">Manage your website's header navigation and links.</p>
                 </div>
-                <Button onClick={() => { setCurrent({ isVisible: true, order: items.length }); setIsEditing(true); }} className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold h-12 rounded-xl">
-                    <Plus size={18} className="mr-2" /> Add Menu Item
+                <Button onClick={() => { setCurrent({ isVisible: true, order: items.length }); setIsEditing(true); }} className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all">
+                    <Plus size={18} className="mr-2" /> Add Item
                 </Button>
             </div>
 
@@ -88,22 +88,22 @@ export default function NavbarAdmin({ initialItems }: NavbarProps) {
                 </div>
                 <div className="divide-y divide-gray-50">
                     {items.sort((a, b) => a.order - b.order).map((item) => (
-                        <div key={item.id} className="flex items-center justify-between p-4 hover:bg-gray-50 group transition-colors">
-                            <div className="flex items-center gap-4">
-                                <GripVertical size={20} className="text-gray-300 cursor-move" />
-                                <div>
+                        <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-gray-50 group transition-colors gap-4">
+                            <div className="flex items-center gap-4 flex-1 min-w-0">
+                                <GripVertical size={20} className="text-gray-300 cursor-move shrink-0" />
+                                <div className="min-w-0 flex-1">
                                     <div className="flex items-center gap-2">
-                                        <h3 className="font-bold text-gray-900">{item.label}</h3>
-                                        {!item.isVisible && <span className="text-[8px] font-black uppercase px-1.5 py-0.5 bg-gray-100 text-gray-400 rounded">Hidden</span>}
+                                        <h3 className="font-bold text-gray-900 truncate">{item.label}</h3>
+                                        {!item.isVisible && <span className="text-[8px] font-black uppercase px-1.5 py-0.5 bg-gray-100 text-gray-400 rounded shrink-0">Hidden</span>}
                                     </div>
-                                    <p className="text-xs text-gray-400 font-mono">{item.link}</p>
+                                    <p className="text-xs text-gray-400 font-mono truncate">{item.link}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-end gap-1 sm:gap-2">
                                 <button onClick={() => toggleVisibility(item)} className={`p-2 rounded-lg transition-colors ${item.isVisible ? 'text-blue-500 hover:bg-blue-50' : 'text-gray-300 hover:bg-gray-100'}`}>
                                     {item.isVisible ? <Eye size={18} /> : <EyeOff size={18} />}
                                 </button>
-                                <button onClick={() => { setCurrent(item); setIsEditing(true); }} className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors">
+                                <button onClick={() => { setCurrent(item); setIsEditing(true); }} className="p-2 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors">
                                     <Edit size={18} />
                                 </button>
                                 <button onClick={() => handleDelete(item.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">

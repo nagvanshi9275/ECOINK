@@ -29,14 +29,14 @@ interface DashboardProps {
 export default function Dashboard({ stats }: DashboardProps) {
     return (
         <AdminLayout>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 font-outfit">Welcome Back!</h1>
-                    <p className="text-gray-500 text-sm md:text-base">Here's an overview of your website content management system.</p>
+                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 font-outfit uppercase tracking-tight">Dashboard Overview</h1>
+                    <p className="text-gray-500 text-sm md:text-base">CMS management and site activity tracking.</p>
                 </div>
                 <div className="flex gap-2">
-                    <Link href="/admin/pages/new">
-                        <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/20">
+                    <Link href="/admin/pages/new" className="w-full">
+                        <Button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all">
                             <Plus size={18} className="mr-2" /> Quick Page
                         </Button>
                     </Link>

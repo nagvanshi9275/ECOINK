@@ -204,26 +204,26 @@ export default function SectionsAdmin({ initialSections }: SectionsProps) {
                                         <Info size={14} /> Content Configuration
                                     </h3>
 
-                                    <div className="space-y-4">
+                                    <div className="space-y-6">
                                         <div>
-                                            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1.5 pl-1">Heading</label>
+                                            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 pl-1">Heading</label>
                                             <input
-                                                className="w-full border border-gray-100 p-3 rounded-xl outline-none focus:border-orange-500 transition-all font-bold text-sm"
+                                                className="w-full border border-gray-100 p-4 rounded-xl outline-none focus:border-orange-500 transition-all font-bold text-sm bg-gray-50/50"
                                                 value={current.content.heading}
                                                 onChange={e => setCurrent({ ...current, content: { ...current.content, heading: e.target.value } })}
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1.5 pl-1">Subheading / Description</label>
+                                            <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 pl-1">Subheading / Description</label>
                                             <textarea
-                                                className="w-full border border-gray-100 p-3 rounded-xl outline-none focus:border-orange-500 transition-all text-sm h-24 resize-none leading-relaxed"
+                                                className="w-full border border-gray-100 p-4 rounded-xl outline-none focus:border-orange-500 transition-all text-sm h-28 resize-none leading-relaxed bg-gray-50/50"
                                                 value={current.content.subheading}
                                                 onChange={e => setCurrent({ ...current, content: { ...current.content, subheading: e.target.value } })}
                                             />
                                         </div>
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1.5 pl-1">Section Image</label>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div className="col-span-1">
+                                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 pl-1">Section Image</label>
                                                 <ImageUploader
                                                     currentImage={current.content.image}
                                                     onImageUploaded={(url) => setCurrent({ ...current, content: { ...current.content, image: url } })}
@@ -233,18 +233,18 @@ export default function SectionsAdmin({ initialSections }: SectionsProps) {
                                                     onRemove={() => setCurrent({ ...current, content: { ...current.content, image: '' } })}
                                                 />
                                             </div>
-                                            <div>
-                                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1.5 pl-1">CTA text</label>
+                                            <div className="col-span-1">
+                                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 pl-1">CTA text</label>
                                                 <input
-                                                    className="w-full border border-gray-100 p-3 rounded-xl outline-none focus:border-orange-500 transition-all text-sm"
+                                                    className="w-full border border-gray-100 p-4 rounded-xl outline-none focus:border-orange-500 transition-all text-sm bg-gray-50/50"
                                                     value={current.content.ctaText}
                                                     onChange={e => setCurrent({ ...current, content: { ...current.content, ctaText: e.target.value } })}
                                                 />
                                             </div>
-                                            <div className="col-span-2">
-                                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1.5 pl-1">CTA Link (URL or Slug)</label>
+                                            <div className="sm:col-span-2">
+                                                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 pl-1">CTA Link (URL or Slug)</label>
                                                 <input
-                                                    className="w-full border border-gray-100 p-3 rounded-xl outline-none focus:border-orange-500 transition-all text-sm"
+                                                    className="w-full border border-gray-100 p-4 rounded-xl outline-none focus:border-orange-500 transition-all text-sm bg-gray-50/50"
                                                     placeholder="/contact or https://..."
                                                     value={current.content.ctaLink}
                                                     onChange={e => setCurrent({ ...current, content: { ...current.content, ctaLink: e.target.value } })}

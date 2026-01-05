@@ -100,13 +100,13 @@ export default function EditPage({ page: initialPage, availableSections }: PageF
                             />
                         </div>
                         <div>
-                            <label className="block text-xs font-black text-gray-400 uppercase tracking-wider mb-2">URL Slug</label>
-                            <div className="flex items-center gap-2 bg-gray-50 border-2 border-gray-50 p-4 rounded-2xl focus-within:bg-white focus-within:border-orange-500 transition-all">
-                                <span className="text-gray-400 font-medium hidden sm:inline">magricabinets.com.au /</span>
+                            <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2 px-1">URL Slug</label>
+                            <div className="flex items-center gap-2 bg-gray-50/50 border-2 border-gray-50 p-4 rounded-2xl focus-within:bg-white focus-within:border-orange-500 transition-all">
+                                <span className="text-gray-400 font-bold text-xs hidden lg:inline">magricabinets.com.au /</span>
                                 <input
-                                    className="flex-1 bg-transparent border-none outline-none font-bold text-gray-700"
+                                    className="flex-1 bg-transparent border-none outline-none font-bold text-gray-800 placeholder:text-gray-300"
                                     value={page.slug}
-                                    onChange={e => setPage({ ...page, slug: e.target.value })}
+                                    onChange={(e) => setPage({ ...page, slug: e.target.value })}
                                     placeholder="our-services"
                                     required
                                 />
