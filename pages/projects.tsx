@@ -1,88 +1,62 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
+import { GetServerSideProps } from "next";
 import { Button } from "@/components/ui/button";
 import ServiceCTA from "@/components/ServiceCTA";
 import { ArrowRight } from "lucide-react";
+import prisma from "@/lib/prisma";
 
-// Projects Data
-const projects = [
-    {
-        id: "modern-kitchen-renovation",
-        title: "Modern Kitchen Renovation",
-        location: "Melbourne CBD",
-        category: "Kitchen",
-        description: "Complete kitchen transformation with custom cabinetry, stone benchtops, and modern fixtures.",
-        image: "/kitchen2.jpg",
-    },
-    {
-        id: "luxury-master-wardrobe",
-        title: "Luxury Master Wardrobe",
-        location: "Toorak",
-        category: "Wardrobe",
-        description: "Walk-in wardrobe with custom shelving, LED lighting, and velvet-lined drawers.",
-        image: "/bedroom.jpg",
-    },
-    {
-        id: "contemporary-bathroom",
-        title: "Contemporary Bathroom",
-        location: "South Yarra",
-        category: "Bathroom",
-        description: "Modern bathroom vanity with floating design and premium stone benchtop.",
-        image: "/toliet.jpg",
-    },
-    {
-        id: "custom-library-study",
-        title: "Custom Library & Study",
-        location: "Brighton",
-        category: "Furniture",
-        description: "Floor-to-ceiling bookshelves with integrated desk and hidden storage.",
-        image: "/library.jpg",
-    },
-    {
-        id: "family-living-space",
-        title: "Family Living Space",
-        location: "Hawthorn",
-        category: "TV Cabinet",
-        description: "Custom entertainment unit with cable management and display shelving.",
-        image: "/room.jpg",
-    },
-    {
-        id: "bespoke-joinery",
-        title: "Bespoke Joinery",
-        location: "Richmond",
-        category: "Kitchen",
-        description: "Hamptons-style kitchen with shaker doors and brass hardware.",
-        image: "/kitchen1.jpg",
-    },
-    {
-        id: "elegant-master-bedroom",
-        title: "Elegant Master Bedroom",
-        location: "Camberwell",
-        category: "Wardrobe",
-        description: "Built-in robes with mirror sliding doors and optimized storage.",
-        image: "/bedroom1.jpg",
-    },
-    {
-        id: "spa-inspired-bathroom",
-        title: "Spa-Inspired Bathroom",
-        location: "Kew",
-        category: "Bathroom",
-        description: "Double vanity with integrated lighting and rainfall shower custom enclosure.",
-        image: "/bathromr.jpg",
-    },
-    {
-        id: "home-office-setup",
-        title: "Home Office Setup",
-        location: "Malvern",
-        category: "Furniture",
-        description: "Custom desk with built-in shelving and cable management solutions.",
-        image: "/room copy.jpg",
-    },
-];
+// Type definition
+type Project = {
+    id: string;
+    title: string;
+    location: string;
+    category: string;
+    description: string;
+    image: string;
+};
+
+type Props = {
+    projects: Project[];
+};
 
 const categories = ["All", "Kitchen", "Bathroom", "Wardrobe", "TV Cabinet", "Furniture"];
 
-export default function Projects() {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+    try {
+        const projectsRaw = await prisma.project.findMany({
+            where: { isVisible: true },
+            orderBy: { createdAt: 'desc' },
+        });
+
+        const projects = projectsRaw.map((p) => ({
+            id: p.slug,
+            title: p.title,
+            location: p.location || "",
+            category: (p as any).category || "Uncategorized",
+            description: p.description,
+            image: p.images && p.images.length > 0 ? p.images[0] : "/placeholder.jpg",
+        }));
+
+        return {
+            props: { projects },
+        };
+    } catch (error) {
+        console.error("Error fetching projects:", error);
+        return {
+            props: { projects: [] },
+        };
+    }
+};
+
+export default function Projects({ projects }: Props) {
+    const [activeCategory, setActiveCategory] = useState("All");
+
+    const filteredProjects = activeCategory === "All"
+        ? projects
+        : projects.filter((p) => p.category === activeCategory);
+
     return (
         <>
             <Head>
@@ -122,7 +96,8 @@ export default function Projects() {
                         {categories.map((category) => (
                             <button
                                 key={category}
-                                className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex-shrink-0 cursor-pointer ${category === "All"
+                                onClick={() => setActiveCategory(category)}
+                                className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex-shrink-0 cursor-pointer ${category === activeCategory
                                     ? "bg-orange-500 text-white shadow-md shadow-orange-500/20"
                                     : "bg-gray-50 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-transparent hover:border-orange-100"
                                     }`}
@@ -138,7 +113,7 @@ export default function Projects() {
             <section className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
-                        {projects.map((project) => (
+                        {filteredProjects.map((project) => (
                             <div
                                 key={project.id}
                                 className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100"

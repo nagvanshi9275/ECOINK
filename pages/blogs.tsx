@@ -2,16 +2,59 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ArrowRight, Calendar, Clock, User } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import ServiceCTA from "@/components/ServiceCTA";
-import { blogPosts } from "@/data";
 
+export const getServerSideProps = async () => {
+    const { PrismaClient } = require('@prisma/client');
+    const prisma = new PrismaClient();
+    try {
+        const posts = await prisma.blogPost.findMany({
+            where: { isPublished: true },
+            orderBy: { publishedAt: 'desc' },
+            include: { category: true }
+        });
 
+        // Transform for frontend matches
+        const serializedPosts = posts.map((post: any) => ({
+            id: post.slug, // Use slug for ID logic
+            title: post.title,
+            excerpt: post.excerpt,
+            image: post.coverImage || '/kitchen1.jpg', // Fallback
+            category: post.category?.name || 'Uncategorized',
+            date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) : '',
+            readTime: (post.readingTime || 5) + ' min read'
+        }));
 
-const categories = ["All", "Kitchen", "Bathroom", "Wardrobe", "Furniture", "TV Cabinet", "Laundry"];
+        await prisma.$disconnect();
+        return { props: { blogPosts: serializedPosts } };
+    } catch (e) {
+        console.error(e);
+        await prisma.$disconnect();
+        return { props: { blogPosts: [] } };
+    }
+};
 
-export default function Blogs() {
+interface BlogPost {
+    id: string;
+    title: string;
+    excerpt: string;
+    image: string;
+    category: string;
+    date: string;
+    readTime: string;
+}
+
+interface BlogsProps {
+    blogPosts: BlogPost[];
+}
+
+export default function Blogs({ blogPosts }: BlogsProps) {
     const [activeCategory, setActiveCategory] = useState("All");
+
+    // Dynamic categories from actual posts
+    const uniqueCategories = Array.from(new Set(blogPosts.map(p => p.category))).filter((c): c is string => !!c).sort();
+    const categories = ["All", ...uniqueCategories];
 
     const filteredPosts = activeCategory === "All"
         ? blogPosts

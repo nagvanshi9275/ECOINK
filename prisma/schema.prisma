@@ -1,0 +1,263 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Hashed
+  role      String   @default("ADMIN") // ADMIN, EDITOR
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 1. Hero Section (Banner Rotation)
+model HeroBanner {
+  id          String   @id @default(uuid())
+  heading     String
+  subheading  String?
+  image       String
+  ctaText     String?
+  ctaLink     String?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 3. Sections (Reusable Schema)
+model ContentSection {
+  id          String   @id @default(uuid())
+  internalName String  // Admin facing name
+  type        String   // 'text', 'image-text', 'cta', 'features', etc.
+  content     Json     // The actual data (heading, body, image, etc.)
+  pages       PageSection[] 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Join table for Page <-> ContentSection to allow ordering per page
+model PageSection {
+  id              String         @id @default(uuid())
+  pageId          String
+  page            Page           @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  sectionId       String
+  section         ContentSection @relation(fields: [sectionId], references: [id])
+  order           Int            @default(0)
+
+  @@index([pageId])
+}
+
+// 2. Pages
+model Page {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  isPublished     Boolean  @default(false)
+  
+  // Content Relations
+  sections        PageSection[]
+  
+  // Legacy JSON fallback (optional, can be phased out or used for one-off content)
+  content         Json?    
+
+  // SEO Fields
+  metaTitle       String?
+  metaDescription String?
+  keywords        String? 
+  canonicalUrl    String?
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  noIndex         Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// 4. Blogs
+model BlogPost {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  excerpt         String?
+  content         String   // HTML or Markdown
+  coverImage      String?
+  isPublished     Boolean  @default(false)
+  publishedAt     DateTime?
+  authorId        String?
+
+  // SEO Fields
+  metaTitle       String?
+  metaDescription String?
+  focusKeyword    String?
+  canonicalUrl    String?
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  noIndex         Boolean  @default(false)
+  noFollow        Boolean  @default(false)
+  readingTime     Int?     @default(0)
+  schemaData      Json?    
+  
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  tags            Tag[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Category {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  slug        String     @unique
+  posts       BlogPost[]
+}
+
+model Tag {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  slug        String     @unique
+  posts       BlogPost[]
+}
+
+// 5. Projects
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String
+  location    String?
+  category    String?
+  client      String?
+  completionDate DateTime?
+  images      String[]
+  isVisible   Boolean  @default(true)
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 6. Services
+model Service {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String
+  icon        String?  // check lucide-react icon names or image url
+  image       String?
+  ctaLink     String?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 7. Partners
+model Partner {
+  id          String   @id @default(uuid())
+  name        String
+  logoUrl     String
+  websiteUrl  String?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 8. Navbar
+model MenuItem {
+  id        String     @id @default(uuid())
+  label     String
+  link      String
+  parentId  String?    // For nested menus
+  parent    MenuItem?  @relation("MenuHierarchy", fields: [parentId], references: [id])
+  children  MenuItem[] @relation("MenuHierarchy")
+  order     Int        @default(0)
+  isVisible Boolean    @default(true)
+}
+
+// 10. Media (Library)
+model MediaAsset {
+  id          String   @id @default(uuid())
+  filename    String
+  url         String
+  type        String   // image, video, pdf
+  size        Int?     // bytes
+  createdAt   DateTime @default(now())
+}
+
+// 11. Contact Messages
+model ContactMessage {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  phone       String?
+  subject     String?
+  message     String
+  status      String   @default("UNREAD") // UNREAD, READ, ARCHIVED
+  createdAt   DateTime @default(now())
+}
+
+// 12. Testimonials
+model Testimonial {
+  id          String   @id @default(uuid())
+  clientName  String
+  role        String?
+  content     String
+  avatarUrl   String?
+  rating      Int      @default(5)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+// 13. FAQs
+model FAQ {
+  id          String   @id @default(uuid())
+  question    String
+  answer      String
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 9 & 14. Global Site Settings (Footer + General)
+model GlobalSettings {
+  id             Int      @id @default(1)
+  siteName       String   @default("Magri Cabinets")
+  siteLogo       String?
+  
+  // Footer
+  footerContent  String?
+  copyrightText  String?
+  socialLinks    Json     // { facebook: '...', instagram: '...' }
+  
+  // Contact Info
+  contactEmail   String?
+  contactPhone   String?
+  address        String?
+  
+  // SEO Global
+  defaultMetaTitle String?
+  defaultMetaDesc  String?
+  favicon          String?
+
+  // Hero Controls
+  enableCustomHero Boolean  @default(false)
+  heroBgImage      String?
+  heroTitle        String?
+
+  updatedAt      DateTime @updatedAt
+}

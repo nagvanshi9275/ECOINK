@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  cms-db:
+    image: postgres:15-alpine
+    container_name: magri_cms_db
+    restart: always
+    environment:
+      POSTGRES_USER: cms_admin
+      POSTGRES_PASSWORD: secure_cms_password
+      POSTGRES_DB: magri_cms
+    ports:
+      - "5433:5432" # Exposed on 5433 to avoid conflicts
+    volumes:
+      - cms_pgdata:/var/lib/postgresql/data
+
+volumes:
+  cms_pgdata:

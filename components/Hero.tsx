@@ -49,28 +49,38 @@ interface HeroProps {
     ctaText?: string;
     ctaLink?: string;
     backgroundImage?: string;
+    services?: any[];
 }
 
-export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", backgroundImage }: HeroProps) {
+export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", backgroundImage, services = [] }: HeroProps) {
     const [currentService, setCurrentService] = useState(0);
+
+    // Map CMS services to component format if provided, otherwise use fallback
+    const activeServices = services && services.length > 0 ? services.map(s => ({
+        title: s.heading,
+        description: s.subheading,
+        image: s.image,
+        link: s.ctaLink || '/contact',
+        ctaText: s.ctaText
+    })) : heroServices;
 
     // Only run auto-rotation if no specific title is provided (Homepage mode)
     useEffect(() => {
         if (title) return;
 
         const timer = setInterval(() => {
-            setCurrentService((prev) => (prev + 1) % heroServices.length);
+            setCurrentService((prev) => (prev + 1) % activeServices.length);
         }, 5000); // Change every 5 seconds
 
         return () => clearInterval(timer);
-    }, [title]);
+    }, [title, activeServices.length]);
 
-    const service = heroServices[currentService];
+    const service = activeServices[currentService];
 
     // If title is provided, use it (Static Mode). Otherwise use the carousel service.
     const displayTitle = title || service.title;
     const displayDescription = subtitle || service.description;
-    const displayCtaText = ctaText || "Get a FREE Quote";
+    const displayCtaText = ctaText || (service as any).ctaText || "Get a FREE Quote";
     const displayCtaLink = ctaLink || service.link;
     const displayImage = backgroundImage || service.image || "/kitchen2.jpg";
 
@@ -133,9 +143,9 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
                         </AnimatePresence>
 
                         {/* Progress Indicators - Only show if NO title (Carousel Mode) */}
-                        {!title && (
+                        {!title && activeServices.length > 1 && (
                             <div className="flex items-center justify-center lg:justify-start gap-3 pt-8 mt-4 lg:mt-0">
-                                {heroServices.map((_, index) => (
+                                {activeServices.map((_, index) => (
                                     <button
                                         key={index}
                                         onClick={() => setCurrentService(index)}

@@ -74,7 +74,11 @@ const features = [
   },
 ];
 
-export default function Home() {
+interface HomeProps {
+  heroes: any[];
+}
+
+export default function Home({ heroes }: HomeProps) {
   return (
     <>
       <Head>
@@ -96,7 +100,7 @@ export default function Home() {
       </Head>
 
       {/* 1️⃣ Hero Section */}
-      <Hero />
+      <Hero services={heroes} />
 
       {/* 2️⃣ Why Magri Cabinets Section */}
       <section className="py-24 bg-white">
@@ -307,3 +311,18 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  const { PrismaClient } = require('@prisma/client');
+  const prisma = new PrismaClient();
+  try {
+    const heroes = await prisma.heroBanner.findMany({
+      orderBy: { order: 'asc' },
+    });
+    await prisma.$disconnect();
+    return { props: { heroes: JSON.parse(JSON.stringify(heroes)) } };
+  } catch (e) {
+    await prisma.$disconnect();
+    return { props: { heroes: [] } };
+  }
+};
