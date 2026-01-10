@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ae062456-7a29-4a90-887c-1d75df745cf5",
+    "heading": "Modern Wardrobes",
+    "subheading": "Smart storage solutions for every bedroom.",
+    "image": "/bedroom1.jpg",
+    "ctaText": "Explore Storage",
+    "ctaLink": "/wardrobes",
+    "order": 1,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.750Z",
+    "updatedAt": "2026-01-10T20:43:01.750Z"
+  },
+  {
+    "id": "ff969236-34eb-489c-b9fc-e91fa505a9ad",
+    "heading": "Luxury Bathroom Vanities",
+    "subheading": "Elegant designs to transform your bathroom.",
+    "image": "/bathromr.jpg",
+    "ctaText": "See Vanities",
+    "ctaLink": "/bathroom-vanities",
+    "order": 2,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.753Z",
+    "updatedAt": "2026-01-10T20:43:01.753Z"
+  },
+  {
+    "id": "d09f6cf6-7c19-4377-a829-6638a266e078",
+    "heading": "Custom Kitchen Cabinets",
+    "subheading": "Premium joinery for your dream kitchen in Melbourne.",
+    "image": "https://res.cloudinary.com/dpbuxfm1f/image/upload/v1768085275/magri-cabinets/hero/mvd3iw4f2cdp5jzwwqct.jpg",
+    "ctaText": "View Kitchens",
+    "ctaLink": "/kitchen-cabinets",
+    "order": 0,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.747Z",
+    "updatedAt": "2026-01-10T20:43:01.747Z"
+  }
+]

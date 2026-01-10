@@ -59,9 +59,12 @@ interface FeatureGridProps {
     features: FeatureCard[];
     title?: string;
     subtitle?: string;
+    badge?: string;
 }
 
-export default function FeatureGrid({ features, title, subtitle }: FeatureGridProps) {
+export default function FeatureGrid({ features, title, subtitle, badge = "Details" }: FeatureGridProps) {
+    const displayBadge = badge || "Details";
+
     return (
         <section className="py-24 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,7 +72,7 @@ export default function FeatureGrid({ features, title, subtitle }: FeatureGridPr
                 {(title || subtitle) && (
                     <div className="text-center mb-12 sm:mb-16">
                         <span className="inline-block px-4 py-1.5 bg-orange-100 text-orange-600 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-full mb-4">
-                            Details
+                            {displayBadge}
                         </span>
                         {title && (
                             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
@@ -94,30 +97,18 @@ export default function FeatureGrid({ features, title, subtitle }: FeatureGridPr
                             return (
                                 <Card
                                     key={feature.id}
-                                    className="group relative h-auto border-0 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl sm:rounded-3xl bg-white flex flex-col"
+                                    // Removed h-auto and flex-col as we only have the image now
+                                    className="group relative border-0 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden rounded-2xl sm:rounded-3xl bg-white"
                                     style={{ animationDelay: `${index * 100}ms` }}
                                 >
-                                    <div className="relative h-32 sm:h-56 lg:h-64 overflow-hidden">
+                                    {/* Increased height since it's now image-only */}
+                                    <div className="relative h-64 sm:h-80 lg:h-96 w-full overflow-hidden">
                                         <Image
                                             src={feature.image}
                                             alt={feature.title}
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
-                                        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
-                                            <div className="px-2 py-0.5 sm:px-3 sm:py-1 bg-orange-500/90 backdrop-blur-sm text-white text-[10px] sm:text-xs font-bold rounded-full shadow-lg">
-                                                {feature.title.split(' ')[0]}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="p-3 sm:p-6 flex flex-col flex-1">
-                                        <h3 className="text-sm sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 lg:mb-2 group-hover:text-orange-500 transition-colors">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-[10px] sm:text-sm text-gray-500 leading-snug lg:leading-relaxed line-clamp-2 sm:line-clamp-none">
-                                            {feature.description}
-                                        </p>
                                     </div>
                                 </Card>
                             );

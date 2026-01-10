@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Plus, Edit, Trash2, ExternalLink, Wrench, LayoutGrid, List } from 'lucide-react';
+import Link from 'next/link';
 import Image from 'next/image';
 import ImageUploader from '@/components/admin/ImageUploader';
 
@@ -11,28 +12,18 @@ interface ServicesProps {
 
 export default function ServicesAdmin({ initialServices }: ServicesProps) {
     const [services, setServices] = useState(initialServices);
-    const [isEditing, setIsEditing] = useState(false);
-    const [current, setCurrent] = useState<any>({});
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-
-    const handleSave = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const method = current.id ? 'PUT' : 'POST';
-        const url = current.id ? `/api/services/${current.id}` : '/api/services';
-
-        const res = await fetch(url, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(current),
-        });
-
-        if (res.ok) window.location.reload();
-    };
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this service?')) return;
         await fetch(`/api/services/${id}`, { method: 'DELETE' });
         setServices(services.filter((s: any) => s.id !== id));
+    };
+
+    const getScoreColor = (score: number) => {
+        if (score >= 80) return 'text-green-600 bg-green-100';
+        if (score >= 50) return 'text-orange-600 bg-orange-100';
+        return 'text-red-600 bg-red-100';
     };
 
     return (
@@ -57,63 +48,26 @@ export default function ServicesAdmin({ initialServices }: ServicesProps) {
                             <List size={18} />
                         </button>
                     </div>
-                    <Button
-                        onClick={() => { setCurrent({}); setIsEditing(true); }}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 px-6 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all w-full sm:w-auto"
-                    >
-                        <Plus size={18} className="mr-2" /> Add Service
-                    </Button>
+                    <Link href="/admin/services/new" className="w-full sm:w-auto">
+                        <Button
+                            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 px-6 rounded-xl shadow-lg shadow-orange-500/20 active:scale-95 transition-all"
+                        >
+                            <Plus size={18} className="mr-2" /> Add Service
+                        </Button>
+                    </Link>
                 </div>
             </div>
 
-            {isEditing && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-                        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-                            <h2 className="text-xl font-bold text-gray-900">{current.id ? 'Edit' : 'Create New'} Service</h2>
-                            <button onClick={() => setIsEditing(false)} className="text-gray-400 hover:text-gray-600 transition-colors">
-                                <Plus size={24} className="rotate-45" />
-                            </button>
-                        </div>
-                        <form onSubmit={handleSave} className="p-6 space-y-5">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wider">Service Name</label>
-                                    <input className="w-full border border-gray-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/50 transition-all font-medium" placeholder="e.g. Kitchen Cabinets" value={current.name || ''} onChange={e => setCurrent({ ...current, name: e.target.value })} required />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wider">Slug (URL)</label>
-                                    <input className="w-full border border-gray-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/50 transition-all font-mono text-sm" placeholder="kitchen-cabinets" value={current.slug || ''} onChange={e => setCurrent({ ...current, slug: e.target.value })} required />
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wider">Description</label>
-                                <textarea className="w-full border border-gray-200 p-3 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/50 transition-all h-32 resize-none" placeholder="Explain what this service covers..." value={current.description || ''} onChange={e => setCurrent({ ...current, description: e.target.value })} required />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wider">Service Image</label>
-                                <ImageUploader
-                                    currentImage={current.image}
-                                    onImageUploaded={(url) => setCurrent({ ...current, image: url })}
-                                    folder="services"
-                                    saveToMedia={true}
-                                    aspectRatio="video"
-                                    onRemove={() => setCurrent({ ...current, image: '' })}
-                                />
-                            </div>
-                            <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 text-sm">
-                                <Button type="button" variant="ghost" className="rounded-xl px-6" onClick={() => setIsEditing(false)}>Cancel</Button>
-                                <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl px-8 shadow-lg shadow-orange-500/20">Save Service</Button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
 
             {viewMode === 'grid' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {services.map((item: any) => (
-                        <div key={item.id} className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 flex flex-col">
+                        <div key={item.id} className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 flex flex-col relative">
+                            {/* SEO Badge */}
+                            <div className={`absolute top-4 left-4 z-10 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-sm ${getScoreColor(item.seoScore || 0)}`}>
+                                SEO: {item.seoScore || 0}
+                            </div>
+
                             <div className="aspect-video bg-gray-50 relative overflow-hidden">
                                 {item.image ? (
                                     <Image src={item.image} alt={item.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -124,10 +78,12 @@ export default function ServicesAdmin({ initialServices }: ServicesProps) {
                                 )}
                             </div>
                             <div className="p-6 md:p-8 flex-1 flex flex-col">
-                                <div className="flex justify-between items-start mb-4">
+                                <div className="flex justify-between items-start mb-4 text-[10px] items-center">
                                     <h3 className="font-black text-xl text-gray-900 font-outfit uppercase tracking-tight group-hover:text-orange-600 transition-colors leading-tight">{item.name}</h3>
                                     <div className="flex gap-1 lg:opacity-0 lg:group-hover:opacity-100 transition-all">
-                                        <button onClick={() => { setCurrent(item); setIsEditing(true); }} className="p-2.5 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-all"><Edit size={16} /></button>
+                                        <Link href={`/admin/services/${item.id}`}>
+                                            <button className="p-2.5 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-all"><Edit size={16} /></button>
+                                        </Link>
                                         <button onClick={() => handleDelete(item.id)} className="p-2.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"><Trash2 size={16} /></button>
                                     </div>
                                 </div>
@@ -144,6 +100,7 @@ export default function ServicesAdmin({ initialServices }: ServicesProps) {
                                 <tr className="bg-gray-50 text-[10px] font-black uppercase tracking-widest text-gray-400 border-b border-gray-100">
                                     <th className="px-6 py-4 font-outfit">Service Name</th>
                                     <th className="px-6 py-4 font-outfit">Slug</th>
+                                    <th className="px-6 py-4 font-outfit">SEO Score</th>
                                     <th className="px-6 py-4 font-outfit">Visibility</th>
                                     <th className="px-6 py-4 text-right font-outfit">Actions</th>
                                 </tr>
@@ -154,13 +111,20 @@ export default function ServicesAdmin({ initialServices }: ServicesProps) {
                                         <td className="px-6 py-4 font-black text-gray-900 group-hover:text-orange-600 transition-colors">{item.name}</td>
                                         <td className="px-6 py-4 text-xs text-gray-400 font-mono">/{item.slug}</td>
                                         <td className="px-6 py-4">
+                                            <div className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${getScoreColor(item.seoScore || 0)}`}>
+                                                {item.seoScore || 0}%
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
                                             <span className={`text-[10px] font-black uppercase px-2.5 py-1 rounded-lg ${item.isVisible ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'}`}>
                                                 {item.isVisible ? 'Active' : 'Hidden'}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex justify-end gap-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                                                <button onClick={() => { setCurrent(item); setIsEditing(true); }} className="p-2 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-all"><Edit size={18} /></button>
+                                                <Link href={`/admin/services/${item.id}`}>
+                                                    <button className="p-2 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-all"><Edit size={18} /></button>
+                                                </Link>
                                                 <button onClick={() => handleDelete(item.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"><Trash2 size={18} /></button>
                                             </div>
                                         </td>

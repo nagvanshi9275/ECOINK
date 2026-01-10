@@ -94,12 +94,15 @@ export default async function handler(
 
         // Optionally save to MediaAsset table
         if (saveToMedia) {
-            const mediaAsset = await prisma.mediaAsset.create({
+            const mediaAsset = await (prisma.mediaAsset as any).create({
                 data: {
                     filename: file.originalFilename || 'uploaded-image',
                     url: uploadResult.url,
                     type: 'image',
                     size: file.size,
+                    altText: fields.altText?.[0] || null,
+                    title: fields.title?.[0] || null,
+                    caption: fields.caption?.[0] || null,
                 }
             });
             mediaAssetId = mediaAsset.id;

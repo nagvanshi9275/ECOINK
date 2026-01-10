@@ -1,0 +1,66 @@
+[
+  {
+    "id": "1ae1cf1e-8e30-47e9-9aeb-c162107fa0bc",
+    "label": "HOME",
+    "link": "/",
+    "parentId": null,
+    "order": 0,
+    "isVisible": true
+  },
+  {
+    "id": "7864b8ed-18cb-459c-aaf9-c6b4d5048462",
+    "label": "WHY MAGRI",
+    "link": "/why-magri-cabinets",
+    "parentId": null,
+    "order": 1,
+    "isVisible": true
+  },
+  {
+    "id": "b2812d8f-9dca-48d0-9672-208da2cf774d",
+    "label": "KITCHEN",
+    "link": "/kitchen-cabinets",
+    "parentId": null,
+    "order": 2,
+    "isVisible": true
+  },
+  {
+    "id": "124fb0ea-9737-4a98-9063-c3776c890510",
+    "label": "BATHROOM",
+    "link": "/bathroom-vanities",
+    "parentId": null,
+    "order": 3,
+    "isVisible": true
+  },
+  {
+    "id": "c77fd40f-1a12-48a2-a671-85d2d384c0dd",
+    "label": "LAUNDRY",
+    "link": "/laundry-cabinets",
+    "parentId": null,
+    "order": 4,
+    "isVisible": true
+  },
+  {
+    "id": "1544ed0c-6ee9-445e-b586-a3dc45a2a9cc",
+    "label": "PROJECTS",
+    "link": "/projects",
+    "parentId": null,
+    "order": 5,
+    "isVisible": true
+  },
+  {
+    "id": "893e589a-0406-4b41-ad81-97368b9032d7",
+    "label": "BLOGS",
+    "link": "/blogs",
+    "parentId": null,
+    "order": 6,
+    "isVisible": true
+  },
+  {
+    "id": "33cee11a-6fd4-4bc0-abd2-da98dd37c76c",
+    "label": "CONTACT",
+    "link": "/get-a-custom-quote",
+    "parentId": null,
+    "order": 7,
+    "isVisible": true
+  }
+]

@@ -2,19 +2,16 @@ import Head from 'next/head';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { getPageBySlug, getAllPageSlugs } from '@/lib/cms';
 import PageRenderer from '@/components/PageRenderer';
+import MetaHead from '@/components/seo/MetaHead';
+import StructuredData from '@/components/seo/StructuredData';
+import prisma from '@/lib/prisma';
 
 interface PageProps {
-    page: {
-        title: string;
-        content: any;
-        metaTitle?: string;
-        metaDescription?: string;
-        noIndex?: boolean;
-        // ... other fields
-    } | null;
+    page: any;
+    seoSettings?: any;
 }
 
-export default function DynamicPage({ page }: PageProps) {
+export default function DynamicPage({ page, seoSettings }: PageProps) {
     if (!page) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -25,12 +22,14 @@ export default function DynamicPage({ page }: PageProps) {
 
     return (
         <>
-            <Head>
-                <title>{page.metaTitle || page.title} | Magri Cabinets</title>
-                <meta name="description" content={page.metaDescription || ''} />
-                {page.noIndex && <meta name="robots" content="noindex" />}
-                {/* Open Graph tags can be added here */}
-            </Head>
+            <MetaHead
+                data={{
+                    ...page,
+                    metaRobots: !page.isPublished ? 'noindex, nofollow' : page.metaRobots
+                }}
+                settings={seoSettings}
+            />
+            <StructuredData data={page} type={page.schemaType || "WebPage"} />
 
             <main className="min-h-screen bg-white pb-24">
                 {/* Render the dynamic sections from the CMS */}
@@ -60,21 +59,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const slug = params?.slug as string;
-    const page = await getPageBySlug(slug);
+export const getStaticProps: GetStaticProps = async (context) => {
+    const slug = context.params?.slug as string;
+    const preview = context.preview || false;
+    const [page, seoSettings] = await Promise.all([
+        getPageBySlug(slug, preview),
+        prisma.seoSettings.findFirst({ where: { id: 1 } })
+    ]);
 
     if (!page) {
         return {
             notFound: true,
-            revalidate: 10, // Try again quickly if it appears
+            revalidate: 10,
         };
     }
 
     return {
         props: {
-            page: JSON.parse(JSON.stringify(page)), // Serialize dates
+            page: JSON.parse(JSON.stringify(page)),
+            seoSettings: JSON.parse(JSON.stringify(seoSettings)),
         },
-        revalidate: 60, // ISR: Revalidate every 60 seconds
+        revalidate: 60,
     };
 };
+

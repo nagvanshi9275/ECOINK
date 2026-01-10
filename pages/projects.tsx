@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 import { GetServerSideProps } from "next";
-import { Button } from "@/components/ui/button";
 import ServiceCTA from "@/components/ServiceCTA";
 import { ArrowRight } from "lucide-react";
 import prisma from "@/lib/prisma";
+import Testimonials from "@/components/Testimonials";
 
 // Type definition
 type Project = {
@@ -20,8 +20,6 @@ type Project = {
 type Props = {
     projects: Project[];
 };
-
-const categories = ["All", "Kitchen", "Bathroom", "Wardrobe", "TV Cabinet", "Furniture"];
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
     try {
@@ -51,12 +49,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 };
 
 export default function Projects({ projects }: Props) {
-    const [activeCategory, setActiveCategory] = useState("All");
-
-    const filteredProjects = activeCategory === "All"
-        ? projects
-        : projects.filter((p) => p.category === activeCategory);
-
     return (
         <>
             <Head>
@@ -89,35 +81,12 @@ export default function Projects({ projects }: Props) {
                 </div>
             </section>
 
-            {/* Category Filter */}
-            <section className="py-6 sm:py-8 bg-white border-b border-gray-100 overflow-hidden sticky top-[80px] z-30 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center lg:justify-center gap-2 sm:gap-3 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveCategory(category)}
-                                className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex-shrink-0 cursor-pointer ${category === activeCategory
-                                    ? "bg-orange-500 text-white shadow-md shadow-orange-500/20"
-                                    : "bg-gray-50 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-transparent hover:border-orange-100"
-                                    }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Projects Grid */}
+            {/* Projects Grid (No Filter) */}
             <section className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
-                        {filteredProjects.map((project) => (
-                            <div
-                                key={project.id}
-                                className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100"
-                            >
+                        {projects.map((project) => (
+                            <Link key={project.id} href={`/projects/${project.id}`} className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100">
                                 <div className="relative h-40 sm:h-56 lg:h-64 overflow-hidden">
                                     <Image
                                         src={project.image}
@@ -148,32 +117,14 @@ export default function Projects({ projects }: Props) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Stats Section */}
-            <section className="py-16 lg:py-24 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
-                            { number: "1000+", label: "Projects Completed" },
-                            { number: "500+", label: "Happy Clients" },
-                            { number: "30+", label: "Years Experience" },
-                            { number: "100%", label: "Satisfaction Rate" },
-                        ].map((stat, index) => (
-                            <div key={index} className="text-center">
-                                <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">
-                                    {stat.number}
-                                </div>
-                                <div className="text-gray-600 font-medium">{stat.label}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Testimonials Section (Replaces Stats) */}
+            <Testimonials />
 
             {/* CTA Section */}
             <ServiceCTA

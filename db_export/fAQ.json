@@ -1,0 +1,29 @@
+[
+  {
+    "id": "4df5290c-72ed-4e77-bff8-689a1a3d31ac",
+    "question": "How long does it take to complete a custom cabinet project?",
+    "answer": "Project timelines vary depending on complexity and scope. Typically, a kitchen renovation takes 4-6 weeks from design approval to installation.",
+    "order": 0,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.765Z",
+    "updatedAt": "2026-01-10T20:43:01.765Z"
+  },
+  {
+    "id": "e8a5f9dd-8306-4984-8568-8a340f415a1b",
+    "question": "What materials do you use for your cabinets?",
+    "answer": "We use only premium materials including moisture-resistant MDF, solid timber, high-quality laminates, and soft-close hardware.",
+    "order": 1,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.768Z",
+    "updatedAt": "2026-01-10T20:43:01.768Z"
+  },
+  {
+    "id": "bc6e9246-592f-4e7d-b47e-01b6e850a38e",
+    "question": "Do you offer free consultations and quotes?",
+    "answer": "Yes! We offer completely free, no-obligation consultations and quotes.",
+    "order": 2,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.771Z",
+    "updatedAt": "2026-01-10T20:43:01.771Z"
+  }
+]

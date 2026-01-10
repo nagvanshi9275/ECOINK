@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "siteName": "Magri Cabinets",
+    "siteLogo": null,
+    "footerContent": "Melbourne's trusted custom cabinet makers. Family owned and operated since 2018.",
+    "copyrightText": "© 2026 Magri Cabinets. All rights reserved.",
+    "socialLinks": {
+      "facebook": "#",
+      "linkedin": "#",
+      "instagram": "#"
+    },
+    "contactEmail": "info@magricabinets.com.au",
+    "contactPhone": "0481 132 920",
+    "address": "Melbourne, VIC, Australia",
+    "defaultMetaTitle": null,
+    "defaultMetaDesc": null,
+    "favicon": null,
+    "enableCustomHero": false,
+    "heroBgImage": null,
+    "heroTitle": null,
+    "updatedAt": "2026-01-10T20:43:01.742Z"
+  }
+]

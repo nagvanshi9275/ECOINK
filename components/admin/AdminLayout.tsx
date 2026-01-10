@@ -17,6 +17,9 @@ import {
     Mail,
     MessageSquare,
     HelpCircle,
+    ArrowRightLeft,
+    Globe,
+    Home,
     Settings,
     LogOut,
     Menu,
@@ -53,6 +56,9 @@ export const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         { label: 'Contact Messages', icon: Mail, href: '/admin/messages' },
         { label: 'Testimonials', icon: MessageSquare, href: '/admin/testimonials' },
         { label: 'FAQs', icon: HelpCircle, href: '/admin/faqs' },
+        { label: 'Redirects', icon: ArrowRightLeft, href: '/admin/redirects' },
+        { label: 'Home SEO', icon: Home, href: '/admin/settings/home' },
+        { label: 'SEO Settings', icon: Globe, href: '/admin/settings/seo' },
         { label: 'Site Settings', icon: Settings, href: '/admin/settings' },
     ];
 

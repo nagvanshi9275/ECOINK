@@ -14,10 +14,24 @@ export default function ProjectsAdmin({ initialProjects }: ProjectsProps) {
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this project?')) return;
-        const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' });
-        if (res.ok) {
-            setProjects(projects.filter(p => p.id !== id));
+        try {
+            const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                setProjects(projects.filter(p => p.id !== id));
+            } else {
+                alert('Failed to delete project. Please check console for details.');
+                console.error('Delete failed:', await res.text());
+            }
+        } catch (error) {
+            console.error('Error deleting project:', error);
+            alert('An error occurred while deleting.');
         }
+    };
+
+    const getScoreColor = (score: number) => {
+        if (score >= 80) return 'text-green-600 bg-green-100';
+        if (score >= 50) return 'text-orange-600 bg-orange-100';
+        return 'text-red-600 bg-red-100';
     };
 
     return (
@@ -43,7 +57,12 @@ export default function ProjectsAdmin({ initialProjects }: ProjectsProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {projects.map((project) => (
-                    <div key={project.id} className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300">
+                    <div key={project.id} className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 relative">
+                        {/* SEO Badge */}
+                        <div className={`absolute top-4 left-4 z-10 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-sm ${getScoreColor(project.seoScore || 0)}`}>
+                            SEO: {project.seoScore || 0}
+                        </div>
+
                         <div className="relative h-64 w-full overflow-hidden">
                             {project.images && project.images.length > 0 ? (
                                 <Image src={project.images[0]} alt={project.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -53,7 +72,7 @@ export default function ProjectsAdmin({ initialProjects }: ProjectsProps) {
                                 </div>
                             )}
                             {project.category && (
-                                <div className="absolute top-4 left-4 z-10">
+                                <div className="absolute top-4 right-4 z-10">
                                     <span className="px-3 py-1 bg-white/90 backdrop-blur text-xs font-bold text-gray-900 rounded-full shadow-lg border border-gray-100">
                                         {project.category}
                                     </span>
@@ -76,12 +95,21 @@ export default function ProjectsAdmin({ initialProjects }: ProjectsProps) {
                                         <Edit size={18} />
                                     </Button>
                                 </Link>
-                                <Button
-                                    className="px-5 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white font-bold h-12 rounded-2xl transition-all active:scale-95 border-0"
-                                    onClick={() => handleDelete(project.id)}
+                                <button
+                                    className="px-5 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white font-bold h-12 rounded-2xl transition-all active:scale-95 border-0 flex items-center justify-center min-w-[3rem]"
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        if (!project.id) {
+                                            alert('Error: Project ID is missing');
+                                            return;
+                                        }
+                                        handleDelete(project.id);
+                                    }}
                                 >
                                     <Trash2 size={18} />
-                                </Button>
+                                </button>
                             </div>
                         </div>
                     </div>

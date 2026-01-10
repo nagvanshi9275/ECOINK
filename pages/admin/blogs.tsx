@@ -24,6 +24,12 @@ export default function BlogsAdmin({ initialPosts }: BlogsProps) {
 
     const filtered = posts.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
 
+    const getScoreColor = (score: number) => {
+        if (score >= 80) return 'text-green-600 bg-green-100';
+        if (score >= 50) return 'text-orange-600 bg-orange-100';
+        return 'text-red-600 bg-red-100';
+    };
+
     return (
         <AdminLayout>
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">
@@ -60,7 +66,12 @@ export default function BlogsAdmin({ initialPosts }: BlogsProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {filtered.map((post) => (
-                    <div key={post.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div key={post.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative">
+                        {/* SEO Badge */}
+                        <div className={`absolute top-4 left-4 z-10 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-sm ${getScoreColor(post.seoScore || 0)}`}>
+                            SEO: {post.seoScore || 0}
+                        </div>
+
                         <div className="relative h-56 w-full">
                             {post.coverImage ? (
                                 <Image src={post.coverImage} alt={post.title} fill className="object-cover" />

@@ -5,7 +5,6 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 
 model AdminUser {
@@ -64,21 +63,52 @@ model Page {
   // Content Relations
   sections        PageSection[]
   
-  // Legacy JSON fallback (optional, can be phased out or used for one-off content)
+  // Legacy JSON fallback
   content         Json?    
 
-  // SEO Fields
-  metaTitle       String?
-  metaDescription String?
-  keywords        String? 
+  // SEO Fields (Consolidated/Expanded)
+  seoTitle        String?
+  seoDescription  String?
+  seoKeywords     String? 
+  focusKeyphrase  String?
   canonicalUrl    String?
+  metaRobots      String?  @default("index,follow")
+  
+  // Social Media
   ogTitle         String?
   ogDescription   String?
   ogImage         String?
+  ogType          String?  @default("website")
+  twitterCard     String?  @default("summary_large_image")
+  twitterTitle    String?
+  twitterDescription String?
+  twitterImage    String?
+
+  // Structured Data
+  schemaType      String?  @default("WebPage")
+  schemaJson      Json?
+
+  // Advanced SEO
+  breadcrumbTitle String?
   noIndex         Boolean  @default(false)
+
+  // Scoring
+  seoScore        Int?     @default(0)
+  readabilityScore Int?    @default(0)
+  lastSeoAudit    DateTime?
+
+  // Navbar Controls
+  showInNavbar    Boolean  @default(false)
+  navbarLabel     String?
+  navbarOrder     Int      @default(0)
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  // Deprecated (Keep for migration safety)
+  metaTitle       String?
+  metaDescription String?
+  keywords        String? 
 }
 
 // 4. Blogs
@@ -87,24 +117,45 @@ model BlogPost {
   title           String
   slug            String   @unique
   excerpt         String?
-  content         String   // HTML or Markdown
+  content         String   @db.Text
   coverImage      String?
+  coverImageAlt   String?
   isPublished     Boolean  @default(false)
   publishedAt     DateTime?
   authorId        String?
 
-  // SEO Fields
-  metaTitle       String?
-  metaDescription String?
-  focusKeyword    String?
+  // SEO Fields (Consolidated/Expanded)
+  seoTitle        String?
+  seoDescription  String?
+  seoKeywords     String? 
+  focusKeyphrase  String?
   canonicalUrl    String?
+  metaRobots      String?  @default("index,follow")
+  
+  // Social Media
   ogTitle         String?
   ogDescription   String?
   ogImage         String?
+  ogType          String?  @default("article")
+  twitterCard     String?  @default("summary_large_image")
+  twitterTitle    String?
+  twitterDescription String?
+  twitterImage    String?
+
+  // Structured Data
+  schemaType      String?  @default("Article")
+  schemaJson      Json?
+
+  // Advanced SEO
+  breadcrumbTitle String?
   noIndex         Boolean  @default(false)
   noFollow        Boolean  @default(false)
+
+  // Scoring
+  seoScore        Int?     @default(0)
+  readabilityScore Int?    @default(0)
+  lastSeoAudit    DateTime?
   readingTime     Int?     @default(0)
-  schemaData      Json?    
   
   categoryId      String?
   category        Category? @relation(fields: [categoryId], references: [id])
@@ -112,6 +163,11 @@ model BlogPost {
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  // Deprecated
+  metaTitle       String?
+  metaDescription String?
+  focusKeyword    String?
 }
 
 model Category {
@@ -134,19 +190,64 @@ model Project {
   title       String
   slug        String   @unique
   description String
+  content     String?  @db.Text
   location    String?
   category    String?
   client      String?
   completionDate DateTime?
   images      String[]
+  heroImage   String?  
+  heroImageAlt String?
+  tags        Json?    
+  galleryTitle    String?  
+  gallerySubtitle String?  
   isVisible   Boolean  @default(true)
 
-  // SEO
-  metaTitle       String?
-  metaDescription String?
+  // SEO Fields (Consolidated/Expanded)
+  seoTitle        String?
+  seoDescription  String?
+  seoKeywords     String? 
+  focusKeyphrase  String?
+  canonicalUrl    String?
+  metaRobots      String?  @default("index,follow")
+  
+  // Social Media
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  ogType          String?  @default("website")
+  twitterCard     String?  @default("summary_large_image")
+  twitterTitle    String?
+  twitterDescription String?
+  twitterImage    String?
+
+  // Structured Data
+  schemaType      String?  @default("WebPage")
+  schemaJson      Json?
+
+  // Advanced SEO
+  breadcrumbTitle String?
+
+  // Scoring
+  seoScore        Int?     @default(0)
+  readabilityScore Int?    @default(0)
+  lastSeoAudit    DateTime?
+
+  // Detail Page Specifics
+  beforeImage       String?
+  beforeImageAlt    String?
+  afterImage        String?
+  afterImageAlt     String?
+  testimonialText   String?
+  testimonialClient String?
+  faqs              Json?    
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // Deprecated
+  metaTitle       String?
+  metaDescription String?
 }
 
 // 6. Services
@@ -155,13 +256,67 @@ model Service {
   name        String
   slug        String   @unique
   description String
-  icon        String?  // check lucide-react icon names or image url
-  image       String?
+  content     String?  @db.Text
+  icon        String?  
+  image       String?  
+  imageAlt    String?
+  heroImage   String?  
+  heroImageAlt String?
+  heroSubtitle String? 
+  heroBadge   String?  
+  ctaText     String?  
   ctaLink     String?
+  ctaTitle    String?  
+  ctaDescription String? 
+  ctaBadge    String?  
+  ctaPhone    String?  
+  featureTitle    String?  
+  featureSubtitle String? 
+  featureBadge    String?  
+  trustBadges     Json?    
   order       Int      @default(0)
   isVisible   Boolean  @default(true)
+  features    Json?    
+  galleryImages String[] 
+  faqs          Json?    
+  additionalContent String? @db.Text 
+  testimonialIds String[] 
+
+  // SEO Fields (Consolidated/Expanded)
+  seoTitle        String?
+  seoDescription  String?
+  seoKeywords     String? 
+  focusKeyphrase  String?
+  canonicalUrl    String?
+  metaRobots      String?  @default("index,follow")
+  
+  // Social Media
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  ogType          String?  @default("website")
+  twitterCard     String?  @default("summary_large_image")
+  twitterTitle    String?
+  twitterDescription String?
+  twitterImage    String?
+
+  // Structured Data
+  schemaType      String?  @default("Service")
+  schemaJson      Json?
+
+  // Advanced SEO
+  breadcrumbTitle String?
+
+  // Scoring
+  seoScore        Int?     @default(0)
+  readabilityScore Int?    @default(0)
+  lastSeoAudit    DateTime?
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // Deprecated
+  metaKeywords    String?  
 }
 
 // 7. Partners
@@ -181,7 +336,7 @@ model MenuItem {
   id        String     @id @default(uuid())
   label     String
   link      String
-  parentId  String?    // For nested menus
+  parentId  String?    
   parent    MenuItem?  @relation("MenuHierarchy", fields: [parentId], references: [id])
   children  MenuItem[] @relation("MenuHierarchy")
   order     Int        @default(0)
@@ -193,8 +348,14 @@ model MediaAsset {
   id          String   @id @default(uuid())
   filename    String
   url         String
-  type        String   // image, video, pdf
-  size        Int?     // bytes
+  type        String   
+  size        Int?     
+  altText     String?  
+  title       String?
+  caption     String?
+  focusArea   Json?    // {x, y}
+  width       Int?
+  height      Int?
   createdAt   DateTime @default(now())
 }
 
@@ -206,7 +367,7 @@ model ContactMessage {
   phone       String?
   subject     String?
   message     String
-  status      String   @default("UNREAD") // UNREAD, READ, ARCHIVED
+  status      String   @default("UNREAD") 
   createdAt   DateTime @default(now())
 }
 
@@ -233,7 +394,49 @@ model FAQ {
   updatedAt   DateTime @updatedAt
 }
 
-// 9 & 14. Global Site Settings (Footer + General)
+// 14. Global SEO Settings
+model SeoSettings {
+  id               Int      @id @default(1)
+  
+  // Site-wide Defaults
+  siteName         String   @default("Magri Cabinets")
+  siteTitle        String?
+  siteDescription  String?
+  defaultOgImage   String?
+
+  // LocalBusiness Schema Data
+  businessName     String?  @default("Magri Cabinets")
+  businessType     String?  @default("LocalBusiness")
+  streetAddress    String?
+  addressLocality  String?  @default("Melbourne")
+  addressRegion    String?  @default("VIC")
+  postalCode       String?
+  telephone        String?
+  priceRange       String?  @default("$$")
+  latitude         Float?
+  longitude        Float?
+  openingHours     Json?    
+
+  // Social Media Links
+  facebookUrl      String?
+  instagramUrl     String?
+  linkedinUrl      String?
+  youtubeUrl       String?
+
+  // Tracking & Verification
+  googleAnalyticsId   String?
+  googleSearchConsole String?
+  googleTagManager    String?
+  facebookPixel       String?
+
+  // Sitemap Configuration
+  sitemapEnabled      Boolean  @default(true)
+  sitemapFrequency    String?  @default("weekly")
+
+  updatedAt        DateTime @updatedAt
+}
+
+// 9 & 15. Global Site Settings
 model GlobalSettings {
   id             Int      @id @default(1)
   siteName       String   @default("Magri Cabinets")
@@ -242,14 +445,14 @@ model GlobalSettings {
   // Footer
   footerContent  String?
   copyrightText  String?
-  socialLinks    Json     // { facebook: '...', instagram: '...' }
+  socialLinks    Json     
   
   // Contact Info
   contactEmail   String?
   contactPhone   String?
   address        String?
   
-  // SEO Global
+  // SEO Global (Keep for now or bridge)
   defaultMetaTitle String?
   defaultMetaDesc  String?
   favicon          String?
@@ -260,4 +463,13 @@ model GlobalSettings {
   heroTitle        String?
 
   updatedAt      DateTime @updatedAt
+}
+model Redirect {
+  id          String   @id @default(uuid())
+  fromPath    String   @unique
+  toPath      String
+  statusCode  Int      @default(301)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

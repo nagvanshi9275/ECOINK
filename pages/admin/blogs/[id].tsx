@@ -5,7 +5,9 @@ import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Save, ArrowLeft, Image as ImageIcon, CheckCircle, Globe, Hash, Calendar, Layout, Tag, Type, Search, Share2, Eye, ShieldAlert, ArrowUpRight, Activity } from 'lucide-react';
 import ImageUploader from '@/components/admin/ImageUploader';
-import 'react-quill-new/dist/quill.snow.css';
+import SeoMetaBox from '@/components/admin/SeoMetaBox';
+// CSS moved to _app.tsx
+
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
@@ -67,7 +69,20 @@ export default function EditBlog({ post: initialPost }: BlogFormProps) {
         categoryName: postData.category?.name || '',
         tagsString: postData.tags?.map((t: any) => t.name).join(', ') || '',
         publishedAt: postData.publishedAt ? new Date(postData.publishedAt).toISOString().slice(0, 16) : '',
-        readingTime: postData.readingTime || 0
+        readingTime: postData.readingTime || 0,
+        // NEW SEO FIELDS
+        seoTitle: postData.seoTitle || '',
+        seoDescription: postData.seoDescription || '',
+        seoKeywords: postData.seoKeywords || '',
+        focusKeyphrase: postData.focusKeyphrase || '',
+        metaRobots: postData.metaRobots || 'index,follow',
+        ogType: postData.ogType || 'article',
+        schemaType: postData.schemaType || 'Article',
+        schemaJson: postData.schemaJson || {},
+        breadcrumbTitle: postData.breadcrumbTitle || '',
+        twitterCard: postData.twitterCard || 'summary_large_image',
+        seoScore: postData.seoScore || 0,
+        readabilityScore: postData.readabilityScore || 0
     });
 
     const [isSaving, setIsSaving] = useState(false);
@@ -211,7 +226,11 @@ export default function EditBlog({ post: initialPost }: BlogFormProps) {
                                 <ReactQuill
                                     theme="snow"
                                     value={post.content}
-                                    onChange={val => setPost({ ...post, content: val })}
+                                    onChange={val => {
+                                        if (val !== post.content) {
+                                            setPost((prev: any) => ({ ...prev, content: val }));
+                                        }
+                                    }}
                                     modules={modules}
                                     className="h-[400px] mb-12"
                                 />
@@ -437,10 +456,11 @@ export default function EditBlog({ post: initialPost }: BlogFormProps) {
                             </h3>
                             <ImageUploader
                                 currentImage={post.coverImage}
-                                onImageUploaded={(url) => setPost({ ...post, coverImage: url })}
+                                onImageUploaded={(url, _, meta) => setPost({ ...post, coverImage: url, coverImageAlt: meta?.altText || post.coverImageAlt })}
+                                initialMetadata={{ altText: post.coverImageAlt }}
                                 folder="blogs"
                                 saveToMedia={true}
-                                aspectRatio="video" // Changed to video for better hero aspect
+                                aspectRatio="video"
                             />
                         </div>
 
@@ -475,6 +495,15 @@ export default function EditBlog({ post: initialPost }: BlogFormProps) {
                         </div>
 
                     </div>
+                </div>
+
+                {/* PHASE 2: SEO META BOX - FULL WIDTH */}
+                <div className="mt-8">
+                    <SeoMetaBox
+                        data={post}
+                        onChange={(newData: any) => setPost(newData)}
+                        content={post.content}
+                    />
                 </div>
             </form>
         </AdminLayout>

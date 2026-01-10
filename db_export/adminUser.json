@@ -1,0 +1,10 @@
+[
+  {
+    "id": "9f89feeb-0780-4fe2-b633-0f8fcd9c4c94",
+    "email": "admin@magricabinets.com.au",
+    "password": "secure_admin_password",
+    "role": "ADMIN",
+    "createdAt": "2026-01-10T20:38:15.851Z",
+    "updatedAt": "2026-01-10T20:38:15.851Z"
+  }
+]

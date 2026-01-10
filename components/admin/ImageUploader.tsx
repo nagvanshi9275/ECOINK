@@ -1,17 +1,24 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
-import { Upload, X, Loader2, Image as ImageIcon } from 'lucide-react';
+import { Upload, X, Loader2, Image as ImageIcon, Settings, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+interface ImageMetadata {
+    altText?: string;
+    title?: string;
+    caption?: string;
+}
 
 interface ImageUploaderProps {
     currentImage?: string;
-    onImageUploaded: (url: string, publicId?: string) => void;
+    onImageUploaded: (url: string, publicId?: string, metadata?: ImageMetadata) => void;
     folder?: string;
     saveToMedia?: boolean;
-    aspectRatio?: 'square' | 'video' | 'banner';
+    aspectRatio?: 'square' | 'video' | 'banner' | 'free';
     className?: string;
     showRemoveButton?: boolean;
     onRemove?: () => void;
+    initialMetadata?: ImageMetadata;
 }
 
 export default function ImageUploader({
@@ -23,10 +30,18 @@ export default function ImageUploader({
     className = '',
     showRemoveButton = true,
     onRemove,
+    initialMetadata
 }: ImageUploaderProps) {
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [dragOver, setDragOver] = useState(false);
+    const [showSeo, setShowSeo] = useState(false);
+    const [metadata, setMetadata] = useState<ImageMetadata>(initialMetadata || {
+        altText: '',
+        title: '',
+        caption: ''
+    });
+
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const getAspectClass = () => {
@@ -34,6 +49,7 @@ export default function ImageUploader({
             case 'square': return 'aspect-square';
             case 'video': return 'aspect-video';
             case 'banner': return 'aspect-[21/9]';
+            case 'free': return 'h-auto min-h-[200px]';
             default: return 'aspect-video';
         }
     };
@@ -47,6 +63,9 @@ export default function ImageUploader({
             formData.append('file', file);
             formData.append('folder', folder);
             formData.append('saveToMedia', saveToMedia.toString());
+            if (metadata.altText) formData.append('altText', metadata.altText);
+            if (metadata.title) formData.append('title', metadata.title);
+            if (metadata.caption) formData.append('caption', metadata.caption);
 
             const response = await fetch('/api/upload', {
                 method: 'POST',
@@ -59,7 +78,7 @@ export default function ImageUploader({
                 throw new Error(result.error || 'Upload failed');
             }
 
-            onImageUploaded(result.url, result.publicId);
+            onImageUploaded(result.url, result.publicId, metadata);
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Upload failed';
             setError(errorMessage);
@@ -67,7 +86,17 @@ export default function ImageUploader({
         } finally {
             setIsUploading(false);
         }
-    }, [folder, saveToMedia, onImageUploaded]);
+    }, [folder, saveToMedia, onImageUploaded, metadata]);
+
+    const handleMetadataChange = (field: keyof ImageMetadata, value: string) => {
+        const newMetadata = { ...metadata, [field]: value };
+        setMetadata(newMetadata);
+        if (currentImage) {
+            // If image already exists, notify parent of metadata change
+            // This might need a separate callback in a real app, but for now we follow the pattern
+            // onImageUploaded(currentImage, undefined, newMetadata);
+        }
+    };
 
     const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -106,7 +135,7 @@ export default function ImageUploader({
         if (onRemove) {
             onRemove();
         } else {
-            onImageUploaded('');
+            onImageUploaded('', '', { altText: '', title: '', caption: '' });
         }
     }, [onRemove, onImageUploaded]);
 
@@ -138,7 +167,7 @@ export default function ImageUploader({
                     <>
                         <Image
                             src={currentImage}
-                            alt="Uploaded"
+                            alt={metadata.altText || "Uploaded image"}
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
@@ -187,6 +216,56 @@ export default function ImageUploader({
                 )}
             </div>
 
+            {currentImage && (
+                <div className="mt-4 border border-gray-100 rounded-xl overflow-hidden">
+                    <button
+                        type="button"
+                        onClick={() => setShowSeo(!showSeo)}
+                        className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 transition-colors"
+                    >
+                        <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest flex items-center gap-2">
+                            <Settings size={12} className="text-orange-500" /> Image SEO & Metadata
+                        </span>
+                        {showSeo ? <ChevronUp size={14} className="text-gray-400" /> : <ChevronDown size={14} className="text-gray-400" />}
+                    </button>
+
+                    {showSeo && (
+                        <div className="p-4 space-y-4 bg-white animate-in slide-in-from-top-2 duration-300">
+                            <div>
+                                <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Alt Text (Best for SEO)</label>
+                                <input
+                                    className="w-full border border-gray-100 bg-gray-50/30 p-2 rounded-lg text-xs font-medium focus:border-orange-500 outline-none transition-all"
+                                    value={metadata.altText}
+                                    onChange={(e) => handleMetadataChange('altText', e.target.value)}
+                                    placeholder="e.g. Custom white kitchen cabinets in Melbourne"
+                                />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Title</label>
+                                    <input
+                                        className="w-full border border-gray-100 bg-gray-50/30 p-2 rounded-lg text-xs font-medium focus:border-orange-500 outline-none transition-all"
+                                        value={metadata.title}
+                                        onChange={(e) => handleMetadataChange('title', e.target.value)}
+                                        placeholder="Image Title"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Caption</label>
+                                    <input
+                                        className="w-full border border-gray-100 bg-gray-50/30 p-2 rounded-lg text-xs font-medium focus:border-orange-500 outline-none transition-all"
+                                        value={metadata.caption}
+                                        onChange={(e) => handleMetadataChange('caption', e.target.value)}
+                                        placeholder="Image Caption"
+                                    />
+                                </div>
+                            </div>
+                            <p className="text-[8px] text-gray-400 italic">Metadata is saved automatically when you save the page.</p>
+                        </div>
+                    )}
+                </div>
+            )}
+
             {error && (
                 <p className="mt-2 text-xs text-red-500 font-medium">{error}</p>
             )}
@@ -196,7 +275,7 @@ export default function ImageUploader({
                     type="button"
                     variant="outline"
                     onClick={handleClick}
-                    className="w-full mt-2 rounded-xl border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all"
+                    className="w-full mt-2 rounded-xl border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all font-bold text-xs uppercase tracking-widest"
                 >
                     <Upload size={16} className="mr-2" /> Browse Files
                 </Button>

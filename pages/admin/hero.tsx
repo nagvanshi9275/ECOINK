@@ -25,6 +25,7 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
     const [heroes, setHeroes] = useState(initialHeroes);
     const [heroImage, setHeroImage] = useState(initialSettings?.heroBgImage || '/kitchen1.jpg');
     const [customHeroEnabled, setCustomHeroEnabled] = useState(initialSettings?.enableCustomHero ?? false);
+    const [isAutoFilling, setIsAutoFilling] = useState(false);
 
     // Separate update handler for individual hero slides
     const handleUpdateSlide = async (hero: any) => {
@@ -102,9 +103,14 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
     const handlePopulateDefaults = async () => {
         if (!confirm('Auto-fill missing slots with default content?')) return;
 
+        setIsAutoFilling(true);
         const currentCount = heroes.length;
         const needed = RECOMMENDED_COUNT - currentCount;
-        if (needed <= 0) return;
+
+        if (needed <= 0) {
+            setIsAutoFilling(false);
+            return;
+        }
 
         // Simple strategy: take first N defaults
         // Better strategy: filter out existing titles
@@ -117,7 +123,7 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
         // If we ran out of unique defaults (unlikely), fill with generic
         while (toAdd.length < needed) {
             toAdd.push({
-                heading: "New Service",
+                heading: `New Service ${heroes.length + toAdd.length + 1}`,
                 subheading: "Description...",
                 image: "/kitchen1.jpg",
                 ctaLink: "/services"
@@ -125,6 +131,8 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
         }
 
         let newHeroes = [...heroes];
+        let addedCount = 0;
+
         for (const item of toAdd) {
             try {
                 const res = await fetch('/api/hero', {
@@ -141,10 +149,13 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
                 if (res.ok) {
                     const created = await res.json();
                     newHeroes.push(created);
+                    addedCount++;
                 }
             } catch (e) { console.error(e); }
         }
         setHeroes(newHeroes);
+        setIsAutoFilling(false);
+        alert(`Successfully added ${addedCount} slots.`);
     };
 
     const handleSaveGlobal = async () => {
@@ -192,8 +203,12 @@ export default function HeroAdmin({ initialHeroes, initialSettings }: HeroAdminP
                                 {heroes.length} / {RECOMMENDED_COUNT} Slots
                             </div>
                             {heroes.length < RECOMMENDED_COUNT && (
-                                <button onClick={handlePopulateDefaults} className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest hover:bg-blue-100 transition-colors shadow-sm">
-                                    <Wand2 size={14} /> Auto-Fill
+                                <button
+                                    onClick={handlePopulateDefaults}
+                                    disabled={isAutoFilling}
+                                    className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-colors shadow-sm ${isAutoFilling ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-50 text-blue-600 hover:bg-blue-100'}`}
+                                >
+                                    {isAutoFilling ? 'Filling...' : <><Wand2 size={14} /> Auto-Fill Slots</>}
                                 </button>
                             )}
                         </div>

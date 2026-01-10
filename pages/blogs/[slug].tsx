@@ -5,8 +5,11 @@ import { useRouter } from "next/router";
 import { ChevronLeft } from "lucide-react";
 import ServiceCTA from "@/components/ServiceCTA";
 import { Button } from "@/components/ui/button";
+import MetaHead from "@/components/seo/MetaHead";
+import StructuredData from "@/components/seo/StructuredData";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 
-export default function BlogDetail({ blog, relatedBlogs }: { blog: any, relatedBlogs: any[] }) {
+export default function BlogDetail({ blog, relatedBlogs, seoSettings }: { blog: any, relatedBlogs: any[], seoSettings: any }) {
     const router = useRouter();
 
     if (router.isFallback) return <div className="min-h-screen bg-white" />;
@@ -36,20 +39,21 @@ export default function BlogDetail({ blog, relatedBlogs }: { blog: any, relatedB
         });
     };
 
+    const breadcrumbItems = [
+        { name: 'Blogs', url: '/blogs' },
+        { name: blog.title, url: `/blogs/${blog.slug}` }
+    ];
+
     return (
         <>
-            <Head>
-                <title>{blog.metaTitle || blog.title} | Magri Cabinets</title>
-                <meta name="description" content={blog.metaDescription || blog.excerpt} />
-                {blog.noIndex && <meta name="robots" content="noindex" />}
-                <meta property="og:title" content={blog.ogTitle || blog.title} />
-                <meta property="og:description" content={blog.ogDescription || blog.excerpt} />
-                {blog.ogImage && <meta property="og:image" content={blog.ogImage} />}
-                {blog.canonicalUrl && <link rel="canonical" href={blog.canonicalUrl} />}
-            </Head>
+            <MetaHead data={blog} settings={seoSettings} />
+            <StructuredData data={blog} type="Article" />
 
             <div className="min-h-screen bg-white pb-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 lg:pt-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+                    <Breadcrumbs items={breadcrumbItems} />
+                </div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 lg:pt-4">
 
                     {/* Hero Section */}
                     <div className="bg-[#545B63] rounded-[2.5rem] p-6 sm:p-8 lg:p-12 text-white flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12 relative overflow-hidden mb-12 sm:mb-16">
@@ -218,31 +222,31 @@ export const getServerSideProps = async (context: any) => {
     const { PrismaClient } = require('@prisma/client');
     const prisma = new PrismaClient();
     try {
-        const blog = await prisma.blogPost.findUnique({
-            where: { slug },
-            include: { category: true, tags: true }
-        });
+        const [blog, relatedBlogs, seoSettings] = await Promise.all([
+            prisma.blogPost.findUnique({
+                where: { slug },
+                include: { category: true, tags: true }
+            }),
+            prisma.blogPost.findMany({
+                where: { isPublished: true, slug: { not: slug } },
+                take: 3,
+                orderBy: { createdAt: 'desc' },
+                include: { category: true }
+            }),
+            prisma.seoSettings.findFirst({ where: { id: 1 } })
+        ]);
 
         if (!blog || !blog.isPublished) {
             await prisma.$disconnect();
             return { notFound: true };
         }
 
-        const relatedBlogs = await prisma.blogPost.findMany({
-            where: {
-                isPublished: true,
-                id: { not: blog.id }
-            },
-            take: 3,
-            orderBy: { createdAt: 'desc' },
-            include: { category: true }
-        });
-
         await prisma.$disconnect();
         return {
             props: {
                 blog: JSON.parse(JSON.stringify(blog)),
-                relatedBlogs: JSON.parse(JSON.stringify(relatedBlogs))
+                relatedBlogs: JSON.parse(JSON.stringify(relatedBlogs)),
+                seoSettings: JSON.parse(JSON.stringify(seoSettings))
             }
         };
     } catch (e) {

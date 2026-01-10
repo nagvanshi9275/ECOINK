@@ -1,0 +1,596 @@
+[
+  {
+    "id": "2a33afa3-c2bf-49da-8517-adc56988b586",
+    "internalName": "Kitchen Cabinets - hero - 0",
+    "type": "hero",
+    "content": {
+      "image": "/kitchen1.jpg",
+      "ctaLink": "/get-a-custom-quote",
+      "ctaText": "Get Free Quote",
+      "heading": "Kitchen Cabinets",
+      "subheading": "Bespoke kitchen cabinets tailored to your lifestyle. Premium quality and expert installation."
+    },
+    "createdAt": "2026-01-10T20:43:01.819Z",
+    "updatedAt": "2026-01-10T20:43:01.819Z"
+  },
+  {
+    "id": "018e3bb7-f674-4c9c-9fc4-6d89e0e18294",
+    "internalName": "Kitchen Cabinets - content-split - 1",
+    "type": "content-split",
+    "content": {
+      "html": "<p>We specialize in creating stunning, functional kitchen cabinets that enhance your home's value and your quality of life. Our team works closely with you to understand your needs and deliver a result that exceeds expectations.</p>",
+      "heading": "Expert Kitchen Cabinets Designers",
+      "serviceName": "Kitchen Cabinets",
+      "sidebarType": "form"
+    },
+    "createdAt": "2026-01-10T20:43:01.826Z",
+    "updatedAt": "2026-01-10T20:43:01.826Z"
+  },
+  {
+    "id": "f5901ebc-25a9-488e-ab51-6beba4e03bda",
+    "internalName": "Kitchen Cabinets - gallery - 2",
+    "type": "gallery",
+    "content": {
+      "images": [
+        "/kitchen1.jpg",
+        "/kitchen2.jpg",
+        "/room.jpg",
+        "/bathromr.jpg"
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.832Z",
+    "updatedAt": "2026-01-10T20:43:01.832Z"
+  },
+  {
+    "id": "1548c1f6-3f4b-438d-9108-2bfb96bdd25f",
+    "internalName": "Kitchen Cabinets - faq - 3",
+    "type": "faq",
+    "content": {
+      "items": [
+        {
+          "answer": "Most projects are completed within 4-6 weeks from design approval.",
+          "question": "How long does it take?"
+        },
+        {
+          "answer": "Yes, we provide a 10-year structural warranty on all our cabinetry.",
+          "question": "Do you provide a warranty?"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.838Z",
+    "updatedAt": "2026-01-10T20:43:01.838Z"
+  },
+  {
+    "id": "1897cc6c-65bd-4668-ba72-dcdadf2aebd7",
+    "internalName": "Kitchen Cabinets - testimonial - 4",
+    "type": "testimonial",
+    "content": {
+      "items": [
+        {
+          "role": "Kitchen Renovation",
+          "rating": 5,
+          "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+          "avatarUrl": "/sarah.png",
+          "clientName": "Sarah Mitchell"
+        },
+        {
+          "role": "Laundry Upgrade",
+          "rating": 5,
+          "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+          "avatarUrl": "/joe.png",
+          "clientName": "Joe D'Agostino"
+        },
+        {
+          "role": "Bathroom Vanity",
+          "rating": 5,
+          "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+          "avatarUrl": "/michael.png",
+          "clientName": "Michael Thompson"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.844Z",
+    "updatedAt": "2026-01-10T20:43:01.844Z"
+  },
+  {
+    "id": "ad91e4bf-8070-4b3a-9fef-5ab4117dbf3a",
+    "internalName": "Bathroom Vanities - hero - 0",
+    "type": "hero",
+    "content": {
+      "image": "/bathromr.jpg",
+      "ctaLink": "/get-a-custom-quote",
+      "ctaText": "Get Free Quote",
+      "heading": "Bathroom Vanities",
+      "subheading": "Bespoke bathroom vanities tailored to your lifestyle. Premium quality and expert installation."
+    },
+    "createdAt": "2026-01-10T20:43:01.853Z",
+    "updatedAt": "2026-01-10T20:43:01.853Z"
+  },
+  {
+    "id": "bcc8920e-5580-4f2d-93c5-15b626e67cc2",
+    "internalName": "Bathroom Vanities - content-split - 1",
+    "type": "content-split",
+    "content": {
+      "html": "<p>We specialize in creating stunning, functional bathroom vanities that enhance your home's value and your quality of life. Our team works closely with you to understand your needs and deliver a result that exceeds expectations.</p>",
+      "heading": "Expert Bathroom Vanities Designers",
+      "serviceName": "Bathroom Vanities",
+      "sidebarType": "form"
+    },
+    "createdAt": "2026-01-10T20:43:01.859Z",
+    "updatedAt": "2026-01-10T20:43:01.859Z"
+  },
+  {
+    "id": "e7aa2af2-11dc-407b-958f-4401da3b620e",
+    "internalName": "Bathroom Vanities - gallery - 2",
+    "type": "gallery",
+    "content": {
+      "images": [
+        "/kitchen1.jpg",
+        "/kitchen2.jpg",
+        "/room.jpg",
+        "/bathromr.jpg"
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.865Z",
+    "updatedAt": "2026-01-10T20:43:01.865Z"
+  },
+  {
+    "id": "c160534e-9533-4adb-b6f6-4c12f7f272b8",
+    "internalName": "Bathroom Vanities - faq - 3",
+    "type": "faq",
+    "content": {
+      "items": [
+        {
+          "answer": "Most projects are completed within 4-6 weeks from design approval.",
+          "question": "How long does it take?"
+        },
+        {
+          "answer": "Yes, we provide a 10-year structural warranty on all our cabinetry.",
+          "question": "Do you provide a warranty?"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.871Z",
+    "updatedAt": "2026-01-10T20:43:01.871Z"
+  },
+  {
+    "id": "cc1dd2e3-69bd-49ee-9564-1c45a07411e4",
+    "internalName": "Bathroom Vanities - testimonial - 4",
+    "type": "testimonial",
+    "content": {
+      "items": [
+        {
+          "role": "Kitchen Renovation",
+          "rating": 5,
+          "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+          "avatarUrl": "/sarah.png",
+          "clientName": "Sarah Mitchell"
+        },
+        {
+          "role": "Laundry Upgrade",
+          "rating": 5,
+          "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+          "avatarUrl": "/joe.png",
+          "clientName": "Joe D'Agostino"
+        },
+        {
+          "role": "Bathroom Vanity",
+          "rating": 5,
+          "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+          "avatarUrl": "/michael.png",
+          "clientName": "Michael Thompson"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.877Z",
+    "updatedAt": "2026-01-10T20:43:01.877Z"
+  },
+  {
+    "id": "28cd831b-686e-49d2-82ce-17fd32d95f9c",
+    "internalName": "Laundry Cabinets - hero - 0",
+    "type": "hero",
+    "content": {
+      "image": "/room copy.jpg",
+      "ctaLink": "/get-a-custom-quote",
+      "ctaText": "Get Free Quote",
+      "heading": "Laundry Cabinets",
+      "subheading": "Bespoke laundry cabinets tailored to your lifestyle. Premium quality and expert installation."
+    },
+    "createdAt": "2026-01-10T20:43:01.887Z",
+    "updatedAt": "2026-01-10T20:43:01.887Z"
+  },
+  {
+    "id": "4ace112a-880d-44bd-8e9d-7e3a0730fa49",
+    "internalName": "Laundry Cabinets - content-split - 1",
+    "type": "content-split",
+    "content": {
+      "html": "<p>We specialize in creating stunning, functional laundry cabinets that enhance your home's value and your quality of life. Our team works closely with you to understand your needs and deliver a result that exceeds expectations.</p>",
+      "heading": "Expert Laundry Cabinets Designers",
+      "serviceName": "Laundry Cabinets",
+      "sidebarType": "form"
+    },
+    "createdAt": "2026-01-10T20:43:01.893Z",
+    "updatedAt": "2026-01-10T20:43:01.893Z"
+  },
+  {
+    "id": "fb143ecf-df8b-4a66-8e1b-d5f44e8e48d0",
+    "internalName": "Laundry Cabinets - gallery - 2",
+    "type": "gallery",
+    "content": {
+      "images": [
+        "/kitchen1.jpg",
+        "/kitchen2.jpg",
+        "/room.jpg",
+        "/bathromr.jpg"
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.898Z",
+    "updatedAt": "2026-01-10T20:43:01.898Z"
+  },
+  {
+    "id": "eee5d555-4ad5-41f3-bc20-fc8112bcc652",
+    "internalName": "Laundry Cabinets - faq - 3",
+    "type": "faq",
+    "content": {
+      "items": [
+        {
+          "answer": "Most projects are completed within 4-6 weeks from design approval.",
+          "question": "How long does it take?"
+        },
+        {
+          "answer": "Yes, we provide a 10-year structural warranty on all our cabinetry.",
+          "question": "Do you provide a warranty?"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.904Z",
+    "updatedAt": "2026-01-10T20:43:01.904Z"
+  },
+  {
+    "id": "693920bc-4c01-4b91-b4a9-2e36a5b7aaff",
+    "internalName": "Laundry Cabinets - testimonial - 4",
+    "type": "testimonial",
+    "content": {
+      "items": [
+        {
+          "role": "Kitchen Renovation",
+          "rating": 5,
+          "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+          "avatarUrl": "/sarah.png",
+          "clientName": "Sarah Mitchell"
+        },
+        {
+          "role": "Laundry Upgrade",
+          "rating": 5,
+          "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+          "avatarUrl": "/joe.png",
+          "clientName": "Joe D'Agostino"
+        },
+        {
+          "role": "Bathroom Vanity",
+          "rating": 5,
+          "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+          "avatarUrl": "/michael.png",
+          "clientName": "Michael Thompson"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.910Z",
+    "updatedAt": "2026-01-10T20:43:01.910Z"
+  },
+  {
+    "id": "970dcaa2-8e3f-499e-b894-230f82f4faa4",
+    "internalName": "TV Cabinets - hero - 0",
+    "type": "hero",
+    "content": {
+      "image": "/library.jpg",
+      "ctaLink": "/get-a-custom-quote",
+      "ctaText": "Get Free Quote",
+      "heading": "TV Cabinets",
+      "subheading": "Bespoke tv cabinets tailored to your lifestyle. Premium quality and expert installation."
+    },
+    "createdAt": "2026-01-10T20:43:01.919Z",
+    "updatedAt": "2026-01-10T20:43:01.919Z"
+  },
+  {
+    "id": "b1a54f91-7308-4117-9d6e-14644ff5dda0",
+    "internalName": "TV Cabinets - content-split - 1",
+    "type": "content-split",
+    "content": {
+      "html": "<p>We specialize in creating stunning, functional tv cabinets that enhance your home's value and your quality of life. Our team works closely with you to understand your needs and deliver a result that exceeds expectations.</p>",
+      "heading": "Expert TV Cabinets Designers",
+      "serviceName": "TV Cabinets",
+      "sidebarType": "form"
+    },
+    "createdAt": "2026-01-10T20:43:01.925Z",
+    "updatedAt": "2026-01-10T20:43:01.925Z"
+  },
+  {
+    "id": "abeece55-fe41-45d6-98b6-38422a1816b9",
+    "internalName": "TV Cabinets - gallery - 2",
+    "type": "gallery",
+    "content": {
+      "images": [
+        "/kitchen1.jpg",
+        "/kitchen2.jpg",
+        "/room.jpg",
+        "/bathromr.jpg"
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.933Z",
+    "updatedAt": "2026-01-10T20:43:01.933Z"
+  },
+  {
+    "id": "098430a9-84e2-461a-8bd4-d5eb3199be67",
+    "internalName": "TV Cabinets - faq - 3",
+    "type": "faq",
+    "content": {
+      "items": [
+        {
+          "answer": "Most projects are completed within 4-6 weeks from design approval.",
+          "question": "How long does it take?"
+        },
+        {
+          "answer": "Yes, we provide a 10-year structural warranty on all our cabinetry.",
+          "question": "Do you provide a warranty?"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.939Z",
+    "updatedAt": "2026-01-10T20:43:01.939Z"
+  },
+  {
+    "id": "70972e5e-03a4-41a6-9466-c366458ce4ea",
+    "internalName": "TV Cabinets - testimonial - 4",
+    "type": "testimonial",
+    "content": {
+      "items": [
+        {
+          "role": "Kitchen Renovation",
+          "rating": 5,
+          "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+          "avatarUrl": "/sarah.png",
+          "clientName": "Sarah Mitchell"
+        },
+        {
+          "role": "Laundry Upgrade",
+          "rating": 5,
+          "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+          "avatarUrl": "/joe.png",
+          "clientName": "Joe D'Agostino"
+        },
+        {
+          "role": "Bathroom Vanity",
+          "rating": 5,
+          "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+          "avatarUrl": "/michael.png",
+          "clientName": "Michael Thompson"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.945Z",
+    "updatedAt": "2026-01-10T20:43:01.945Z"
+  },
+  {
+    "id": "d71f37a5-a4ec-49fa-b601-3dc9be111a3a",
+    "internalName": "Wardrobes - hero - 0",
+    "type": "hero",
+    "content": {
+      "image": "/bedroom1.jpg",
+      "ctaLink": "/get-a-custom-quote",
+      "ctaText": "Get Free Quote",
+      "heading": "Wardrobes",
+      "subheading": "Bespoke wardrobes tailored to your lifestyle. Premium quality and expert installation."
+    },
+    "createdAt": "2026-01-10T20:43:01.954Z",
+    "updatedAt": "2026-01-10T20:43:01.954Z"
+  },
+  {
+    "id": "125adc70-4b02-4ca7-a85e-6abd560dbb18",
+    "internalName": "Wardrobes - content-split - 1",
+    "type": "content-split",
+    "content": {
+      "html": "<p>We specialize in creating stunning, functional wardrobes that enhance your home's value and your quality of life. Our team works closely with you to understand your needs and deliver a result that exceeds expectations.</p>",
+      "heading": "Expert Wardrobes Designers",
+      "serviceName": "Wardrobes",
+      "sidebarType": "form"
+    },
+    "createdAt": "2026-01-10T20:43:01.960Z",
+    "updatedAt": "2026-01-10T20:43:01.960Z"
+  },
+  {
+    "id": "052f8393-fcba-45e0-b71e-daf5b3092ed5",
+    "internalName": "Wardrobes - gallery - 2",
+    "type": "gallery",
+    "content": {
+      "images": [
+        "/kitchen1.jpg",
+        "/kitchen2.jpg",
+        "/room.jpg",
+        "/bathromr.jpg"
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.966Z",
+    "updatedAt": "2026-01-10T20:43:01.966Z"
+  },
+  {
+    "id": "6406c190-0ba2-44fd-9cb2-058983b20fbc",
+    "internalName": "Wardrobes - faq - 3",
+    "type": "faq",
+    "content": {
+      "items": [
+        {
+          "answer": "Most projects are completed within 4-6 weeks from design approval.",
+          "question": "How long does it take?"
+        },
+        {
+          "answer": "Yes, we provide a 10-year structural warranty on all our cabinetry.",
+          "question": "Do you provide a warranty?"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.972Z",
+    "updatedAt": "2026-01-10T20:43:01.972Z"
+  },
+  {
+    "id": "4fe155da-88cf-46bc-a43c-65b7d54610df",
+    "internalName": "Wardrobes - testimonial - 4",
+    "type": "testimonial",
+    "content": {
+      "items": [
+        {
+          "role": "Kitchen Renovation",
+          "rating": 5,
+          "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+          "avatarUrl": "/sarah.png",
+          "clientName": "Sarah Mitchell"
+        },
+        {
+          "role": "Laundry Upgrade",
+          "rating": 5,
+          "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+          "avatarUrl": "/joe.png",
+          "clientName": "Joe D'Agostino"
+        },
+        {
+          "role": "Bathroom Vanity",
+          "rating": 5,
+          "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+          "avatarUrl": "/michael.png",
+          "clientName": "Michael Thompson"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.978Z",
+    "updatedAt": "2026-01-10T20:43:01.978Z"
+  },
+  {
+    "id": "2520818a-6d50-460f-b635-e834e9f70aec",
+    "internalName": "Furniture - hero - 0",
+    "type": "hero",
+    "content": {
+      "image": "/room.jpg",
+      "ctaLink": "/get-a-custom-quote",
+      "ctaText": "Get Free Quote",
+      "heading": "Furniture",
+      "subheading": "Bespoke furniture tailored to your lifestyle. Premium quality and expert installation."
+    },
+    "createdAt": "2026-01-10T20:43:01.987Z",
+    "updatedAt": "2026-01-10T20:43:01.987Z"
+  },
+  {
+    "id": "759a2346-670b-4cde-8b13-44182678c69b",
+    "internalName": "Furniture - content-split - 1",
+    "type": "content-split",
+    "content": {
+      "html": "<p>We specialize in creating stunning, functional furniture that enhance your home's value and your quality of life. Our team works closely with you to understand your needs and deliver a result that exceeds expectations.</p>",
+      "heading": "Expert Furniture Designers",
+      "serviceName": "Furniture",
+      "sidebarType": "form"
+    },
+    "createdAt": "2026-01-10T20:43:01.994Z",
+    "updatedAt": "2026-01-10T20:43:01.994Z"
+  },
+  {
+    "id": "e59bb4d3-ff23-42de-89ce-c05c920e5f75",
+    "internalName": "Furniture - gallery - 2",
+    "type": "gallery",
+    "content": {
+      "images": [
+        "/kitchen1.jpg",
+        "/kitchen2.jpg",
+        "/room.jpg",
+        "/bathromr.jpg"
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:01.999Z",
+    "updatedAt": "2026-01-10T20:43:01.999Z"
+  },
+  {
+    "id": "bfabf44b-4a80-457e-95aa-0865dd5d2031",
+    "internalName": "Furniture - faq - 3",
+    "type": "faq",
+    "content": {
+      "items": [
+        {
+          "answer": "Most projects are completed within 4-6 weeks from design approval.",
+          "question": "How long does it take?"
+        },
+        {
+          "answer": "Yes, we provide a 10-year structural warranty on all our cabinetry.",
+          "question": "Do you provide a warranty?"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:02.005Z",
+    "updatedAt": "2026-01-10T20:43:02.005Z"
+  },
+  {
+    "id": "cee2fe92-8fee-4131-a76f-4f966e1f8edb",
+    "internalName": "Furniture - testimonial - 4",
+    "type": "testimonial",
+    "content": {
+      "items": [
+        {
+          "role": "Kitchen Renovation",
+          "rating": 5,
+          "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+          "avatarUrl": "/sarah.png",
+          "clientName": "Sarah Mitchell"
+        },
+        {
+          "role": "Laundry Upgrade",
+          "rating": 5,
+          "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+          "avatarUrl": "/joe.png",
+          "clientName": "Joe D'Agostino"
+        },
+        {
+          "role": "Bathroom Vanity",
+          "rating": 5,
+          "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+          "avatarUrl": "/michael.png",
+          "clientName": "Michael Thompson"
+        }
+      ]
+    },
+    "createdAt": "2026-01-10T20:43:02.013Z",
+    "updatedAt": "2026-01-10T20:43:02.013Z"
+  },
+  {
+    "id": "54f3ffb0-ce32-4b15-8aab-f075e84d5bf4",
+    "internalName": "Why Magri Cabinets? - Hero",
+    "type": "hero",
+    "content": {
+      "image": "/kitchen2.jpg",
+      "heading": "Why Magri Cabinets?",
+      "subheading": "Discover the Magri Cabinets difference."
+    },
+    "createdAt": "2026-01-10T20:43:02.025Z",
+    "updatedAt": "2026-01-10T20:43:02.025Z"
+  },
+  {
+    "id": "18ed5277-973d-4155-b302-9be06c03b3d2",
+    "internalName": "Projects - Hero",
+    "type": "hero",
+    "content": {
+      "image": "/kitchen2.jpg",
+      "heading": "Projects",
+      "subheading": "Discover the Magri Cabinets difference."
+    },
+    "createdAt": "2026-01-10T20:43:02.036Z",
+    "updatedAt": "2026-01-10T20:43:02.036Z"
+  },
+  {
+    "id": "cce4bf3d-ef35-4e37-9f1d-288350d53396",
+    "internalName": "Blogs - Hero",
+    "type": "hero",
+    "content": {
+      "image": "/kitchen2.jpg",
+      "heading": "Blogs",
+      "subheading": "Discover the Magri Cabinets difference."
+    },
+    "createdAt": "2026-01-10T20:43:02.047Z",
+    "updatedAt": "2026-01-10T20:43:02.047Z"
+  }
+]

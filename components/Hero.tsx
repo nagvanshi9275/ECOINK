@@ -49,10 +49,12 @@ interface HeroProps {
     ctaText?: string;
     ctaLink?: string;
     backgroundImage?: string;
+    imageAlt?: string;
     services?: any[];
+    badge?: string;
 }
 
-export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", backgroundImage, services = [] }: HeroProps) {
+export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", backgroundImage, imageAlt, services = [], badge }: HeroProps) {
     const [currentService, setCurrentService] = useState(0);
 
     // Map CMS services to component format if provided, otherwise use fallback
@@ -82,7 +84,14 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
     const displayDescription = subtitle || service.description;
     const displayCtaText = ctaText || (service as any).ctaText || "Get a FREE Quote";
     const displayCtaLink = ctaLink || service.link;
-    const displayImage = backgroundImage || service.image || "/kitchen2.jpg";
+
+    // Image Logic: 
+    // If title is present (Static Mode), use backgroundImage only.
+    // If title is missing (Carousel Mode), use backgroundImage or carousel service image.
+    const displayImage = title
+        ? (backgroundImage || "/kitchen2.jpg")
+        : (backgroundImage || service.image || "/kitchen2.jpg");
+    const displayBadge = badge || "Premier Cabinet Makers";
 
     return (
         <section className="relative bg-gradient-to-br from-gray-600 to-gray-700 pt-20 pb-12 lg:pt-24 lg:pb-24 overflow-hidden">
@@ -104,7 +113,7 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
                                 className="space-y-6"
                             >
                                 <div className="hidden lg:inline-block px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 text-orange-400 rounded-full text-sm font-bold tracking-wide uppercase mb-2 backdrop-blur-sm">
-                                    Premier Cabinet Makers
+                                    {displayBadge}
                                 </div>
 
                                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
@@ -177,7 +186,7 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
                                 >
                                     <Image
                                         src={displayImage}
-                                        alt={displayTitle}
+                                        alt={imageAlt || displayTitle}
                                         fill
                                         className="object-cover"
                                         priority

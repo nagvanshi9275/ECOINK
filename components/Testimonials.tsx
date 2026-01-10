@@ -4,7 +4,22 @@ import { Star, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { testimonials } from "@/data";
 
-export default function Testimonials() {
+interface TestimonialItem {
+    id: string | number;
+    author: string;
+    role?: string;
+    quote: string;
+    rating?: number;
+    image?: string;
+    date?: string;
+}
+
+interface TestimonialsProps {
+    items?: TestimonialItem[];
+}
+
+export default function Testimonials({ items }: TestimonialsProps) {
+    const testimonialData = items && items.length > 0 ? items : testimonials;
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const scroll = (direction: "left" | "right") => {
@@ -71,7 +86,7 @@ export default function Testimonials() {
                     className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory"
                     style={{ scrollBehavior: 'smooth' }}
                 >
-                    {testimonials.map((testimonial, index) => (
+                    {testimonialData.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.id}
                             initial={{ opacity: 0, scale: 0.95 }}

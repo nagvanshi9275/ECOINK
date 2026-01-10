@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "siteName": "Magri Cabinets",
+    "siteTitle": null,
+    "siteDescription": null,
+    "defaultOgImage": null,
+    "businessName": "Magri Cabinets",
+    "businessType": "LocalBusiness",
+    "streetAddress": null,
+    "addressLocality": "Melbourne",
+    "addressRegion": "VIC",
+    "postalCode": null,
+    "telephone": null,
+    "priceRange": "$$",
+    "latitude": null,
+    "longitude": null,
+    "openingHours": null,
+    "facebookUrl": null,
+    "instagramUrl": null,
+    "linkedinUrl": null,
+    "youtubeUrl": null,
+    "googleAnalyticsId": null,
+    "googleSearchConsole": null,
+    "googleTagManager": null,
+    "facebookPixel": null,
+    "sitemapEnabled": true,
+    "sitemapFrequency": "weekly",
+    "updatedAt": "2026-01-10T21:35:03.340Z"
+  }
+]

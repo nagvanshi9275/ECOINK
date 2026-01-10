@@ -1,0 +1,32 @@
+[
+  {
+    "id": "2bc71612-3cb7-4802-b93c-1b73bd7e1d54",
+    "clientName": "Sarah Mitchell",
+    "role": "Kitchen Renovation",
+    "content": "Mark was very accommodating and professional throughout the entire process. The quality of the kitchen cabinets exceeded our expectations. Truly a premium experience!",
+    "avatarUrl": "/sarah.png",
+    "rating": 5,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.756Z"
+  },
+  {
+    "id": "b3534370-2fc9-4b3c-baef-d0e3d5ffa8bb",
+    "clientName": "Joe D'Agostino",
+    "role": "Laundry Upgrade",
+    "content": "Excellent workmanship and attention to detail on our laundry cabinets. They maximized our small space perfectly. Highly recommended for any custom joinery!",
+    "avatarUrl": "/joe.png",
+    "rating": 5,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.759Z"
+  },
+  {
+    "id": "aedd55a8-ca32-44cd-90f4-189088b56fb1",
+    "clientName": "Michael Thompson",
+    "role": "Bathroom Vanity",
+    "content": "Highly recommend Magri Cabinets for custom cabinetry in Melbourne. Their team is professional, clean, and the final finish is absolutely flawless.",
+    "avatarUrl": "/michael.png",
+    "rating": 5,
+    "isVisible": true,
+    "createdAt": "2026-01-10T20:43:01.762Z"
+  }
+]

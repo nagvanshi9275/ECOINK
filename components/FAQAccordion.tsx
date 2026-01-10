@@ -7,7 +7,18 @@ import {
 import { faqItems } from "@/data";
 import { HelpCircle } from "lucide-react";
 
-export default function FAQAccordion() {
+interface FAQItem {
+    id: string | number;
+    question: string;
+    answer: string;
+}
+
+interface FAQAccordionProps {
+    items?: FAQItem[];
+}
+
+export default function FAQAccordion({ items }: FAQAccordionProps) {
+    const faqData = items && items.length > 0 ? items : faqItems;
     return (
         <section className="py-24 bg-white">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,10 +38,10 @@ export default function FAQAccordion() {
 
                 {/* FAQ Accordion */}
                 <Accordion type="single" collapsible className="space-y-4">
-                    {faqItems.map((faq, index) => (
+                    {faqData.map((faq, index) => (
                         <AccordionItem
                             key={faq.id}
-                            value={faq.id}
+                            value={String(faq.id)}
                             className="bg-gray-50 rounded-xl border-0 px-6 data-[state=open]:bg-gradient-to-r data-[state=open]:from-gray-900 data-[state=open]:to-gray-800 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md"
                         >
                             <AccordionTrigger className="py-6 text-left text-lg font-semibold hover:no-underline group data-[state=open]:text-white">

@@ -2,31 +2,43 @@
  * Fetches the specific page data from the CMS by slug.
  * This should be used in getStaticProps or getServerSideProps.
  */
-export async function getPageBySlug(slug: string) {
-    // We cannot use fetch() with relative URLs on the server side easily during build time
-    // unless we know the absolute URL. 
-    // However, since we are on the server (Next.js), we can use Prisma DIRECTLY
-    // instead of calling our own API routes, which is more efficient and avoids build errors.
-
+export async function getPageBySlug(slug: string, preview: boolean = false) {
     const { PrismaClient } = require('@prisma/client');
     const prisma = new PrismaClient();
 
     try {
         const page = await prisma.page.findUnique({
-            where: {
-                slug: slug,
-                isPublished: true, // Only fetch published pages for frontend
-            },
+            where: { slug: slug },
+            include: {
+                sections: {
+                    include: { section: true },
+                    orderBy: { order: 'asc' }
+                }
+            }
         });
 
+        if (!page || (!page.isPublished && !preview)) {
+            await prisma.$disconnect();
+            return null;
+        }
+
+        const formattedPage = {
+            ...page,
+            content: page.sections.map((ps: any) => ({
+                type: ps.section.type,
+                data: ps.section.content
+            }))
+        };
+
         await prisma.$disconnect();
-        return page;
+        return formattedPage;
     } catch (error) {
         console.error(`Error fetching page with slug ${slug}:`, error);
         await prisma.$disconnect();
         return null;
     }
 }
+
 
 /**
  * Fetches all published page slugs for getStaticPaths
