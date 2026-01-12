@@ -12,6 +12,33 @@ import SeoMetaBox from '@/components/admin/SeoMetaBox';
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
+const quillStyles = `
+  .ql-container {
+    font-family: inherit;
+    font-size: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    background: white;
+  }
+  .ql-toolbar {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background: #f8fafc;
+    border-color: #f1f5f9 !important;
+  }
+  .ql-container.ql-snow {
+    border-color: #f1f5f9 !important;
+  }
+  .ql-editor {
+    min-height: 300px;
+    color: #1e293b !important;
+  }
+  .ql-editor.ql-blank::before {
+    color: #cbd5e1 !important;
+    font-style: normal;
+  }
+`;
+
 const slugify = (text: string) => {
     return text.toString().toLowerCase()
         .replace(/\s+/g, '-')
@@ -120,6 +147,7 @@ export default function EditProject({ project: initialProject }: ProjectFormProp
 
     return (
         <AdminLayout>
+            <style dangerouslySetInnerHTML={{ __html: quillStyles }} />
             <form onSubmit={handleSave} className="max-w-[1600px] mx-auto pb-20">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8">

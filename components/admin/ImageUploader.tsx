@@ -59,8 +59,58 @@ export default function ImageUploader({
         setError(null);
 
         try {
+            // Client-side compression to speed up upload
+            let fileToUpload: File | Blob = file;
+
+            // Only compress if it's an image and not a tiny file
+            if (file.type.startsWith('image/') && file.size > 500 * 1024) {
+                try {
+                    fileToUpload = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = (e) => {
+                            const img = document.createElement('img');
+                            img.src = e.target?.result as string;
+                            img.onload = () => {
+                                const canvas = document.createElement('canvas');
+                                const MAX_WIDTH = 1920;
+                                const MAX_HEIGHT = 1080;
+                                let width = img.width;
+                                let height = img.height;
+
+                                if (width > height) {
+                                    if (width > MAX_WIDTH) {
+                                        height *= MAX_WIDTH / width;
+                                        width = MAX_WIDTH;
+                                    }
+                                } else {
+                                    if (height > MAX_HEIGHT) {
+                                        width *= MAX_HEIGHT / height;
+                                        height = MAX_HEIGHT;
+                                    }
+                                }
+
+                                canvas.width = width;
+                                canvas.height = height;
+                                const ctx = canvas.getContext('2d');
+                                ctx?.drawImage(img, 0, 0, width, height);
+                                canvas.toBlob((blob) => {
+                                    if (blob) resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+                                    else resolve(file);
+                                }, 'image/jpeg', 0.8);
+                            };
+                            img.onerror = reject;
+                        };
+                        reader.onerror = reject;
+                    });
+                } catch (compressionError) {
+                    console.warn('Compression failed, uploading original:', compressionError);
+                    fileToUpload = file;
+                }
+            }
+
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', fileToUpload);
             formData.append('folder', folder);
             formData.append('saveToMedia', saveToMedia.toString());
             if (metadata.altText) formData.append('altText', metadata.altText);
