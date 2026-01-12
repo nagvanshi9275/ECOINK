@@ -317,7 +317,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       title: p.title,
       description: p.description,
       location: p.location || "Melbourne",
-      image: p.images && p.images.length > 0 ? p.images[0] : "/placeholder.jpg"
+      image: (p as any).thumbnailImage || (p.images && p.images.length > 0 ? p.images[0] : "/placeholder.jpg"),
     }));
 
     if (projects.length === 0) {

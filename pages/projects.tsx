@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
             location: p.location || "",
             category: (p as any).category || "Uncategorized",
             description: p.description,
-            image: p.images && p.images.length > 0 ? p.images[0] : "/placeholder.jpg",
+            image: (p as any).thumbnailImage || (p.images && p.images.length > 0 ? p.images[0] : "/placeholder.jpg"),
         }));
 
         return {

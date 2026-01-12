@@ -199,6 +199,8 @@ model Project {
   images      String[]
   heroImage   String?  
   heroImageAlt String?
+  thumbnailImage String?
+  thumbnailImageAlt String?
   tags        Json?    
   galleryTitle    String?  
   gallerySubtitle String?  

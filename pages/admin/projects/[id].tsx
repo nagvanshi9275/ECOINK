@@ -56,6 +56,8 @@ export default function EditProject({ project: initialProject }: ProjectFormProp
         ...initialProject,
         tags: initialProject?.tags || [],
         images: initialProject?.images || [],
+        thumbnailImage: initialProject?.thumbnailImage || '',
+        thumbnailImageAlt: initialProject?.thumbnailImageAlt || '',
         // NEW SEO FIELDS
         seoTitle: initialProject?.seoTitle || '',
         seoDescription: initialProject?.seoDescription || '',
@@ -415,6 +417,22 @@ export default function EditProject({ project: initialProject }: ProjectFormProp
                                 aspectRatio="video"
                             />
                             <p className="text-[10px] text-gray-400">Main image shown in the hero section (or click "Hero" on any gallery image)</p>
+                        </div>
+
+                        {/* Thumbnail/Card Image */}
+                        <div className="bg-white p-6 rounded-[24px] shadow-sm border border-gray-100 space-y-4">
+                            <h3 className="text-xs font-black text-gray-900 uppercase tracking-widest flex items-center gap-2 mb-4">
+                                <LayoutGrid size={14} className="text-orange-500" /> Card Thumbnail Image
+                            </h3>
+                            <ImageUploader
+                                currentImage={project.thumbnailImage}
+                                onImageUploaded={(url, _, meta) => setProject({ ...project, thumbnailImage: url, thumbnailImageAlt: meta?.altText || project.thumbnailImageAlt })}
+                                initialMetadata={{ altText: project.thumbnailImageAlt }}
+                                folder="projects"
+                                saveToMedia={true}
+                                aspectRatio="square"
+                            />
+                            <p className="text-[10px] text-gray-400">Image used specifically for project cards in the portfolio grid.</p>
                         </div>
 
                         {/* Project Details Box */}
