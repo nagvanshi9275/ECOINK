@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -17,7 +19,19 @@ export default function Navbar() {
                 const res = await fetch('/api/navbar/items');
                 if (res.ok) {
                     const data = await res.json();
-                    setNavItems(data);
+
+                    // Filter out unwanted items or items we're manually placing
+                    const filteredData = data.filter((item: any) =>
+                        !["WHY MAGRI CABINETS?", "MAGRI CABINETS", "CONTACT"].includes(item.label)
+                    );
+
+                    const finalItems = [
+                        { label: "CUTTING EDGE SERVICES", href: "/cutting-edge-services" },
+                        ...filteredData,
+                        { label: "CONTACT", href: "/contact" }
+                    ];
+
+                    setNavItems(finalItems);
                 }
             } catch (error) {
                 console.error('Failed to fetch navbar:', error);
@@ -30,10 +44,11 @@ export default function Navbar() {
 
     // Fallback if API fails or is loading
     const displayItems = navItems.length > 0 ? navItems : [
-        { label: "WHY MAGRI CABINETS?", href: "/why-magri-cabinets" },
+        { label: "CUTTING EDGE SERVICES", href: "/cutting-edge-services" },
         { label: "OUR INSTALLATIONS", href: "/our-installations", hasDropdown: true, dropdownItems: [] },
         { label: "PROJECTS", href: "/projects" },
         { label: "BLOGS", href: "/blogs" },
+        { label: "CONTACT", href: "/contact" },
     ];
 
     return (
@@ -42,18 +57,16 @@ export default function Navbar() {
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-3 group">
-                        <div className="relative w-14 h-14 flex items-center justify-center bg-gray-50 rounded-2xl group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                        <div className="relative w-40 h-16 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                             <Image
                                 src="/Magri-Cabinets-removebg-preview.png"
                                 alt="Magri Cabinets Logo"
-                                width={48}
-                                height={48}
-                                className="object-contain"
+                                fill
+                                className="object-contain object-left"
                             />
                         </div>
                         <div className="hidden sm:block">
-                            <span className="text-gray-900 font-extrabold text-xl tracking-tight font-outfit uppercase">Magri Cabinets</span>
-                            <p className="text-orange-500 text-[10px] font-black uppercase tracking-[0.2em]">Melbourne Cabinet Makers</p>
+                            {/* Text removed as per user request to show only logo */}
                         </div>
                     </Link>
 
@@ -68,7 +81,7 @@ export default function Navbar() {
                                     onMouseLeave={() => setIsDropdownOpen(false)}
                                 >
                                     <button
-                                        className={`flex items-center px-4 py-2 text-xs font-black tracking-widest transition-all duration-300 rounded-xl ${isDropdownOpen ? 'bg-orange-50 text-orange-600' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
+                                        className={`flex items-center px-4 py-2 text-xs font-black tracking-widest transition-all duration-300 rounded-xl whitespace-nowrap ${isDropdownOpen ? 'bg-orange-50 text-orange-600' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
                                     >
                                         {item.label}
                                         <ChevronDown className={`ml-1.5 w-3.5 h-3.5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -103,7 +116,7 @@ export default function Navbar() {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="px-4 py-2 text-xs font-black tracking-widest text-gray-600 hover:text-orange-500 hover:bg-gray-50 rounded-xl transition-all duration-300"
+                                    className="px-4 py-2 text-xs font-black tracking-widest text-gray-600 hover:text-orange-500 hover:bg-gray-50 rounded-xl transition-all duration-300 whitespace-nowrap"
                                 >
                                     {item.label}
                                 </Link>
@@ -117,7 +130,6 @@ export default function Navbar() {
                             href="tel:0481132920"
                             className="flex flex-col items-end group"
                         >
-                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest group-hover:text-orange-500 transition-colors">Call Experts</span>
                             <span className="text-sm font-black text-gray-900 group-hover:text-orange-600 transition-colors">0481 132 920</span>
                         </a>
                         <Link href="/get-a-custom-quote">

@@ -47,7 +47,7 @@ export default function MetaHead({ data, settings }: MetaHeadProps) {
             )}
 
             {/* Favicon - fallback */}
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/Magri-Cabinets-removebg-preview.png" />
         </Head>
     );
 }

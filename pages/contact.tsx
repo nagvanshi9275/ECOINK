@@ -134,22 +134,25 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            {/* Live Google Map */}
-                            <div className="mt-8 overflow-hidden rounded-2xl shadow-xl h-[400px] border border-gray-200">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3157.2258856009794!2d144.8767192!3d-37.6908938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65bd4c14335cd%3A0x6fd4c70c1f398e28!2s10%20Dakota%20Ct%2C%20Tullamarine%20VIC%203043%2C%20Australia!5e0!3m2!1sen!2sin!4v1767349287477!5m2!1sen!2sin"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen={true}
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                />
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/* FULL WIDTH MAP SECTION */}
+            <div className="w-full h-[500px] relative z-0">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3157.2258856009794!2d144.8767192!3d-37.6908938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65bd4c14335cd%3A0x6fd4c70c1f398e28!2s10%20Dakota%20Ct%2C%20Tullamarine%20VIC%203043%2C%20Australia!5e0!3m2!1sen!2sin!4v1767349287477!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+                />
+            </div>
 
             {/* Service Areas */}
             <section className="py-24 bg-gray-50">

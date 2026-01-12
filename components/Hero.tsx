@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -103,6 +105,10 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
 
                     {/* Left Side: Content */}
                     <div className="flex-1 text-center lg:text-left w-full relative lg:min-h-auto flex flex-col justify-center">
+                        <div className="hidden lg:inline-block px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 text-orange-400 rounded-full text-sm font-bold tracking-wide uppercase mb-6 backdrop-blur-sm w-fit mx-auto lg:mx-0">
+                            {displayBadge}
+                        </div>
+
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={title || currentService} // Key changes based on mode
@@ -112,10 +118,6 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
                                 transition={{ duration: 0.5, ease: "easeOut" }}
                                 className="space-y-6"
                             >
-                                <div className="hidden lg:inline-block px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 text-orange-400 rounded-full text-sm font-bold tracking-wide uppercase mb-2 backdrop-blur-sm">
-                                    {displayBadge}
-                                </div>
-
                                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
                                     {/* For static titles, we might lose the split coloring unless we process it manually. 
                                         For simplicity, we color the first word if it's dynamic, or just keep it simple. */}

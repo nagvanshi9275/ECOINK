@@ -1,9 +1,11 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Upload } from "lucide-react";
 
 export default function ServiceContactForm({ defaultService = "General Enquiry" }: { defaultService?: string }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,7 +16,8 @@ export default function ServiceContactForm({ defaultService = "General Enquiry" 
         phone: "",
         postcode: "",
         installationType: defaultService,
-        message: ""
+        message: "",
+        attachment: null as File | null
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -109,12 +112,13 @@ export default function ServiceContactForm({ defaultService = "General Enquiry" 
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-bold text-gray-500 uppercase">Installation Type</label>
+                        <label className="text-xs font-bold text-gray-500 uppercase">Service Type</label>
                         <select
                             className="w-full h-10 px-3 py-2 rounded-md border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition-colors"
                             value={formData.installationType}
                             onChange={e => setFormData({ ...formData, installationType: e.target.value })}
                         >
+                            <option value="Cut & Edge Service">Cut & Edge Service</option>
                             <option value="TV Cabinets">TV Cabinets & Entertainment</option>
                             <option value="Kitchen Cabinets">Kitchen Renovations</option>
                             <option value="Bathroom Vanities">Bathroom Vanities</option>
@@ -126,13 +130,27 @@ export default function ServiceContactForm({ defaultService = "General Enquiry" 
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-bold text-gray-500 uppercase">Your Vision</label>
+                        <label className="text-xs font-bold text-gray-500 uppercase">Project Details</label>
                         <Textarea
                             placeholder="Tell us about your project requirements..."
                             className="bg-gray-50 border-gray-200 min-h-[100px] focus:bg-white transition-colors"
                             value={formData.message}
                             onChange={e => setFormData({ ...formData, message: e.target.value })}
                         />
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-gray-500 uppercase">Attachment (Optional)</label>
+                        <div className="relative">
+                            <Input
+                                type="file"
+                                accept="image/*,.pdf"
+                                className="pl-10 cursor-pointer bg-gray-50 border-gray-200 file:text-orange-600 file:font-semibold file:border-0 file:bg-transparent file:mr-4 file:py-1"
+                                onChange={e => setFormData({ ...formData, attachment: e.target.files ? e.target.files[0] : null })}
+                            />
+                            <Upload className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                        </div>
+                        <p className="text-[10px] text-gray-400">Supported: Images, PDF. Max 5MB.</p>
                     </div>
 
                     <Button

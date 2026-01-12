@@ -165,7 +165,7 @@ export default function Footer() {
                         <p className="text-gray-300 text-sm">
                             Copyright © Magri Cabinets 2025 | Designed & Optimised by{" "}
                             <a
-                                href="https://doublebricksdigital.com"
+                                href="https://www.doublebricks.com/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-orange-500 hover:text-orange-400 transition-colors"
