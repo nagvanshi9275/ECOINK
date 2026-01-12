@@ -388,61 +388,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             };
         }
 
-        // --- INJECT DEFAULTS FOR DEMO / REQUIREMENT VISIBILITY ---
-        // Ensure these fields exist so the requested sections RENDER immediately for the user to see.
-        // User can later overwrite these via Admin (DB).
+        // No longer injecting hardcoded defaults. We use what's in the DB.
+        // We'll just provide empty arrays/nulls if missing to prevent crashes.
+        if (!serializedProject.images) serializedProject.images = [];
+        if (!serializedProject.faqs) serializedProject.faqs = [];
+        if (!serializedProject.tags) serializedProject.tags = [];
 
-        // 1. Ensure Images
-        if (!serializedProject.images || serializedProject.images.length < 4) {
-            const img1 = '/kitchen1.jpg';
-            const img2 = '/kitchen2.jpg';
-            const img3 = '/library.jpg';
-            const img4 = '/bedroom.jpg';
-
-            // If the project had one image and it's not a placeholder, keep it at start
-            if (serializedProject.image && serializedProject.image !== '/placeholder.jpg') {
-                serializedProject.images = [serializedProject.image, img2, img3, img4];
-            } else {
-                serializedProject.images = [img1, img2, img3, img4];
-            }
-        }
-
-        // 2. Ensure Before/After (Use diverse images for demo effect)
-        if (!serializedProject.beforeImage || serializedProject.beforeImage === '/images/placeholder.jpg') {
-            serializedProject.beforeImage = '/kitchen2.jpg';
-        }
-        if (!serializedProject.afterImage || serializedProject.afterImage === '/images/placeholder.jpg') {
-            serializedProject.afterImage = '/kitchen1.jpg';
-        }
-
-        // Ensure Hero uses a nice image if missing
-        if (!serializedProject.heroImage || serializedProject.heroImage === '/placeholder.jpg' || serializedProject.heroImage === '/images/placeholder.jpg') {
-            serializedProject.heroImage = '/kitchen1.jpg';
-        }
-
-        // 3. Ensure Text Content (If missing, use the specific requirement text)
-        if (!serializedProject.content || serializedProject.content.length < 50) {
-            serializedProject.title = serializedProject.title || 'Ballan – Kitchen Makeover';
-            serializedProject.description = serializedProject.description || 'This kitchen makeover, finished in late 2024, was designed together with our client to bring their dream space to life. Using a mix of high-quality materials, we created a timeless look that combines elegance, durability, and everyday functionality.';
-            serializedProject.content = `<p>At Magri Cabinets, we love turning kitchen ideas into reality. For the Ballan Kitchen Makeover, we worked side by side with the homeowner to design a kitchen that’s stylish, practical, and tailored to their needs.</p><p>This project features Polytec thermolaminated doors in the classic Ballarat profile, finished in Porcelain Smooth for a sleek, modern feel. To elevate the design, we installed a 40mm YDL Mahal Ivory stone benchtop, adding strength, brightness, and a stunning focal point.</p><p>The transformation has completely refreshed the home—what was once a darker, dated space is now light, spacious, and welcoming. Every choice was carefully made to balance beauty with functionality, resulting in a kitchen that’s both practical and personal.</p><p>This project is a true example of the craftsmanship and attention to detail that Magri Cabinets brings to every kitchen we create.</p>`;
-            serializedProject.location = serializedProject.location || 'Ballan';
-            serializedProject.category = serializedProject.category || 'Kitchen Renovation';
-            if (!serializedProject.completionDate) serializedProject.completionDate = new Date('2024-11-01').toISOString();
-        }
-
-        // 4. Ensure Testimonial
-        if (!serializedProject.testimonialText) {
-            serializedProject.testimonialText = "This project is a true example of the craftsmanship and attention to detail that Magri Cabinets brings to every kitchen we create.";
-            serializedProject.testimonialClient = "Happy Client";
-        }
-
-        // 5. Ensure FAQs
-        if (!serializedProject.faqs || serializedProject.faqs.length === 0) {
-            serializedProject.faqs = [
-                { question: "What materials were used?", answer: "Polytec thermolaminated doors in Ballarat profile, Porcelain Smooth finish, and 40mm YDL Mahal Ivory stone benchtop." },
-                { question: "How long did it take?", answer: "The project was finished in late 2024." }
-            ];
-        }
 
         const seoSettings = await (prisma as any).seoSettings.findFirst({ where: { id: 1 } });
 
