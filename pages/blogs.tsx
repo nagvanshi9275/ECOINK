@@ -92,25 +92,7 @@ export default function Blogs({ blogPosts }: BlogsProps) {
                 </div>
             </section>
 
-            {/* Category Filter */}
-            <section className="py-6 sm:py-8 bg-white border-b border-gray-100 overflow-hidden sticky top-[80px] z-30 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center lg:justify-center gap-2 sm:gap-3 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveCategory(category)}
-                                className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex-shrink-0 cursor-pointer ${activeCategory === category
-                                    ? "bg-orange-500 text-white shadow-md shadow-orange-500/20"
-                                    : "bg-gray-50 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-transparent hover:border-orange-100"
-                                    }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
+
 
             {/* Blog Posts Grid */}
             <section className="py-16 lg:py-24 bg-white min-h-[400px]">
@@ -130,11 +112,6 @@ export default function Blogs({ blogPosts }: BlogsProps) {
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                                             />
-                                            <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
-                                                <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-orange-500 text-white text-[10px] sm:text-xs font-bold rounded-full shadow-lg">
-                                                    {post.category}
-                                                </span>
-                                            </div>
                                         </div>
 
                                         {/* Content Container */}

@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChevronLeft } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import ServiceCTA from "@/components/ServiceCTA";
 import { Button } from "@/components/ui/button";
 import MetaHead from "@/components/seo/MetaHead";
@@ -50,9 +53,6 @@ export default function BlogDetail({ blog, relatedBlogs, seoSettings }: { blog: 
             <StructuredData data={blog} type="Article" />
 
             <div className="min-h-screen bg-white pb-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-                    <Breadcrumbs items={breadcrumbItems} />
-                </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 lg:pt-4">
 
                     {/* Hero Section */}
@@ -82,20 +82,7 @@ export default function BlogDetail({ blog, relatedBlogs, seoSettings }: { blog: 
                                 {blog.title}
                             </h1>
 
-                            <div className="flex flex-wrap gap-2 sm:gap-3">
-                                {blog.category?.name && (
-                                    <div className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#1E293B] rounded-full text-[10px] sm:text-sm font-medium text-gray-300">
-                                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-orange-500" />
-                                        {blog.category.name}
-                                    </div>
-                                )}
-                                {blog.tags && blog.tags.map((tag: any) => (
-                                    <div key={tag.id} className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#1E293B] rounded-full text-[10px] sm:text-sm font-medium text-gray-300">
-                                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-orange-500" />
-                                        {tag.name}
-                                    </div>
-                                ))}
-                            </div>
+
                         </div>
                     </div>
 
@@ -126,10 +113,24 @@ export default function BlogDetail({ blog, relatedBlogs, seoSettings }: { blog: 
                                 </div>
                             </div>
 
-                            <div
-                                className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#0F172A] prose-p:text-gray-600 prose-img:rounded-3xl prose-a:text-orange-500 hover:prose-a:text-orange-600 font-sans"
-                                dangerouslySetInnerHTML={{ __html: blog.content }}
-                            />
+                            <div className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-[#0F172A] prose-p:text-gray-600 prose-img:rounded-3xl prose-a:text-orange-500 hover:prose-a:text-orange-600 font-sans">
+                                <ReactMarkdown
+                                    remarkPlugins={[remarkGfm]}
+                                    rehypePlugins={[rehypeRaw]}
+                                    components={{
+                                        img: ({ node, ...props }) => (
+                                            <img
+                                                {...props}
+                                                className="rounded-3xl w-full h-auto my-8 shadow-lg"
+                                                loading="lazy"
+                                                alt={props.alt || ''}
+                                            />
+                                        ),
+                                    }}
+                                >
+                                    {blog.content}
+                                </ReactMarkdown>
+                            </div>
                         </div>
 
                         {/* Recent Sidebar */}
