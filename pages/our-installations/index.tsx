@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import ServiceCTA from "@/components/ServiceCTA";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import prisma from "@/lib/prisma";
 
 interface Props {
@@ -87,7 +87,7 @@ export default function OurInstallations({ services }: Props) {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     // Installation Types Data (Static Fallback)
     const staticInstallations = [
         {
@@ -164,14 +164,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
         return {
             props: {
                 services: JSON.parse(JSON.stringify(finalServices))
-            }
+            },
+            revalidate: 60
         };
     } catch (error) {
-        console.error("Error in OurInstallations getServerSideProps:", error);
+        console.error("Error in OurInstallations getStaticProps:", error);
         return {
             props: {
                 services: staticInstallations
-            }
+            },
+            revalidate: 60
         };
     }
 };
