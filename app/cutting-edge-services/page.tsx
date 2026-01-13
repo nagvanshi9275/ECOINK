@@ -47,32 +47,54 @@ export default async function CuttingEdgePage() {
 
     // 1. Hero Data
     const heroData = {
-        title: serviceName,
-        subtitle: heroSubtitle,
+        title: "Leading Cutting & Edging Service in Melbourne",
+        subtitle: "At Cut & Edge, we specialise in precision panel cutting and edge banding services for cabinet makers, builders, shopfitters, and DIY renovators across Melbourne. Using advanced CNC machinery and high-quality materials, we deliver clean, accurate cuts and seamless edges — fast, reliable, and ready to assemble. Whether you need a single job or high-volume production, we’re committed to helping you save time, reduce waste, and achieve a flawless finish every time.",
         ctaText: dbService?.ctaText || "Get Free Quote",
         ctaLink: dbService?.ctaLink || "#contact-form",
-        image: dbService?.heroImage || "/kitchen2.jpg", // Using existing asset
-        badge: dbService?.heroBadge || "Precision Joinery"
+        image: dbService?.heroImage || "/kitchen2.jpg",
+        badge: "Your Best Local Cut & Edge Service",
+        backgroundVideo: "/cuttingedge/VID20251121122504 (1).mp4"
     };
 
     // 2. Intro Text
     const introHeading = "Cutting & Edging Service";
-    const introText = dbService?.content || `
-    <p class="mb-4">At Cut & Edge, we specialise in precision panel cutting and edge banding services for cabinet makers, builders, shopfitters, and DIY renovators across Melbourne. Using advanced CNC machinery and high-quality materials, we deliver clean, accurate cuts and seamless edges — fast, reliable, and ready to assemble.</p>
-    <p>Whether you need a single job or high-volume production, we’re committed to helping you save time, reduce waste, and achieve a flawless finish every time.</p>
-    <h3 class="text-xl font-bold mt-6 mb-2">Tailored to Your Specifications</h3>
-    <p class="mb-4">We work with a wide range of board products including MDF, particleboard, plywood, and laminate. Our advanced equipment ensures precise sizing and smooth, durable edges — every time.</p>
-    <p>With fast turnaround times and exceptional attention to detail, we are your trusted partner for quality joinery components.</p>
+    const introText = `
+    <p class="mb-4">At Cut & Edge, we provide professional panel cutting and edge banding services tailored to your exact specifications. Whether you’re working with MDF, particleboard, plywood, or laminate, our advanced equipment ensures precise sizing and smooth, durable edges — every time.</p>
+    <p>We work with a wide range of board products and cater to both custom one-off jobs and large-scale production runs. With fast turnaround times and exceptional attention to detail.</p>
   `;
 
     // 3. Our Services (Features)
-    const features = dbService?.features ? (dbService.features as any[]) : [
-        { id: 1, title: "CNC Panel Cutting", description: "Precision cutting to 0.1mm accuracy. Max sheet size: 3112mm x 1200mm. Optimized cutting lists.", iconName: "Ruler" },
-        { id: 2, title: "Edge Banding", description: "PVC, ABS, and veneer edging. 1mm thickness options with hot air technology for seamless results.", iconName: "Layers" },
-        { id: 3, title: "Hardware Options", description: "Complete range of hinges, drawers, screws, and handles supplied with your order.", iconName: "Cog" },
-        { id: 4, title: "Assembly & Pick-Up", description: "Flat pack assembly available. All panels labeled for easy identification. Pickup or delivery.", iconName: "Package" },
-        { id: 5, title: "Full Service Package", description: "Complete cut and edge solution with nested cutting efficiency and quality control.", iconName: "Gem" },
-        { id: 6, title: "Drilling Services", description: "Vertical and horizontal drilling available for all your cabinet needs.", iconName: "Target" },
+    const features = [
+        {
+            id: 1,
+            title: "CNC Panel Cutting",
+            description: "Precision cutting to 0.1mm accuracy. Maximum sheet size: 3112mm x 1200mm. Vertical and horizontal drilling. Cutting list optimization available. Completion / turnaround depends on size: 3–5 days.",
+            iconName: "Ruler"
+        },
+        {
+            id: 2,
+            title: "Edge Banding",
+            description: "PVC, ABS, and veneer edging. Edge thickness: 1mm. Hot air edge banding technology. Flush trimming and buffing. Color matching service.",
+            iconName: "Layers"
+        },
+        {
+            id: 3,
+            title: "Hardware Option",
+            description: "We also can offer all the hardware for your flat pack. List includes:. Hinges. Drawers. Screws. Handles etc.",
+            iconName: "Cog"
+        },
+        {
+            id: 4,
+            title: "Assembly & Pick-Up Option",
+            description: "Assembly of your flat pack. All labeled. Can be picked or delivered.",
+            iconName: "Package"
+        },
+        {
+            id: 5,
+            title: "Full Service Package",
+            description: "Complete cut and edge solution. Nested cutting for efficiency. Quality control inspection. Organized and labeled panels. Delivery or pickup options.",
+            iconName: "Gem"
+        }
     ];
 
     // 4. Why Choose Us
@@ -120,6 +142,7 @@ export default async function CuttingEdgePage() {
                 ctaLink={heroData.ctaLink}
                 backgroundImage={heroData.image}
                 badge={heroData.badge}
+                backgroundVideo={heroData.backgroundVideo}
             />
 
             {/* 2. Intro + Form Section */}
@@ -158,6 +181,7 @@ export default async function CuttingEdgePage() {
                 subtitle="Comprehensive panel processing solutions tailored to your needs."
                 badge="Services"
                 features={features.map((f: any) => ({ ...f, iconName: f.iconName || 'Settings' }))}
+                isChecklist={true}
             />
 
             {/* 4. Why Choose Us */}

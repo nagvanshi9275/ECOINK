@@ -25,9 +25,16 @@ export default function Navbar() {
                         !["WHY MAGRI CABINETS?", "MAGRI CABINETS", "CONTACT"].includes(item.label)
                     );
 
+                    // Explicitly define the order
+                    const installations = filteredData.find((i: any) => i.label === "OUR INSTALLATIONS");
+                    const projects = filteredData.find((i: any) => i.label === "PROJECTS");
+                    const blogs = filteredData.find((i: any) => i.label === "BLOGS");
+
                     const finalItems = [
-                        { label: "CUTTING EDGE SERVICES", href: "/cutting-edge-services" },
-                        ...filteredData,
+                        ...(installations ? [installations] : [{ label: "OUR INSTALLATIONS", href: "/our-installations", hasDropdown: true, dropdownItems: [] }]),
+                        { label: "CUTTING-EDGE-SERVICES", href: "/cutting-edge-services" },
+                        ...(projects ? [projects] : [{ label: "PROJECTS", href: "/projects" }]),
+                        ...(blogs ? [blogs] : [{ label: "BLOGS", href: "/blogs" }]),
                         { label: "CONTACT", href: "/contact" }
                     ];
 
@@ -44,8 +51,8 @@ export default function Navbar() {
 
     // Fallback if API fails or is loading
     const displayItems = navItems.length > 0 ? navItems : [
-        { label: "CUTTING EDGE SERVICES", href: "/cutting-edge-services" },
         { label: "OUR INSTALLATIONS", href: "/our-installations", hasDropdown: true, dropdownItems: [] },
+        { label: "CUTTING-EDGE-SERVICES", href: "/cutting-edge-services" },
         { label: "PROJECTS", href: "/projects" },
         { label: "BLOGS", href: "/blogs" },
         { label: "CONTACT", href: "/contact" },
@@ -70,73 +77,76 @@ export default function Navbar() {
                         </div>
                     </Link>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center space-x-1">
-                        {displayItems.map((item) => (
-                            item.hasDropdown ? (
-                                <div
-                                    key={item.href}
-                                    className="relative h-20 flex items-center"
-                                    onMouseEnter={() => setIsDropdownOpen(true)}
-                                    onMouseLeave={() => setIsDropdownOpen(false)}
-                                >
-                                    <button
-                                        className={`flex items-center px-4 py-2 text-xs font-black tracking-widest transition-all duration-300 rounded-xl whitespace-nowrap ${isDropdownOpen ? 'bg-orange-50 text-orange-600' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
+                    {/* Desktop Navigation & Contact Group */}
+                    <div className="hidden lg:flex items-center space-x-8">
+                        <div className="flex items-center space-x-1">
+                            {displayItems.map((item) => (
+                                item.hasDropdown ? (
+                                    <div
+                                        key={item.href}
+                                        className="relative h-20 flex items-center"
+                                        onMouseEnter={() => setIsDropdownOpen(true)}
+                                        onMouseLeave={() => setIsDropdownOpen(false)}
+                                    >
+                                        <button
+                                            className={`flex items-center px-4 py-2 text-xs font-black tracking-widest transition-all duration-300 rounded-xl whitespace-nowrap ${isDropdownOpen ? 'bg-orange-50 text-orange-600' : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'}`}
+                                        >
+                                            {item.label}
+                                            <ChevronDown className={`ml-1.5 w-3.5 h-3.5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                        </button>
+
+                                        {/* Dropdown Menu */}
+                                        <div
+                                            className={`absolute top-[80%] left-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 z-50 ${isDropdownOpen
+                                                ? 'opacity-100 visible translate-y-0'
+                                                : 'opacity-0 invisible -translate-y-4 shadow-none'
+                                                }`}
+                                        >
+                                            <div className="p-3 grid gap-1">
+                                                {(item.dropdownItems || []).map((dropdownItem: any, index: number) => (
+                                                    <Link
+                                                        key={dropdownItem.href}
+                                                        href={dropdownItem.href}
+                                                        className="flex items-center px-4 py-3 text-[11px] font-bold text-gray-500 hover:text-orange-600 hover:bg-orange-50/50 rounded-xl transition-all duration-200 group"
+                                                    >
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-orange-200 mr-3 group-hover:bg-orange-500 transition-colors" />
+                                                        {dropdownItem.label}
+                                                    </Link>
+                                                ))}
+                                                {item.dropdownItems?.length === 0 && (
+                                                    <p className="px-4 py-3 text-[10px] text-gray-400 italic">No services listed</p>
+                                                )}
+                                            </div>
+                                            <div className="h-1.5 bg-gradient-to-r from-orange-400 to-orange-600" />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="px-4 py-2 text-xs font-black tracking-widest text-gray-600 hover:text-orange-500 hover:bg-gray-50 rounded-xl transition-all duration-300 whitespace-nowrap"
                                     >
                                         {item.label}
-                                        <ChevronDown className={`ml-1.5 w-3.5 h-3.5 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
-                                    </button>
+                                    </Link>
+                                )
+                            ))}
+                        </div>
 
-                                    {/* Dropdown Menu */}
-                                    <div
-                                        className={`absolute top-[80%] left-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transition-all duration-300 z-50 ${isDropdownOpen
-                                            ? 'opacity-100 visible translate-y-0'
-                                            : 'opacity-0 invisible -translate-y-4 shadow-none'
-                                            }`}
-                                    >
-                                        <div className="p-3 grid gap-1">
-                                            {(item.dropdownItems || []).map((dropdownItem: any, index: number) => (
-                                                <Link
-                                                    key={dropdownItem.href}
-                                                    href={dropdownItem.href}
-                                                    className="flex items-center px-4 py-3 text-[11px] font-bold text-gray-500 hover:text-orange-600 hover:bg-orange-50/50 rounded-xl transition-all duration-200 group"
-                                                >
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-orange-200 mr-3 group-hover:bg-orange-500 transition-colors" />
-                                                    {dropdownItem.label}
-                                                </Link>
-                                            ))}
-                                            {item.dropdownItems?.length === 0 && (
-                                                <p className="px-4 py-3 text-[10px] text-gray-400 italic">No services listed</p>
-                                            )}
-                                        </div>
-                                        <div className="h-1.5 bg-gradient-to-r from-orange-400 to-orange-600" />
-                                    </div>
+                        {/* Contact Number */}
+                        <div className="flex items-center border-l border-gray-100 pl-8">
+                            <a
+                                href="tel:0481132920"
+                                className="flex items-center gap-3 group"
+                            >
+                                <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                    <Phone className="w-5 h-5" />
                                 </div>
-                            ) : (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className="px-4 py-2 text-xs font-black tracking-widest text-gray-600 hover:text-orange-500 hover:bg-gray-50 rounded-xl transition-all duration-300 whitespace-nowrap"
-                                >
-                                    {item.label}
-                                </Link>
-                            )
-                        ))}
-                    </div>
-
-                    {/* Desktop CTA & Phone */}
-                    <div className="hidden md:flex items-center space-x-6">
-                        <a
-                            href="tel:0481132920"
-                            className="flex flex-col items-end group"
-                        >
-                            <span className="text-sm font-black text-gray-900 group-hover:text-orange-600 transition-colors">0481 132 920</span>
-                        </a>
-                        <Link href="/get-a-custom-quote">
-                            <Button className="bg-orange-500 hover:bg-orange-600 text-white font-black px-8 h-12 rounded-2xl shadow-xl shadow-orange-500/20 active:scale-95 transition-all duration-300 tracking-[0.1em] text-[10px] uppercase">
-                                Get Free Quote
-                            </Button>
-                        </Link>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Call Us</span>
+                                    <span className="text-sm font-black text-gray-900 group-hover:text-orange-600 transition-colors leading-none tracking-tight">0481 132 920</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
 
                     {/* Mobile Menu Actions */}

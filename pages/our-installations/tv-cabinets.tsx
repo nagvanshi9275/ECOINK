@@ -1,6 +1,9 @@
 import Head from "next/head";
+import Link from "next/link";
 import FeatureGrid from "@/components/FeatureGrid";
 import ServiceCTA from "@/components/ServiceCTA";
+import ServiceContactForm from "@/components/ServiceContactForm";
+import { Button } from "@/components/ui/button";
 import { tvFeatures } from "@/data";
 import prisma from "@/lib/prisma";
 import { GetServerSideProps } from "next";
@@ -34,9 +37,14 @@ export default function TVCabinets({ service }: Props) {
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                         {service?.name || "TV Cabinets"}
                     </h1>
-                    <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
                         {service?.description || "Showcase your entertainment system in style with our custom-designed cabinets and entertainment units."}
                     </p>
+                    <Link href="#contact-form">
+                        <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-orange-500/20 transition-all duration-300">
+                            Get Free Quote
+                        </Button>
+                    </Link>
                 </div>
             </section>
 
@@ -62,10 +70,22 @@ export default function TVCabinets({ service }: Props) {
                 subtitle="Smart features that make your entertainment setup work harder for you"
             />
 
+            {/* Contact Form Section */}
+            <section id="contact-form" className="py-16 bg-gray-50">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-10">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">Request a Quote</h2>
+                        <p className="text-gray-600">Fill out the form below and we'll get back to you with a competitive price.</p>
+                    </div>
+                    <ServiceContactForm defaultService="TV Cabinets" />
+                </div>
+            </section>
+
             {/* CTA Section */}
             <ServiceCTA
                 title="Design Your Entertainment Space"
                 description="From concept to installation, we'll design a TV cabinet that becomes the centerpiece of your living room."
+                ctaLink="#contact-form"
             />
         </>
     );

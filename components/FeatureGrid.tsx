@@ -60,9 +60,10 @@ interface FeatureGridProps {
     title?: string;
     subtitle?: string;
     badge?: string;
+    isChecklist?: boolean;
 }
 
-export default function FeatureGrid({ features, title, subtitle, badge = "Details" }: FeatureGridProps) {
+export default function FeatureGrid({ features, title, subtitle, badge = "Details", isChecklist = false }: FeatureGridProps) {
     const displayBadge = badge || "Details";
 
     return (
@@ -88,9 +89,42 @@ export default function FeatureGrid({ features, title, subtitle, badge = "Detail
                 )}
 
                 {/* Features Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
+                <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 ${isChecklist ? 'items-start' : ''}`}>
                     {features.map((feature, index) => {
                         const IconComponent = iconMap[feature.iconName] || Shield;
+
+                        // Checkbox List Style (Special render)
+                        if (isChecklist) {
+                            // Split description by periods or newlines but filter empty strings
+                            const listItems = feature.description.split('.').map(s => s.trim()).filter(s => s.length > 0);
+
+                            return (
+                                <Card
+                                    key={feature.id}
+                                    className="bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 rounded-2xl h-full"
+                                    style={{ animationDelay: `${index * 100}ms` }}
+                                >
+                                    <CardContent className="p-8 flex flex-col h-full">
+                                        <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                                            {feature.title}
+                                        </h3>
+                                        <ul className="space-y-4">
+                                            {listItems.map((item, i) => (
+                                                <li key={i} className="flex items-start gap-3">
+                                                    <div className="mt-1 min-w-[16px]">
+                                                        {/* Orange Check Icon */}
+                                                        <svg className="w-4 h-4 text-orange-500 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <span className="text-gray-600 text-sm leading-relaxed">{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </CardContent>
+                                </Card>
+                            )
+                        }
 
                         // If image exists, render image card (Blog Style)
                         if (feature.image) {

@@ -5,9 +5,10 @@ import { useRouter } from "next/router";
 
 interface LayoutProps {
     children: ReactNode;
+    pageProps?: any;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, pageProps }: LayoutProps) {
     const router = useRouter();
     const isAdmin = router.pathname.startsWith('/admin');
 
@@ -19,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="min-h-screen flex flex-col">
             <Navbar />
             <main className="flex-1 pt-20">{children}</main>
-            <Footer />
+            <Footer service={pageProps?.service} />
         </div>
     );
 }

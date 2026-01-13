@@ -3,479 +3,384 @@ generator client {
 }
 
 datasource db {
-  provider   = "postgresql"
-  url        = env("DATABASE_URL")   // PgBouncer (runtime queries)
-  directUrl  = env("DIRECT_URL")     // Direct DB (migrations, db pull)
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model AdminUser {
   id        String   @id @default(uuid())
   email     String   @unique
-  password  String   // Hashed
-  role      String   @default("ADMIN") // ADMIN, EDITOR
+  password  String
+  role      String   @default("ADMIN")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-// 1. Hero Section (Banner Rotation)
 model HeroBanner {
-  id          String   @id @default(uuid())
-  heading     String
-  subheading  String?
-  image       String
-  ctaText     String?
-  ctaLink     String?
-  order       Int      @default(0)
-  isVisible   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(uuid())
+  heading    String
+  subheading String?
+  image      String
+  ctaText    String?
+  ctaLink    String?
+  order      Int      @default(0)
+  isVisible  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
-// 3. Sections (Reusable Schema)
 model ContentSection {
-  id          String   @id @default(uuid())
-  internalName String  // Admin facing name
-  type        String   // 'text', 'image-text', 'cta', 'features', etc.
-  content     Json     // The actual data (heading, body, image, etc.)
-  pages       PageSection[] 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String        @id @default(uuid())
+  internalName String
+  type         String
+  content      Json
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  pages        PageSection[]
 }
 
-// Join table for Page <-> ContentSection to allow ordering per page
 model PageSection {
-  id              String         @id @default(uuid())
-  pageId          String
-  page            Page           @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  sectionId       String
-  section         ContentSection @relation(fields: [sectionId], references: [id])
-  order           Int            @default(0)
+  id        String         @id @default(uuid())
+  pageId    String
+  sectionId String
+  order     Int            @default(0)
+  page      Page           @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  section   ContentSection @relation(fields: [sectionId], references: [id])
 
   @@index([pageId])
 }
 
-// 2. Pages
 model Page {
-  id              String   @id @default(uuid())
-  title           String
-  slug            String   @unique
-  isPublished     Boolean  @default(false)
-  
-  // Content Relations
-  sections        PageSection[]
-  
-  // Legacy JSON fallback
-  content         Json?    
-
-  // SEO Fields (Consolidated/Expanded)
-  seoTitle        String?
-  seoDescription  String?
-  seoKeywords     String? 
-  focusKeyphrase  String?
-  canonicalUrl    String?
-  metaRobots      String?  @default("index,follow")
-  
-  // Social Media
-  ogTitle         String?
-  ogDescription   String?
-  ogImage         String?
-  ogType          String?  @default("website")
-  twitterCard     String?  @default("summary_large_image")
-  twitterTitle    String?
+  id                 String        @id @default(uuid())
+  title              String
+  slug               String        @unique
+  isPublished        Boolean       @default(false)
+  content            Json?
+  metaTitle          String?
+  metaDescription    String?
+  keywords           String?
+  canonicalUrl       String?
+  ogTitle            String?
+  ogDescription      String?
+  ogImage            String?
+  noIndex            Boolean       @default(false)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  breadcrumbTitle    String?
+  focusKeyphrase     String?
+  lastSeoAudit       DateTime?
+  metaRobots         String?       @default("index,follow")
+  navbarLabel        String?
+  navbarOrder        Int           @default(0)
+  ogType             String?       @default("website")
+  readabilityScore   Int?          @default(0)
+  schemaJson         Json?
+  schemaType         String?       @default("WebPage")
+  seoDescription     String?
+  seoKeywords        String?
+  seoScore           Int?          @default(0)
+  seoTitle           String?
+  showInNavbar       Boolean       @default(false)
+  twitterCard        String?       @default("summary_large_image")
   twitterDescription String?
-  twitterImage    String?
-
-  // Structured Data
-  schemaType      String?  @default("WebPage")
-  schemaJson      Json?
-
-  // Advanced SEO
-  breadcrumbTitle String?
-  noIndex         Boolean  @default(false)
-
-  // Scoring
-  seoScore        Int?     @default(0)
-  readabilityScore Int?    @default(0)
-  lastSeoAudit    DateTime?
-
-  // Navbar Controls
-  showInNavbar    Boolean  @default(false)
-  navbarLabel     String?
-  navbarOrder     Int      @default(0)
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  // Deprecated (Keep for migration safety)
-  metaTitle       String?
-  metaDescription String?
-  keywords        String? 
+  twitterImage       String?
+  twitterTitle       String?
+  sections           PageSection[]
 }
 
-// 4. Blogs
 model BlogPost {
-  id              String   @id @default(uuid())
-  title           String
-  slug            String   @unique
-  excerpt         String?
-  content         String   @db.Text
-  coverImage      String?
-  coverImageAlt   String?
-  isPublished     Boolean  @default(false)
-  publishedAt     DateTime?
-  authorId        String?
-
-  // SEO Fields (Consolidated/Expanded)
-  seoTitle        String?
-  seoDescription  String?
-  seoKeywords     String? 
-  focusKeyphrase  String?
-  canonicalUrl    String?
-  metaRobots      String?  @default("index,follow")
-  
-  // Social Media
-  ogTitle         String?
-  ogDescription   String?
-  ogImage         String?
-  ogType          String?  @default("article")
-  twitterCard     String?  @default("summary_large_image")
-  twitterTitle    String?
+  id                 String    @id @default(uuid())
+  title              String
+  slug               String    @unique
+  excerpt            String?
+  content            String
+  coverImage         String?
+  isPublished        Boolean   @default(false)
+  publishedAt        DateTime?
+  authorId           String?
+  metaTitle          String?
+  metaDescription    String?
+  focusKeyword       String?
+  canonicalUrl       String?
+  ogTitle            String?
+  ogDescription      String?
+  ogImage            String?
+  noIndex            Boolean   @default(false)
+  noFollow           Boolean   @default(false)
+  readingTime        Int?      @default(0)
+  categoryId         String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  breadcrumbTitle    String?
+  coverImageAlt      String?
+  focusKeyphrase     String?
+  lastSeoAudit       DateTime?
+  metaRobots         String?   @default("index,follow")
+  ogType             String?   @default("article")
+  readabilityScore   Int?      @default(0)
+  schemaJson         Json?
+  schemaType         String?   @default("Article")
+  seoDescription     String?
+  seoKeywords        String?
+  seoScore           Int?      @default(0)
+  seoTitle           String?
+  twitterCard        String?   @default("summary_large_image")
   twitterDescription String?
-  twitterImage    String?
-
-  // Structured Data
-  schemaType      String?  @default("Article")
-  schemaJson      Json?
-
-  // Advanced SEO
-  breadcrumbTitle String?
-  noIndex         Boolean  @default(false)
-  noFollow        Boolean  @default(false)
-
-  // Scoring
-  seoScore        Int?     @default(0)
-  readabilityScore Int?    @default(0)
-  lastSeoAudit    DateTime?
-  readingTime     Int?     @default(0)
-  
-  categoryId      String?
-  category        Category? @relation(fields: [categoryId], references: [id])
-  tags            Tag[]
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  // Deprecated
-  metaTitle       String?
-  metaDescription String?
-  focusKeyword    String?
+  twitterImage       String?
+  twitterTitle       String?
+  category           Category? @relation(fields: [categoryId], references: [id])
+  tags               Tag[]     @relation("BlogPostToTag")
 }
 
 model Category {
-  id          String     @id @default(uuid())
-  name        String     @unique
-  slug        String     @unique
-  posts       BlogPost[]
+  id    String     @id @default(uuid())
+  name  String     @unique
+  slug  String     @unique
+  posts BlogPost[]
 }
 
 model Tag {
-  id          String     @id @default(uuid())
-  name        String     @unique
-  slug        String     @unique
-  posts       BlogPost[]
+  id    String     @id @default(uuid())
+  name  String     @unique
+  slug  String     @unique
+  posts BlogPost[] @relation("BlogPostToTag")
 }
 
-// 5. Projects
 model Project {
-  id          String   @id @default(uuid())
-  title       String
-  slug        String   @unique
-  description String
-  content     String?  @db.Text
-  location    String?
-  category    String?
-  client      String?
-  completionDate DateTime?
-  images      String[]
-  heroImage   String?  
-  heroImageAlt String?
-  thumbnailImage String?
-  thumbnailImageAlt String?
-  tags        Json?    
-  galleryTitle    String?  
-  gallerySubtitle String?  
-  isVisible   Boolean  @default(true)
-
-  // SEO Fields (Consolidated/Expanded)
-  seoTitle        String?
-  seoDescription  String?
-  seoKeywords     String? 
-  focusKeyphrase  String?
-  canonicalUrl    String?
-  metaRobots      String?  @default("index,follow")
-  
-  // Social Media
-  ogTitle         String?
-  ogDescription   String?
-  ogImage         String?
-  ogType          String?  @default("website")
-  twitterCard     String?  @default("summary_large_image")
-  twitterTitle    String?
+  id                 String    @id @default(uuid())
+  title              String
+  slug               String    @unique
+  description        String
+  location           String?
+  category           String?
+  client             String?
+  completionDate     DateTime?
+  images             String[]
+  isVisible          Boolean   @default(true)
+  metaTitle          String?
+  metaDescription    String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  afterImage         String?
+  afterImageAlt      String?
+  beforeImage        String?
+  beforeImageAlt     String?
+  breadcrumbTitle    String?
+  canonicalUrl       String?
+  content            String?
+  faqs               Json?
+  focusKeyphrase     String?
+  gallerySubtitle    String?
+  galleryTitle       String?
+  heroImage          String?
+  heroImageAlt       String?
+  lastSeoAudit       DateTime?
+  metaRobots         String?   @default("index,follow")
+  ogDescription      String?
+  ogImage            String?
+  ogTitle            String?
+  ogType             String?   @default("website")
+  readabilityScore   Int?      @default(0)
+  schemaJson         Json?
+  schemaType         String?   @default("WebPage")
+  seoDescription     String?
+  seoKeywords        String?
+  seoScore           Int?      @default(0)
+  seoTitle           String?
+  tags               Json?
+  testimonialClient  String?
+  testimonialText    String?
+  twitterCard        String?   @default("summary_large_image")
   twitterDescription String?
-  twitterImage    String?
-
-  // Structured Data
-  schemaType      String?  @default("WebPage")
-  schemaJson      Json?
-
-  // Advanced SEO
-  breadcrumbTitle String?
-
-  // Scoring
-  seoScore        Int?     @default(0)
-  readabilityScore Int?    @default(0)
-  lastSeoAudit    DateTime?
-
-  // Detail Page Specifics
-  beforeImage       String?
-  beforeImageAlt    String?
-  afterImage        String?
-  afterImageAlt     String?
-  testimonialText   String?
-  testimonialClient String?
-  faqs              Json?    
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Deprecated
-  metaTitle       String?
-  metaDescription String?
+  twitterImage       String?
+  twitterTitle       String?
+  thumbnailImage     String?
+  thumbnailImageAlt  String?
 }
 
-// 6. Services
 model Service {
-  id          String   @id @default(uuid())
-  name        String
-  slug        String   @unique
-  description String
-  content     String?  @db.Text
-  icon        String?  
-  image       String?  
-  imageAlt    String?
-  heroImage   String?  
-  heroImageAlt String?
-  heroSubtitle String? 
-  heroBadge   String?  
-  ctaText     String?  
-  ctaLink     String?
-  ctaTitle    String?  
-  ctaDescription String? 
-  ctaBadge    String?  
-  ctaPhone    String?  
-  featureTitle    String?  
-  featureSubtitle String? 
-  featureBadge    String?  
-  trustBadges     Json?    
-  order       Int      @default(0)
-  isVisible   Boolean  @default(true)
-  features    Json?    
-  galleryImages String[] 
-  faqs          Json?    
-  additionalContent String? @db.Text 
-  testimonialIds String[] 
-
-  // SEO Fields (Consolidated/Expanded)
-  seoTitle        String?
-  seoDescription  String?
-  seoKeywords     String? 
-  focusKeyphrase  String?
-  canonicalUrl    String?
-  metaRobots      String?  @default("index,follow")
-  
-  // Social Media
-  ogTitle         String?
-  ogDescription   String?
-  ogImage         String?
-  ogType          String?  @default("website")
-  twitterCard     String?  @default("summary_large_image")
-  twitterTitle    String?
+  id                 String    @id @default(uuid())
+  name               String
+  slug               String    @unique
+  description        String
+  icon               String?
+  image              String?
+  ctaLink            String?
+  order              Int       @default(0)
+  isVisible          Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  additionalContent  String?
+  breadcrumbTitle    String?
+  canonicalUrl       String?
+  content            String?
+  ctaBadge           String?
+  ctaDescription     String?
+  ctaPhone           String?
+  ctaText            String?
+  ctaTitle           String?
+  faqs               Json?
+  featureBadge       String?
+  featureSubtitle    String?
+  featureTitle       String?
+  features           Json?
+  focusKeyphrase     String?
+  galleryImages      String[]
+  heroBadge          String?
+  heroImage          String?
+  heroImageAlt       String?
+  heroSubtitle       String?
+  imageAlt           String?
+  lastSeoAudit       DateTime?
+  metaKeywords       String?
+  metaRobots         String?   @default("index,follow")
+  ogDescription      String?
+  ogImage            String?
+  ogTitle            String?
+  ogType             String?   @default("website")
+  readabilityScore   Int?      @default(0)
+  schemaJson         Json?
+  schemaType         String?   @default("Service")
+  seoDescription     String?
+  seoKeywords        String?
+  seoScore           Int?      @default(0)
+  seoTitle           String?
+  testimonialIds     String[]
+  trustBadges        Json?
+  twitterCard        String?   @default("summary_large_image")
   twitterDescription String?
-  twitterImage    String?
-
-  // Structured Data
-  schemaType      String?  @default("Service")
-  schemaJson      Json?
-
-  // Advanced SEO
-  breadcrumbTitle String?
-
-  // Scoring
-  seoScore        Int?     @default(0)
-  readabilityScore Int?    @default(0)
-  lastSeoAudit    DateTime?
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Deprecated
-  metaKeywords    String?  
-  suppliers       Json?    // List of supplier images
-  industryUseCases Json?   // List of use case cards
-  whyChooseUs     Json?    // List of benefits
+  twitterImage       String?
+  twitterTitle       String?
+  industryUseCases   Json?
+  suppliers          Json?
+  whyChooseUs        Json?
 }
 
-// 7. Partners
 model Partner {
-  id          String   @id @default(uuid())
-  name        String
-  logoUrl     String
-  websiteUrl  String?
-  order       Int      @default(0)
-  isVisible   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(uuid())
+  name       String
+  logoUrl    String
+  websiteUrl String?
+  order      Int      @default(0)
+  isVisible  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
-// 8. Navbar
 model MenuItem {
   id        String     @id @default(uuid())
   label     String
   link      String
-  parentId  String?    
-  parent    MenuItem?  @relation("MenuHierarchy", fields: [parentId], references: [id])
-  children  MenuItem[] @relation("MenuHierarchy")
+  parentId  String?
   order     Int        @default(0)
   isVisible Boolean    @default(true)
+  parent    MenuItem?  @relation("MenuHierarchy", fields: [parentId], references: [id])
+  children  MenuItem[] @relation("MenuHierarchy")
 }
 
-// 10. Media (Library)
 model MediaAsset {
-  id          String   @id @default(uuid())
-  filename    String
-  url         String
-  type        String   
-  size        Int?     
-  altText     String?  
-  title       String?
-  caption     String?
-  focusArea   Json?    // {x, y}
-  width       Int?
-  height      Int?
-  createdAt   DateTime @default(now())
+  id        String   @id @default(uuid())
+  filename  String
+  url       String
+  type      String
+  size      Int?
+  createdAt DateTime @default(now())
+  altText   String?
+  caption   String?
+  focusArea Json?
+  height    Int?
+  title     String?
+  width     Int?
 }
 
-// 11. Contact Messages
 model ContactMessage {
-  id          String   @id @default(uuid())
-  name        String
-  email       String
-  phone       String?
-  subject     String?
-  message     String
-  status      String   @default("UNREAD") 
-  createdAt   DateTime @default(now())
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  status    String   @default("UNREAD")
+  createdAt DateTime @default(now())
 }
 
-// 12. Testimonials
 model Testimonial {
-  id          String   @id @default(uuid())
-  clientName  String
-  role        String?
-  content     String
-  avatarUrl   String?
-  rating      Int      @default(5)
-  isVisible   Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  id         String   @id @default(uuid())
+  clientName String
+  role       String?
+  content    String
+  avatarUrl  String?
+  rating     Int      @default(5)
+  isVisible  Boolean  @default(true)
+  createdAt  DateTime @default(now())
 }
 
-// 13. FAQs
 model FAQ {
-  id          String   @id @default(uuid())
-  question    String
-  answer      String
-  order       Int      @default(0)
-  isVisible   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-// 14. Global SEO Settings
 model SeoSettings {
-  id               Int      @id @default(1)
-  
-  // Site-wide Defaults
-  siteName         String   @default("Magri Cabinets")
-  siteTitle        String?
-  siteDescription  String?
-  defaultOgImage   String?
-
-  // LocalBusiness Schema Data
-  businessName     String?  @default("Magri Cabinets")
-  businessType     String?  @default("LocalBusiness")
-  streetAddress    String?
-  addressLocality  String?  @default("Melbourne")
-  addressRegion    String?  @default("VIC")
-  postalCode       String?
-  telephone        String?
-  priceRange       String?  @default("$$")
-  latitude         Float?
-  longitude        Float?
-  openingHours     Json?    
-
-  // Social Media Links
-  facebookUrl      String?
-  instagramUrl     String?
-  linkedinUrl      String?
-  youtubeUrl       String?
-
-  // Tracking & Verification
+  id                  Int      @id @default(1)
+  siteName            String   @default("Magri Cabinets")
+  siteTitle           String?
+  siteDescription     String?
+  defaultOgImage      String?
+  businessName        String?  @default("Magri Cabinets")
+  businessType        String?  @default("LocalBusiness")
+  streetAddress       String?
+  addressLocality     String?  @default("Melbourne")
+  addressRegion       String?  @default("VIC")
+  postalCode          String?
+  telephone           String?
+  priceRange          String?  @default("$$")
+  latitude            Float?
+  longitude           Float?
+  openingHours        Json?
+  facebookUrl         String?
+  instagramUrl        String?
+  linkedinUrl         String?
+  youtubeUrl          String?
   googleAnalyticsId   String?
   googleSearchConsole String?
   googleTagManager    String?
   facebookPixel       String?
-
-  // Sitemap Configuration
   sitemapEnabled      Boolean  @default(true)
   sitemapFrequency    String?  @default("weekly")
-
-  updatedAt        DateTime @updatedAt
+  updatedAt           DateTime @updatedAt
 }
 
-// 9 & 15. Global Site Settings
 model GlobalSettings {
-  id             Int      @id @default(1)
-  siteName       String   @default("Magri Cabinets")
-  siteLogo       String?
-  
-  // Footer
-  footerContent  String?
-  copyrightText  String?
-  socialLinks    Json     
-  
-  // Contact Info
-  contactEmail   String?
-  contactPhone   String?
-  address        String?
-  
-  // SEO Global (Keep for now or bridge)
+  id               Int      @id @default(1)
+  siteName         String   @default("Magri Cabinets")
+  siteLogo         String?
+  footerContent    String?
+  copyrightText    String?
+  socialLinks      Json
+  contactEmail     String?
+  contactPhone     String?
+  address          String?
   defaultMetaTitle String?
   defaultMetaDesc  String?
   favicon          String?
-
-  // Hero Controls
   enableCustomHero Boolean  @default(false)
   heroBgImage      String?
   heroTitle        String?
-
-  updatedAt      DateTime @updatedAt
+  updatedAt        DateTime @updatedAt
 }
+
 model Redirect {
-  id          String   @id @default(uuid())
-  fromPath    String   @unique
-  toPath      String
-  statusCode  Int      @default(301)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(uuid())
+  fromPath   String   @unique
+  toPath     String
+  statusCode Int      @default(301)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

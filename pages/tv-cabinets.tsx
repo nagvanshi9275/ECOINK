@@ -68,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
                     name: staticService.title,
                     description: staticService.description,
                     content: null, // Static content usually not in this HTML format
-                    heroImage: "/room.jpg", // Default
+                    heroImage: "/Tvcabinets/IMG_1347.jpg", // Default
                     // Populate other fields with safe defaults
                 } as any;
             }

@@ -17,7 +17,12 @@ const resourceLinks = [
     { label: "Contact", href: "/contact" },
 ];
 
-export default function Footer() {
+export default function Footer({ service }: { service?: any }) {
+    // Dynamic content from service object or defaults
+    const ctaTitle = service?.ctaTitle || "Ready to Transform Your Space?";
+    const ctaDescription = service?.ctaDescription || "Get a free, no-obligation quote from Melbourne's trusted cabinet makers.";
+    const ctaText = service?.ctaText || "Get FREE Quote";
+
     return (
         <footer className="bg-gray-700 text-white">
             {/* CTA Section */}
@@ -26,17 +31,17 @@ export default function Footer() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
                             <h3 className="text-2xl md:text-3xl font-bold text-white">
-                                Ready to Transform Your Space?
+                                {ctaTitle}
                             </h3>
                             <p className="text-white/90 mt-2">
-                                Get a free, no-obligation quote from Melbourne&apos;s trusted cabinet makers.
+                                {ctaDescription}
                             </p>
                         </div>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center bg-white hover:bg-gray-100 text-orange-600 font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
+                            className="inline-flex items-center bg-white hover:bg-gray-100 text-orange-600 font-bold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group whitespace-nowrap"
                         >
-                            Get FREE Quote
+                            {ctaText}
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>

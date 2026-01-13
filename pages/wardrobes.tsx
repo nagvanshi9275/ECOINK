@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
                     name: staticService.title,
                     description: staticService.description,
                     content: null,
-                    heroImage: "/bedroom1.jpg",
+                    heroImage: "/wardrobe/wardrobe-4.png",
                 } as any;
             }
         }

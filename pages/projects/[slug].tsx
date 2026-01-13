@@ -5,15 +5,16 @@ import { useState, useRef, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { Button } from "@/components/ui/button";
 import ServiceCTA from "@/components/ServiceCTA";
+import FAQAccordion from "@/components/FAQAccordion";
+import Testimonials from "@/components/Testimonials";
 import {
     ChevronLeft,
     Calendar,
     MapPin,
     Tag,
     MoveHorizontal,
-    ChevronDown,
-    ChevronUp,
-    Quote
+    Quote,
+    ChevronRight
 } from "lucide-react";
 import prisma from "@/lib/prisma";
 import MetaHead from "@/components/seo/MetaHead";
@@ -43,11 +44,14 @@ type Project = {
     faqs: FAQ[] | null;
     metaTitle: string | null;
     metaDescription: string | null;
+    slug: string;
 };
 
 interface Props {
     project: any | null;
     seoSettings?: any;
+    globalFaqs?: any[];
+    testimonials?: any[];
 }
 
 // --- Components ---
@@ -128,23 +132,62 @@ const BeforeAfterSlider = ({ before, after, beforeAlt, afterAlt }: { before: str
     );
 };
 
-// 2. FAQ Accordion
-const FAQItem = ({ question, answer }: FAQ) => {
-    const [isOpen, setIsOpen] = useState(false);
+// 2. Project Gallery Slider Component (Service Gallery Style)
+const ProjectGallerySlider = ({ images }: { images: string[] }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    };
 
     return (
-        <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:shadow-md">
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-6 text-left"
-            >
-                <span className="font-bold text-gray-900 text-lg">{question}</span>
-                {isOpen ? <ChevronUp className="text-orange-500" /> : <ChevronDown className="text-gray-400" />}
-            </button>
+        <div className="relative w-full overflow-hidden">
             <div
-                className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0'}`}
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{
+                    transform: `translateX(-${currentIndex * 25}%)`,
+                    display: 'flex',
+                    width: '100%'
+                }}
             >
-                <p className="text-gray-600 leading-relaxed">{answer}</p>
+                {[...images, ...images, ...images].map((imgSrc, index) => (
+                    <div
+                        key={index}
+                        className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 aspect-[12/9] relative"
+                    >
+                        <Image
+                            src={imgSrc}
+                            alt="Project Detail Gallery"
+                            fill
+                            priority={index < 4}
+                            className="object-cover border-r border-white/5"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            quality={90}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="absolute top-1/2 -translate-y-1/2 left-4 z-20">
+                <button
+                    onClick={prevSlide}
+                    className="p-3 bg-white/90 backdrop-blur shadow-xl rounded-full text-gray-900 transition-all hover:bg-orange-500 hover:text-white group"
+                >
+                    <ChevronLeft className="w-6 h-6 transform group-hover:-translate-x-0.5 transition-transform" />
+                </button>
+            </div>
+            <div className="absolute top-1/2 -translate-y-1/2 right-4 z-20">
+                <button
+                    onClick={nextSlide}
+                    className="p-3 bg-white/90 backdrop-blur shadow-xl rounded-full text-gray-900 transition-all hover:bg-orange-500 hover:text-white group"
+                >
+                    <ChevronRight className="w-6 h-6 transform group-hover:translate-x-0.5 transition-transform" />
+                </button>
             </div>
         </div>
     );
@@ -152,7 +195,7 @@ const FAQItem = ({ question, answer }: FAQ) => {
 
 // --- Page Component ---
 
-export default function ProjectDetail({ project, seoSettings }: Props) {
+export default function ProjectDetail({ project, seoSettings, globalFaqs, testimonials }: Props) {
     if (!project) return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <div className="text-center">
@@ -167,16 +210,35 @@ export default function ProjectDetail({ project, seoSettings }: Props) {
         { name: project.title, url: `/projects/${project.slug}` }
     ];
 
+    // Determine FAQs to display: Project specific + Global
+    const projectFaqs = (project.faqs && Array.isArray(project.faqs))
+        ? project.faqs.map((f: any, i: number) => ({ id: `project-faq-${i}`, question: f.question, answer: f.answer }))
+        : [];
+
+    const displayFaqs = [...projectFaqs, ...(globalFaqs || [])];
+
+    // Prepare testimonials: Project specific (if valid) + Global
+    let displayTestimonials = testimonials || [];
+    if (project.testimonialText && project.testimonialClient) {
+        const projectTestimonial = {
+            id: 'project-specific',
+            author: project.testimonialClient,
+            role: 'Happy Client',
+            quote: project.testimonialText,
+            rating: 5,
+            image: null, // Ensure image property exists
+            date: new Date().getFullYear().toString() // Or project completion date year
+        };
+        displayTestimonials = [projectTestimonial, ...displayTestimonials];
+    }
+
     return (
         <>
             <MetaHead data={project} settings={seoSettings} />
             <StructuredData data={project} type="WebPage" />
 
             <main className="bg-white pb-24">
-                {/* Breadcrumbs */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-                    <Breadcrumbs items={breadcrumbItems} />
-                </div>
+
                 {/* 1️⃣ Hero Section */}
                 <section className="relative pt-32 pb-20 bg-gray-900 overflow-hidden">
                     <div className="absolute inset-0 opacity-40">
@@ -210,24 +272,24 @@ export default function ProjectDetail({ project, seoSettings }: Props) {
                 </section>
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-24">
 
                         {/* 2️⃣ Main Content Section (Left) */}
-                        <div className="lg:col-span-8 space-y-8">
+                        <div className="lg:col-span-7 xl:col-span-8 space-y-8">
                             <div>
                                 <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
                                     <span className="w-12 h-1 bg-orange-500 rounded-full" />
-                                    {project.title.split('–')[1] || project.title}
+                                    Project Description
                                 </h2>
                                 <div
-                                    className="prose prose-lg text-gray-600 prose-headings:text-gray-900 prose-p:leading-relaxed"
+                                    className="prose prose-lg max-w-none text-gray-600 prose-headings:text-gray-900 prose-p:leading-relaxed"
                                     dangerouslySetInnerHTML={{ __html: project.content || "" }}
                                 />
                             </div>
                         </div>
 
                         {/* 3️⃣ Project Information (Right) */}
-                        <div className="lg:col-span-4">
+                        <div className="lg:col-span-5 xl:col-span-4">
                             <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 sticky top-24">
                                 <h3 className="text-xl font-bold text-gray-900 mb-6">Project Details</h3>
                                 <div className="space-y-6">
@@ -247,7 +309,7 @@ export default function ProjectDetail({ project, seoSettings }: Props) {
                                         <div>
                                             <p className="text-sm text-gray-500 font-medium">Date</p>
                                             <p className="font-bold text-gray-900">
-                                                {project.completionDate ? new Date(project.completionDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'N/A'}
+                                                {project.completionDate ? new Date(project.completionDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).replace(' ', ', ') : 'N/A'}
                                             </p>
                                         </div>
                                     </div>
@@ -281,71 +343,32 @@ export default function ProjectDetail({ project, seoSettings }: Props) {
                     </section>
                 )}
 
-                {/* 5️⃣ Project Gallery Section */}
+                {/* 5️⃣ Project Gallery Section (Slider) */}
                 {project.images && project.images.length > 0 && (
-                    <section className="py-16 lg:py-24 bg-white">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-12">
-                                <h2 className="text-3xl font-bold text-gray-900">Project Gallery</h2>
+                    <section className="py-16 lg:py-24 bg-white overflow-hidden relative group">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+                            <div className="text-center">
+                                <h2 className="text-3xl font-bold text-gray-900 italic">Project <span className="text-orange-500">Gallery</span></h2>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                                {project.images.slice(0, 4).map((img: string, idx: number) => (
-                                    <div key={idx} className="relative aspect-[4/3] rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 group cursor-pointer border border-gray-100">
-                                        <Image
-                                            src={img}
-                                            alt={`Gallery Image ${idx + 1}`}
-                                            fill
-                                            quality={100}
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                                    </div>
-                                ))}
-                            </div>
+                        </div>
+
+                        <div className="relative">
+                            <ProjectGallerySlider images={project.images} />
                         </div>
                     </section>
                 )}
 
-                {/* 6️⃣ Testimonial Section */}
-                {project.testimonialText && (
-                    <section className="py-16 lg:py-24 bg-orange-50">
-                        <div className="max-w-4xl mx-auto px-4 text-center">
-                            <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white mx-auto mb-8 shadow-lg shadow-orange-500/30">
-                                <Quote size={32} />
-                            </div>
-                            <blockquote className="text-2xl md:text-3xl font-medium text-gray-900 mb-8 leading-relaxed font-secondary">
-                                &quot;{project.testimonialText}&quot;
-                            </blockquote>
-                            <div className="font-bold text-gray-900 text-lg">
-                                {project.testimonialClient}
-                            </div>
-                            <div className="text-orange-500 text-sm font-bold uppercase tracking-wide mt-1">Happy Client</div>
-                        </div>
-                    </section>
+                {/* 7️⃣ FAQ Section (Using Shared Component) */}
+                {displayFaqs && displayFaqs.length > 0 && (
+                    <FAQAccordion items={displayFaqs} />
                 )}
 
-                {/* 7️⃣ FAQ Section */}
-                {project.faqs && project.faqs.length > 0 && (
-                    <section className="py-16 lg:py-24 bg-white">
-                        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-12">
-                                <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
-                                <p className="text-gray-600 mt-4">Common questions about this project renovation.</p>
-                            </div>
-                            <div className="space-y-4">
-                                {project.faqs.map((faq: any, idx: number) => (
-                                    <FAQItem key={idx} question={faq.question} answer={faq.answer} />
-                                ))}
-                            </div>
-                        </div>
-                    </section>
+                {/* 6️⃣ Testimonials Section (Slider) */}
+                {displayTestimonials.length > 0 && (
+                    <Testimonials items={displayTestimonials} />
                 )}
 
-                <ServiceCTA
-                    title="Inspired by this project?"
-                    description="Let's discuss how we can bring similar quality and style to your next project."
-                />
+
             </main>
         </>
     );
@@ -366,12 +389,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         let serializedProject: any = null;
 
         if (project) {
-            serializedProject = {
-                ...project,
-                createdAt: project.createdAt.toISOString(),
-                updatedAt: project.updatedAt.toISOString(),
-                completionDate: project.completionDate ? project.completionDate.toISOString() : null,
-            };
+            serializedProject = JSON.parse(JSON.stringify(project));
         } else {
             // Fallback for "Only One Project" scenario if DB is empty or slug mismatches
             serializedProject = {
@@ -397,10 +415,33 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
         const seoSettings = await (prisma as any).seoSettings.findFirst({ where: { id: 1 } });
 
+        const globalFaqs = await prisma.fAQ.findMany({
+            where: { isVisible: true },
+            orderBy: { order: 'asc' }
+        });
+
+        const testimonialsRaw = await prisma.testimonial.findMany({
+            where: { isVisible: true },
+            orderBy: { createdAt: 'desc' },
+            take: 10
+        });
+
+        const testimonials = testimonialsRaw.map((t: any) => ({
+            id: t.id,
+            author: t.clientName,
+            quote: t.content,
+            role: t.role,
+            rating: t.rating,
+            image: t.avatarUrl,
+            date: new Date(t.createdAt).toLocaleDateString()
+        }));
+
         return {
             props: {
                 project: serializedProject,
-                seoSettings: JSON.parse(JSON.stringify(seoSettings))
+                seoSettings: JSON.parse(JSON.stringify(seoSettings)),
+                globalFaqs: JSON.parse(JSON.stringify(globalFaqs)),
+                testimonials: JSON.parse(JSON.stringify(testimonials)),
             }
         };
 

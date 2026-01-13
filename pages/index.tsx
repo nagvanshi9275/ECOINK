@@ -19,42 +19,42 @@ const staticInstallations = [
     title: "TV Cabinets",
     description: "Custom entertainment units designed for modern living",
     href: "/tv-cabinets",
-    image: "/library.jpg",
+    image: "/Tvcabinets/IMG_2482.jpg",
   },
   {
     id: "wardrobes",
     title: "Wardrobes",
     description: "Walk-in and built-in wardrobes with smart storage",
     href: "/wardrobes",
-    image: "/bedroom1.jpg",
+    image: "/wardrobe/wardrobe-2.png",
   },
   {
     id: "furniture",
     title: "Furniture",
     description: "Unique handcrafted furniture for every room",
     href: "/furniture",
-    image: "/room.jpg",
+    image: "/Furniture/IMG_0384.jpg",
   },
   {
     id: "kitchen-cabinets",
     title: "Kitchen Cabinets",
     description: "Bespoke kitchen cabinetry tailored to your lifestyle",
     href: "/kitchen-cabinets",
-    image: "/kitchen1.jpg",
+    image: "/kitchen/IMG_3227.jpg",
   },
   {
     id: "laundry-cabinets",
     title: "Laundry Cabinets",
     description: "Efficient and stylish laundry storage solutions",
     href: "/laundry-cabinets",
-    image: "/room copy.jpg",
+    image: "/Laundry/laundry2.png",
   },
   {
     id: "bathroom-vanities",
     title: "Bathroom Vanities",
     description: "Transform your bathroom into a luxurious retreat",
     href: "/bathroom-vanities",
-    image: "/bathromr.jpg",
+    image: "/IMG_2263.jpg",
   },
 ];
 
@@ -95,15 +95,7 @@ export default function Home({ heroes, services, projects, seoSettings, homeSeo 
       <StructuredData data={seoSettings} type="Organization" />
 
       <Hero
-        services={heroes.length > 0 ? heroes : [
-          {
-            image: "/hero-bg.jpg",
-            heading: "Quality Joinery Across Melbourne",
-            subheading: "Custom-made cabinetry for your entire home.",
-            ctaText: "Get a Free Quote",
-            ctaLink: "/contact"
-          }
-        ]}
+        services={heroes}
       />
 
       {/* 2️⃣ What We Do Section (Services) */}
@@ -124,29 +116,46 @@ export default function Home({ heroes, services, projects, seoSettings, homeSeo 
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((item) => (
-              <Link key={item.id} href={item.href} className="group cursor-pointer">
-                <div className="relative h-96 rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+            {staticInstallations.map((item) => {
+              // Extract original images used in Hero and Gallery to ensure this one is DIFFERENT
+              const heroImages = ["/kitchen/IMG_3226.jpg", "/bathromr.jpg", "/wardrobe/wardrobe-1.png", "/Tvcabinets/IMG_1347.jpg", "/Laundry/laundry1.png", "/Furniture/IMG_2073.jpg"];
+              const galleryImages = ["/Tvcabinets/IMG_2482.jpg", "/wardrobe/wardrobe-2.png", "/Furniture/IMG_0384.jpg", "/kitchen/IMG_3227.jpg", "/Laundry/laundry2.png", "/toliet.jpg"];
 
-                  <div className="absolute bottom-0 left-0 p-8 w-full text-white">
-                    <h3 className="text-2xl font-bold mb-3 transform group-hover:-translate-y-2 transition-transform duration-500">{item.title}</h3>
-                    <p className="text-gray-200 text-sm mb-6 line-clamp-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                      {item.description}
-                    </p>
-                    <div className="flex items-center text-orange-400 font-bold group-hover:gap-3 transition-all duration-300">
-                      Learn More <ArrowRight className="w-5 h-5 ml-2" />
+              const serviceSpecificImages: Record<string, string> = {
+                "tv-cabinets": "/Tvcabinets/IMG_2483.jpg",
+                "wardrobes": "/wardrobe/wardrobe-3.png",
+                "furniture": "/Furniture/Side Bed Table.jpg",
+                "kitchen-cabinets": "/kitchen/IMG_1392.jpg",
+                "laundry-cabinets": "/Laundry/laundry3.png",
+                "bathroom-vanities": "/toliet.jpg"
+              };
+
+              const uniqueImage = serviceSpecificImages[item.id] || item.image;
+
+              return (
+                <Link key={item.id} href={item.href} className="group cursor-pointer">
+                  <div className="relative h-96 rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+                    <Image
+                      src={uniqueImage}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+
+                    <div className="absolute bottom-0 left-0 p-8 w-full text-white">
+                      <h3 className="text-2xl font-bold mb-3 transform group-hover:-translate-y-2 transition-transform duration-500">{item.title}</h3>
+                      <p className="text-gray-200 text-sm mb-6 line-clamp-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                        {item.description}
+                      </p>
+                      <div className="flex items-center text-orange-400 font-bold group-hover:gap-3 transition-all duration-300">
+                        Learn More <ArrowRight className="w-5 h-5 ml-2" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -197,41 +206,40 @@ export default function Home({ heroes, services, projects, seoSettings, homeSeo 
                 Portfolio Showcase
               </span>
               <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
-                Our Latest <span className="text-orange-500 italic">Work</span>
+                Project <span className="text-orange-500 italic">Gallery</span>
               </h2>
             </div>
-            <Link href="/projects" className="group flex items-center gap-2 text-orange-600 font-bold hover:gap-4 transition-all duration-300">
-              View All Projects <ArrowRight className="w-5 h-5" />
-            </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                onClick={() => setSelectedProject(project)}
-                className="cursor-pointer group aspect-square relative rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.slice(0, 6).map((service) => (
+              <Link
+                key={service.id}
+                href={service.href}
+                className="group aspect-[4/3] relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500"
               >
                 <Image
-                  src={project.image}
-                  alt={project.title || "Project Image"}
+                  src={service.image}
+                  alt={service.title || "Service Image"}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              </div>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 opacity-90 group-hover:opacity-100" />
+
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-end p-8">
+                  <h3 className="text-2xl font-bold text-white mb-2 transform transition-transform duration-300 group-hover:-translate-y-2">
+                    {service.title.split(' in ')[0].split(' – ')[0].replace(' Melbourne', '')}
+                  </h3>
+                  <div className="w-12 h-1 bg-orange-500 rounded-full transform origin-left transition-all duration-300 scale-x-50 group-hover:scale-x-100 group-hover:-translate-y-2" />
+                </div>
+              </Link>
             ))}
           </div>
 
 
-          {/* View All CTA */}
-          <div className="text-center mt-16">
-            <Link href="/projects">
-              <Button size="lg" variant="outline" className="border-2 border-orange-500 text-orange-600 hover:bg-orange-50 font-bold px-10 py-6 rounded-xl transition-all duration-300">
-                View Full Portfolio
-              </Button>
-            </Link>
-          </div>
+
         </div>
       </section >
 

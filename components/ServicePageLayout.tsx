@@ -36,25 +36,20 @@ export default function ServicePageLayout({ service, testimonials, faqs, seoSett
             <MetaHead data={service} settings={seoSettings} />
             <StructuredData data={service} type="Service" />
 
-            <div className="bg-white pt-6">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <Breadcrumbs items={breadcrumbItems} />
-                </div>
-            </div>
 
             {/* 1. Hero Section */}
             <Hero
                 title={service.name}
                 subtitle={service.heroSubtitle || service.description || "Premium Custom Cabinetry"}
                 ctaText={service.ctaText || "Get FREE Quote"}
-                ctaLink={service.ctaLink || "/contact"}
+                ctaLink="#contact-form"
                 backgroundImage={service.heroImage || "/kitchen2.jpg"}
                 imageAlt={service.heroImageAlt}
                 badge={service.heroBadge}
             />
 
             {/* 2. Content + Form Section */}
-            <section className="py-16 lg:py-24 bg-white">
+            <section id="contact-form" className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                         {/* Left: Content (7/12) */}
