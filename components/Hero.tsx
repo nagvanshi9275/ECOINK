@@ -100,7 +100,7 @@ export default function Hero({ title, subtitle, ctaText, ctaLink = "/contact", b
     const displayBadge = badge || "Premier Cabinet Makers";
 
     return (
-        <section className="relative bg-gradient-to-br from-gray-600 to-gray-700 pt-12 pb-8 lg:pt-24 lg:pb-24 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-gray-600 to-gray-700 pt-8 pb-12 lg:pt-36 lg:pb-28 overflow-hidden">
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
 

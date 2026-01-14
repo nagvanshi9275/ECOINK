@@ -36,6 +36,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         });
 
+        // Sort service items alphabetically by label
+        serviceItems.sort((a, b) => a.label.localeCompare(b.label));
+
         // Ensure "OUR INSTALLATIONS" is present if there are services
         if (serviceItems.length > 0) {
             // Find if there's an "Our Installations" page already

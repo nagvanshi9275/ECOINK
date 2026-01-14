@@ -30,7 +30,7 @@ export default function Contact() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                         {/* Contact Form */}
                         <div>
-                            <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-6">
+                            <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-6">
                                 Send a Message
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -48,7 +48,7 @@ export default function Contact() {
 
                         {/* Contact Information */}
                         <div>
-                            <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-6">
+                            <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-6">
                                 Contact Details
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -60,75 +60,64 @@ export default function Contact() {
                             </p>
 
                             {/* Contact Cards */}
-                            <div className="space-y-6">
+                            {/* Contact Details Box */}
+                            <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-2xl p-8 shadow-lg space-y-8">
                                 {/* Phone */}
-                                <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-2xl p-6 shadow-lg">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-12 h-12 bg-amber-400 rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <Phone className="w-6 h-6 text-gray-900" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-lg font-bold text-white mb-1">Phone</h3>
-                                            <a href="tel:0412345678" className="text-gray-300 hover:text-amber-400 transition-colors text-lg">
-                                                0412 345 678
-                                            </a>
-                                            <p className="text-gray-400 text-sm mt-1">
-                                                Available during business hours
-                                            </p>
-                                        </div>
+                                <div className="flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <Phone className="w-5 h-5 text-gray-900" />
+                                    </div>
+                                    <div>
+                                        <a href="tel:0412345678" className="text-white hover:text-orange-500 transition-colors font-bold text-lg">
+                                            0412 345 678
+                                        </a>
+                                        <p className="text-gray-400 text-sm">Available during business hours</p>
                                     </div>
                                 </div>
 
                                 {/* Email */}
-                                <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-2xl p-6 shadow-lg">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-12 h-12 bg-amber-400 rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <Mail className="w-6 h-6 text-gray-900" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-lg font-bold text-white mb-1">Email</h3>
-                                            <a href="mailto:info@magricabinets.com.au" className="text-gray-300 hover:text-amber-400 transition-colors">
-                                                info@magricabinets.com.au
-                                            </a>
-                                            <p className="text-gray-400 text-sm mt-1">
-                                                We respond within 24 hours
-                                            </p>
-                                        </div>
+                                <div className="flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <Mail className="w-5 h-5 text-gray-900" />
+                                    </div>
+                                    <div>
+                                        <a href="mailto:info@magricabinets.com.au" className="text-white hover:text-orange-500 transition-colors font-bold">
+                                            info@magricabinets.com.au
+                                        </a>
+                                        <p className="text-gray-400 text-sm">We respond within 24 hours</p>
                                     </div>
                                 </div>
 
-                                {/* Address */}
-                                <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-2xl p-6 shadow-lg">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-12 h-12 bg-amber-400 rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <MapPin className="w-6 h-6 text-gray-900" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-lg font-bold text-white mb-1">Showroom</h3>
-                                            <p className="text-gray-300">
-                                                10 Dakota Ct<br />
-                                                Tullamarine VIC 3043
-                                            </p>
-                                            <p className="text-gray-400 text-sm mt-1">
-                                                Visit by appointment
-                                            </p>
-                                        </div>
+                                {/* Showroom */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <MapPin className="w-5 h-5 text-gray-900" />
+                                    </div>
+                                    <div>
+                                        <p className="text-white font-bold">
+                                            10 Dakota Ct, Tullamarine VIC 3043
+                                        </p>
+                                        <p className="text-gray-400 text-sm">Visit by appointment</p>
                                     </div>
                                 </div>
 
-                                {/* Hours */}
-                                <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-2xl p-6 shadow-lg">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-12 h-12 bg-amber-400 rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <Clock className="w-6 h-6 text-gray-900" />
+                                {/* Business Hours */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <Clock className="w-5 h-5 text-gray-900" />
+                                    </div>
+                                    <div className="space-y-3">
+                                        <div className="flex items-center text-white font-medium">
+                                            <span className="text-gray-400 w-24">Mon - Fri:</span>
+                                            <span>7:30am - 4:30pm</span>
                                         </div>
-                                        <div>
-                                            <h3 className="text-lg font-bold text-white mb-1">Business Hours</h3>
-                                            <div className="text-gray-300 space-y-1">
-                                                <p>Monday - Friday: 7:30am - 4:30pm</p>
-                                                <p>Saturday: 9am - 1pm</p>
-                                                <p>Sunday: Closed</p>
-                                            </div>
+                                        <div className="flex items-center text-white font-medium">
+                                            <span className="text-gray-400 w-24">Saturday:</span>
+                                            <span>9:00am - 1:00pm</span>
+                                        </div>
+                                        <div className="flex items-center text-white font-medium">
+                                            <span className="text-gray-400 w-24">Sunday:</span>
+                                            <span className="text-gray-400">Closed</span>
                                         </div>
                                     </div>
                                 </div>
@@ -150,21 +139,21 @@ export default function Contact() {
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full transition-all duration-700"
                 />
             </div>
 
             {/* Service Areas */}
             <section className="py-24 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-4">
+                    <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-4">
                         Service Areas
                     </span>
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                         Serving All of Melbourne
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
-                        We provide free in-home consultations throughout Melbourne and surrounding suburbs.
+                        We provide free in-home consultations throughout Melbourne and surrounding areas.
                     </p>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">

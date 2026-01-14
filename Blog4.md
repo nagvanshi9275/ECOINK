@@ -44,7 +44,7 @@ Some designs even incorporate pull-out ironing boards, allowing you to switch be
 
 ## 6. Opt for Light Colours and Gloss Finishes
 
-While storage is important, aesthetics matter too—especially in compact rooms. Choosing light-coloured cabinetry (like white, pale grey, or soft beige) can make the room feel larger and more open. Gloss finishes reflect light, adding brightness and giving the illusion of extra space.
+While storage is important, aesthetics matter too—especially in compact rooms. Choosing light-coloured cabinetry (like white, pale grey, or soft beige) can make the room feel larger and more open. [Gloss finishes](/blogs/matte-vs-gloss-finish) reflect light, adding brightness and giving the illusion of extra space.
 
 Pair your cabinetry with sleek, minimal handles or push-to-open doors for a clean, modern look.
 
@@ -102,4 +102,4 @@ When designing cabinets for a small laundry room, it’s important to think beyo
 
 Designing a functional yet stylish laundry space in a small area is all about using every inch wisely. Vertical cabinets, pull-out hampers, and over-the-appliance shelving help create order without clutter. Choosing durable materials that resist moisture and daily wear ensures your investment lasts for years. Thoughtful touches like built-in drying racks or concealed ironing boards add convenience and make the room more pleasant to use.
 
-When it comes to bringing your vision to reality, working with experts who understand custom cabinetry for Australian homes can make a huge difference. Magri Cabinets specialises in custom laundry cabinet solutions that maximise storage in compact laundry rooms without compromising on design. With a commitment to craftsmanship and functionality, they can help you transform even the smallest laundry into a space that works beautifully for your lifestyle. Contact us to start designing your ideal laundry room today.
+When it comes to bringing your vision to reality, working with experts who understand [custom cabinetry](/) for Australian homes can make a huge difference. Magri Cabinets specialises in custom [laundry cabinet](/laundry-cabinets) solutions that maximise storage in compact laundry rooms without compromising on design. With a commitment to craftsmanship and functionality, they can help you transform even the smallest laundry into a space that works beautifully for your lifestyle. [Contact us](/contact) to start designing your ideal laundry room today.

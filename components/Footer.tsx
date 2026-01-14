@@ -1,19 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Facebook, Instagram, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowRight } from "lucide-react";
 
 const installationLinks = [
-    { label: "TV Cabinets", href: "/tv-cabinets" },
-    { label: "Wardrobes", href: "/wardrobes" },
+    { label: "Bathroom Vanities", href: "/bathroom-vanities" },
     { label: "Furniture", href: "/furniture" },
     { label: "Kitchen Cabinets", href: "/kitchen-cabinets" },
     { label: "Laundry Cabinets", href: "/laundry-cabinets" },
-    { label: "Bathroom Vanities", href: "/bathroom-vanities" },
+    { label: "TV Cabinets", href: "/tv-cabinets" },
+    { label: "Wardrobes", href: "/wardrobes" },
 ];
 
 const resourceLinks = [
     { label: "Blogs", href: "/blogs" },
-    { label: "Projects", href: "/#projects" },
+    { label: "Projects", href: "/projects" },
     { label: "Contact", href: "/contact" },
 ];
 
@@ -93,6 +93,15 @@ export default function Footer({ service }: { service?: any }) {
                                     aria-label="Instagram"
                                 >
                                     <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                </a>
+                                <a
+                                    href="https://www.youtube.com/@MagriCabinets"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-11 h-11 bg-gray-600 hover:bg-orange-500 rounded-lg flex items-center justify-center transition-all duration-300 group"
+                                    aria-label="YouTube"
+                                >
+                                    <Youtube className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                 </a>
                             </div>
                         </div>

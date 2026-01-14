@@ -19,10 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
     if (service) {
         return {
-            title: service.seoTitle || "Cutting & Edge Services | Magri Cabinets Melbourne",
+            title: service.seoTitle || "Cutting & Edging | Magri Cabinets Melbourne",
             description: service.seoDescription || "Leading Cutting & Edging Service in Melbourne. Precision panel cutting and edge banding for cabinet makers and DIY.",
             openGraph: {
-                title: service.ogTitle || service.seoTitle || "Cutting & Edge Services",
+                title: service.ogTitle || service.seoTitle || "Cutting & Edging",
                 description: service.ogDescription || service.seoDescription || "Expert panel cutting services.",
                 images: service.ogImage ? [service.ogImage] : undefined,
             }
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 
     return {
-        title: "Cutting & Edge Services | Magri Cabinets Melbourne",
+        title: "Cutting & Edging | Magri Cabinets Melbourne",
         description: "Leading Cutting & Edging Service in Melbourne. Precision panel cutting and edge banding for cabinet makers, shopfitters, and DIY renovators.",
     };
 }
@@ -41,7 +41,7 @@ export default async function CuttingEdgePage() {
     });
 
     // --- FALLBACK DATA (Prompt Requirements) ---
-    const serviceName = dbService?.name || "Cutting & Edge Services";
+    const serviceName = dbService?.name || "Cutting & Edging";
     const heroSubtitle = dbService?.heroSubtitle || "Your Best Local Cut & Edge Service";
     const description = dbService?.description || "Leading Cutting & Edging Service in Melbourne";
 
@@ -177,7 +177,7 @@ export default async function CuttingEdgePage() {
 
             {/* 3. Our Services List */}
             <FeatureGrid
-                title="Our Cutting & Edge Services"
+                title="Our Cutting & Edging Services"
                 subtitle="Comprehensive panel processing solutions tailored to your needs."
                 badge="Services"
                 features={features.map((f: any) => ({ ...f, iconName: f.iconName || 'Settings' }))}

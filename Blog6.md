@@ -1,6 +1,6 @@
 # 2 Pac vs Vinyl Wrap Cabinetry: Pros, Cons & How to Choose the Right Finish
 
-When renovating a kitchen or customising cabinetry, one of the biggest decisions homeowners face is choosing the right finish. In Australia, the two most popular options are **2Pac (also called 2-pack or 2K paint)** and **vinyl wrap (thermolaminated)**.
+When [renovating a kitchen](/kitchen-cabinets) or customising cabinetry, one of the biggest decisions homeowners face is choosing the right finish. In Australia, the two most popular options are **2Pac (also called 2-pack or 2K paint)** and **vinyl wrap (thermolaminated)**.
 
 When it comes to **2 Pac vs. vinyl wrap**, both can deliver stylish, durable results, but they serve different purposes—and understanding the differences could save you money, time, and future frustration.
 
@@ -59,7 +59,7 @@ Vinyl wrap is best suited for homeowners looking for an affordable, stylish fini
 ---
 
 ### Best used for:
-- Budget-conscious kitchen makeovers  
+- Budget-conscious [kitchen makeovers](/kitchen-cabinets)  
 - Rental or investment properties  
 - Quick renovations  
 - Low-traffic or low-moisture areas  
@@ -162,4 +162,4 @@ At **Magri Cabinets**, we believe cabinetry should be as practical as it is beau
 
 Our team takes the time to understand your goals, whether that’s a long-term dream kitchen or a fast, stylish update, and then recommends the finish that fits both your vision and lifestyle. From Hampton-style profiles to sleek modern designs, our cabinetry is built to impress and built to last.
 
-**Contact us today** and let us help you create cabinetry that’s functional, stylish, and crafted with genuine care.
+**[Contact us](/contact) today** and let us help you create cabinetry that’s functional, stylish, and crafted with genuine care.

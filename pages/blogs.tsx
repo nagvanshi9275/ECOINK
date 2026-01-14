@@ -73,7 +73,7 @@ export default function Blogs({ blogPosts }: BlogsProps) {
             </Head>
 
             {/* Hero Section - Hidden on Mobile */}
-            <section className="hidden lg:block relative bg-gradient-to-br from-gray-600 to-gray-700 pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden">
+            <section className="hidden lg:block relative bg-gradient-to-br from-gray-600 to-gray-700 pt-8 pb-16 lg:pt-36 lg:pb-24 overflow-hidden">
                 {/* Ambient Background Glow */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gray-500/20 blur-[100px] rounded-full pointer-events-none" />
@@ -128,8 +128,8 @@ export default function Blogs({ blogPosts }: BlogsProps) {
                                                         {post.excerpt}
                                                     </p>
 
-                                                    <div className="hidden sm:flex items-center gap-3 text-[10px] text-gray-400 mb-4">
-                                                        <div className="flex items-center gap-1">
+                                                    <div className="hidden sm:flex items-center gap-3 text-[10px] mb-4">
+                                                        <div className="flex items-center gap-1 text-orange-500 font-bold">
                                                             <Calendar className="w-2.5 h-2.5" />
                                                             <span>{post.date}</span>
                                                         </div>

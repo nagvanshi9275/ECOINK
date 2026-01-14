@@ -22,6 +22,13 @@ export const services: ServiceCard[] = [
         iconName: "Bath",
     },
     {
+        id: "furniture",
+        title: "Custom Furniture",
+        description: "Unique, handcrafted furniture pieces designed to your exact specifications. From dining tables to office desks.",
+        href: "/furniture",
+        iconName: "Armchair",
+    },
+    {
         id: "kitchen-cabinets",
         title: "Kitchen Cabinets",
         description: "Bespoke kitchen cabinetry tailored to your space and lifestyle. Experience the heart of your home with premium craftsmanship.",
@@ -48,13 +55,6 @@ export const services: ServiceCard[] = [
         description: "Walk-in and built-in wardrobes with smart storage solutions. Organize your wardrobe with custom-fitted interiors.",
         href: "/wardrobes",
         iconName: "Shirt",
-    },
-    {
-        id: "furniture",
-        title: "Custom Furniture",
-        description: "Unique, handcrafted furniture pieces designed to your exact specifications. From dining tables to office desks.",
-        href: "/furniture",
-        iconName: "Armchair",
     },
 ];
 

@@ -24,7 +24,7 @@ export default function Furniture({ service }: Props) {
             </Head>
 
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-gray-600 to-gray-700 pt-20 pb-16 lg:pt-28 lg:pb-24 overflow-hidden">
+            <section className="relative bg-gradient-to-br from-gray-600 to-gray-700 pt-8 pb-16 lg:pt-36 lg:pb-24 overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gray-500/20 blur-[100px] rounded-full pointer-events-none" />
 

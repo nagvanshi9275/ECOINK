@@ -26,6 +26,7 @@ async function main() {
                 file: 'Blog1.md',
                 folder: 'Blog1',
                 coverImage: '/Blog1/blog1.jpg',
+                publishedAt: new Date('2025-12-23'),
                 imageMap: {
                     'blog1/image1.jpg': '/Blog1/blog1.jpg',
                     'blog1/image2.jpg': '/Blog1/home-office-custom-cabinet-melbourne.jpg',
@@ -36,6 +37,7 @@ async function main() {
                 file: 'Blog2.md',
                 folder: 'Blog2',
                 coverImage: '/Blog2/Blog2.jpg',
+                publishedAt: new Date('2025-11-17'),
                 imageMap: {
                     'blog2/image1.jpg': '/Blog2/Blog2.jpg',
                     'blog2/image2.jpg': '/Blog2/blog21.jpg',
@@ -46,6 +48,7 @@ async function main() {
                 file: 'Blog3.md',
                 folder: 'Blog3',
                 coverImage: '/Blog3/Custom-Elegant-Bathroom-Vanities.jpg',
+                publishedAt: new Date('2025-10-15'),
                 imageMap: {
                     'blog3/image1.jpg': '/Blog3/Custom-Elegant-Bathroom-Vanities.jpg',
                     'blog3/image2.jpg': '/Blog3/Elegant-Bathroom-Vanities.jpg',
@@ -56,6 +59,7 @@ async function main() {
                 file: 'Blog4.md',
                 folder: 'Blog4',
                 coverImage: '/Blog4/magri-cabinets-Custom-Laundry-Cabinet.jpg',
+                publishedAt: new Date('2025-09-09'),
                 imageMap: {
                     'blog4/image1.jpg': '/Blog4/magri-cabinets-Custom-Laundry-Cabinet.jpg',
                     'blog4/image2.jpg': '/Blog4/magri-cabinets-Custom-white-Laundry-Cabinet.jpg',
@@ -66,16 +70,18 @@ async function main() {
                 file: 'Blog5.md',
                 folder: 'Blog5',
                 coverImage: '/Blog5/magri-cabinets-featuring-handleless-cabinetry.jpg',
+                publishedAt: new Date('2025-08-08'),
                 imageMap: {
-                    'blog5/image1.jpg': '/Blog5/magri-cabinets-handleless-overheads-with-traditional-handles-on-the-base.jpg.jpg',
+                    'blog5/image1.jpg': '/Blog5/magri-cabinets-featuring-child-opening-a-cabinet.jpg',
                     'blog5/image2.jpg': '/Blog5/magri-cabinets-featuring-handleless-cabinetry.jpg',
-                    'blog5/image3.jpg': '/Blog5/magri-cabinets-featuring-handleless-cabinetry.jpg'
+                    'blog5/image3.jpg': '/Blog5/magri-cabinets-modern-handleless-hybrid.jpg'
                 }
             },
             {
                 file: 'Blog6.md',
                 folder: 'Blog6',
                 coverImage: '/Blog6/Vinyl-Wrap-Cabinetry.jpg',
+                publishedAt: new Date('2025-07-28'),
                 replacements: [
                     { search: '![Vinyl Wrap Cabinetry Finish](IMAGE_URL_HERE)', replace: '![Vinyl Wrap Cabinetry Finish](/Blog6/Vinyl-Wrap-Cabinetry.jpg)' },
                     { search: '![2 Pac Cabinetry Durability](IMAGE_URL_HERE)', replace: '![2 Pac Cabinetry Durability](/Blog6/2-pac-finish.jpg)' },
@@ -123,7 +129,7 @@ async function main() {
                     slug: slug,
                     content: content,
                     isPublished: true,
-                    publishedAt: new Date(),
+                    publishedAt: blog.publishedAt || new Date(),
                     coverImage: blog.coverImage || null
                 }
             });

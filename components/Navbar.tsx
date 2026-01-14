@@ -32,7 +32,7 @@ export default function Navbar() {
 
                     const finalItems = [
                         ...(installations ? [installations] : [{ label: "OUR INSTALLATIONS", href: "/our-installations", hasDropdown: true, dropdownItems: [] }]),
-                        { label: "CUTTING-EDGE-SERVICES", href: "/cutting-edge-services" },
+                        { label: "CUTTING & EDGING", href: "/cutting-edge-services" },
                         ...(projects ? [projects] : [{ label: "PROJECTS", href: "/projects" }]),
                         ...(blogs ? [blogs] : [{ label: "BLOGS", href: "/blogs" }]),
                         { label: "CONTACT", href: "/contact" }
@@ -52,7 +52,7 @@ export default function Navbar() {
     // Fallback if API fails or is loading
     const displayItems = navItems.length > 0 ? navItems : [
         { label: "OUR INSTALLATIONS", href: "/our-installations", hasDropdown: true, dropdownItems: [] },
-        { label: "CUTTING-EDGE-SERVICES", href: "/cutting-edge-services" },
+        { label: "CUTTING & EDGING", href: "/cutting-edge-services" },
         { label: "PROJECTS", href: "/projects" },
         { label: "BLOGS", href: "/blogs" },
         { label: "CONTACT", href: "/contact" },
@@ -61,10 +61,10 @@ export default function Navbar() {
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20">
+                <div className="flex items-center justify-between h-20 lg:h-28">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-3 group">
-                        <div className="relative w-40 h-16 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                        <div className="relative w-32 h-12 lg:w-48 lg:h-20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                             <Image
                                 src="/Magri-Cabinets-removebg-preview.png"
                                 alt="Magri Cabinets Logo"
@@ -84,7 +84,7 @@ export default function Navbar() {
                                 item.hasDropdown ? (
                                     <div
                                         key={item.href}
-                                        className="relative h-20 flex items-center"
+                                        className="relative h-20 lg:h-28 flex items-center"
                                         onMouseEnter={() => setIsDropdownOpen(true)}
                                         onMouseLeave={() => setIsDropdownOpen(false)}
                                     >

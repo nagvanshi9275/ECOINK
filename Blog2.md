@@ -66,6 +66,6 @@ Perhaps most importantly, professional installation gives you confidence. You kn
 
 Choosing professional installation is one of the smartest decisions you can make for your new cabinetry. At Magri Cabinets, our expert team combines precision, craftsmanship, and years of experience to deliver installations that look stunning and perform flawlessly.
 
-We ensure every cabinet is perfectly aligned, level, and secured, resulting in a finish that enhances your entire space. Whether you are updating your kitchen, bathroom, or laundry, we handle every project with the same care and attention to detail that defines our reputation for quality.
+We ensure every cabinet is perfectly aligned, level, and secured, resulting in a finish that enhances your entire space. Whether you are updating your [kitchen](/kitchen-cabinets), [bathroom](/bathroom-vanities), or [laundry](/laundry-cabinets), we handle every project with the same care and attention to detail that defines our reputation for quality.
 
-Contact us to learn more about our professional cabinet installation services and see how we can help you achieve a perfect, lasting finish for your home.
+[Contact us](/contact) to learn more about our professional cabinet installation services and see how we can help you achieve a perfect, lasting finish for your home.

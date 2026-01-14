@@ -64,12 +64,12 @@ async function main() {
 
     // 3. Services (Installations)
     const servicesData = [
-        { name: 'TV Cabinets', slug: 'tv-cabinets', description: 'Custom entertainment units designed for modern living', image: '/library.jpg', order: 0 },
-        { name: 'Wardrobes', slug: 'wardrobes', description: 'Walk-in and built-in wardrobes with smart storage', image: '/bedroom1.jpg', order: 1 },
-        { name: 'Furniture', slug: 'furniture', description: 'Unique handcrafted furniture for every room', image: '/room.jpg', order: 2 },
-        { name: 'Kitchen Cabinets', slug: 'kitchen-cabinets', description: 'Bespoke kitchen cabinetry tailored to your lifestyle', image: '/kitchen1.jpg', order: 3 },
-        { name: 'Laundry Cabinets', slug: 'laundry-cabinets', description: 'Efficient and stylish laundry storage solutions', image: '/room copy.jpg', order: 4 },
-        { name: 'Bathroom Vanities', slug: 'bathroom-vanities', description: 'Transform your bathroom into a luxurious retreat', image: '/bathromr.jpg', order: 5 },
+        { name: 'Bathroom Vanities', slug: 'bathroom-vanities', description: 'Transform your bathroom into a luxurious retreat', image: '/bathromr.jpg', order: 0 },
+        { name: 'Furniture', slug: 'furniture', description: 'Unique handcrafted furniture for every room', image: '/room.jpg', order: 1 },
+        { name: 'Kitchen Cabinets', slug: 'kitchen-cabinets', description: 'Bespoke kitchen cabinetry tailored to your lifestyle', image: '/kitchen1.jpg', order: 2 },
+        { name: 'Laundry Cabinets', slug: 'laundry-cabinets', description: 'Efficient and stylish laundry storage solutions', image: '/room copy.jpg', order: 3 },
+        { name: 'TV Cabinets', slug: 'tv-cabinets', description: 'Custom entertainment units designed for modern living', image: '/library.jpg', order: 4 },
+        { name: 'Wardrobes', slug: 'wardrobes', description: 'Walk-in and built-in wardrobes with smart storage', image: '/bedroom1.jpg', order: 5 },
     ];
 
     for (const s of servicesData) {

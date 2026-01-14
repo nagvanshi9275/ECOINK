@@ -65,7 +65,7 @@ Timelines depend on the project scope and coordination with other trades. Most p
 
 ## Unlocking Underutilised Spaces
 
-Many Melbourne homes contain spaces that are overlooked or poorly used. Custom storage can transform under-stair voids, hallway recesses, laundries and garages into functional areas without altering the home’s footprint.
+Many Melbourne homes contain spaces that are overlooked or poorly used. Custom storage can transform under-stair voids, hallway recesses, [laundries](/laundry-cabinets) and garages into functional areas without altering the home’s footprint.
 
 By tailoring storage to these spaces, homeowners can significantly increase usable capacity while maintaining a cohesive design.
 
@@ -77,6 +77,6 @@ Custom storage is a long-term investment in how a home functions, feels and perf
 
 Unlike standard furniture, custom cabinetry is designed specifically for the home’s layout, lifestyle requirements and architectural constraints. This means it integrates seamlessly into the space, uses available dimensions more efficiently and avoids the wasted gaps common with off-the-shelf solutions. Over time, this level of precision supports better living outcomes and reduces the need for frequent replacements or compromises.
 
-Custom storage also offers durability and consistency that mass-produced furniture cannot match. Built with quality materials and professional installation, it is designed to withstand daily use while maintaining its appearance. For homeowners and investors alike, this durability translates into better value retention and improved appeal to future buyers or tenants.
+Custom storage also offers durability and consistency that mass-produced furniture cannot match. Built with quality materials and [professional installation](/blogs/why-professional-cabinet-installation-matters-for-a-perfect-finish), it is designed to withstand daily use while maintaining its appearance. For homeowners and investors alike, this durability translates into better value retention and improved appeal to future buyers or tenants.
 
-Choosing the right custom storage is not only about maximising space, but it is also about creating a home that supports how you live now and into the future. At Magri Cabinets, we design and install custom cabinetry and storage solutions tailored to Melbourne homes and lifestyles. Contact us today to explore how we can help you achieve lasting results.
+Choosing the right custom storage is not only about maximising space, but it is also about creating a home that supports how you live now and into the future. At [Magri Cabinets](/), we design and install [custom cabinetry](/projects) and storage solutions tailored to Melbourne homes and lifestyles. [Contact us](/contact) today to explore how we can help you achieve lasting results.

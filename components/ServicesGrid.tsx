@@ -17,7 +17,7 @@ export default function ServicesGrid() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-4">
+                    <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-4">
                         Our Services
                     </span>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -47,7 +47,7 @@ export default function ServicesGrid() {
                                         </div>
 
                                         {/* Content */}
-                                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-500 transition-colors">
                                             {service.title}
                                         </h3>
                                         <p className="text-gray-600 leading-relaxed mb-6">
@@ -55,13 +55,13 @@ export default function ServicesGrid() {
                                         </p>
 
                                         {/* Link */}
-                                        <div className="flex items-center text-gray-900 font-semibold group-hover:text-amber-600 transition-colors">
+                                        <div className="flex items-center text-gray-900 font-semibold group-hover:text-orange-500 transition-colors">
                                             <span>Learn More</span>
                                             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                                         </div>
 
                                         {/* Decorative Element */}
-                                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/10 to-amber-500/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500/10 to-orange-500/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     </CardContent>
                                 </Card>
                             </Link>

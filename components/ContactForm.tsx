@@ -113,7 +113,7 @@ export default function ContactForm() {
                     placeholder="John Smith"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`h-12 bg-white border-gray-200 focus:border-amber-400 focus:ring-amber-400 rounded-xl ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                    className={`h-12 bg-white border-gray-200 focus:border-orange-500 focus:ring-orange-500 rounded-xl ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
                         }`}
                 />
                 {errors.name && (
@@ -133,7 +133,7 @@ export default function ContactForm() {
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`h-12 bg-white border-gray-200 focus:border-amber-400 focus:ring-amber-400 rounded-xl ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                    className={`h-12 bg-white border-gray-200 focus:border-orange-500 focus:ring-orange-500 rounded-xl ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
                         }`}
                 />
                 {errors.email && (
@@ -153,7 +153,7 @@ export default function ContactForm() {
                     placeholder="0412 345 678"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`h-12 bg-white border-gray-200 focus:border-amber-400 focus:ring-amber-400 rounded-xl ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                    className={`h-12 bg-white border-gray-200 focus:border-orange-500 focus:ring-orange-500 rounded-xl ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
                         }`}
                 />
                 {errors.phone && (
@@ -173,7 +173,7 @@ export default function ContactForm() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`bg-white border-gray-200 focus:border-amber-400 focus:ring-amber-400 rounded-xl resize-none ${errors.message ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                    className={`bg-white border-gray-200 focus:border-orange-500 focus:ring-orange-500 rounded-xl resize-none ${errors.message ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
                         }`}
                 />
                 {errors.message && (

@@ -240,7 +240,7 @@ export default function ProjectDetail({ project, seoSettings, globalFaqs, testim
             <main className="bg-white pb-24">
 
                 {/* 1️⃣ Hero Section */}
-                <section className="relative pt-32 pb-20 bg-gray-900 overflow-hidden">
+                <section className="relative pt-12 lg:pt-24 pb-20 bg-gray-900 overflow-hidden">
                     <div className="absolute inset-0 opacity-40">
                         <Image
                             src={project.heroImage}

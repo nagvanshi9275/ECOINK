@@ -9,7 +9,7 @@ This guide covers key factors such as size, style, materials, storage, and insta
 Before you start browsing, think about the overall design theme of your bathroom. Luxury bathroom vanities come in a wide variety of styles, from sleek modern designs to ornate traditional pieces.
 
 **Modern and minimalist**  
-Clean lines, handleless drawers, and high-gloss finishes. Ideal for contemporary Australian homes with a focus on simplicity.
+Clean lines, [handleless](/blogs/handles-or-no-handles-what-s-the-best-option-for-your-new-cabinets) drawers, and high-gloss finishes. Ideal for contemporary Australian homes with a focus on simplicity.
 
 **Classic and timeless**  
 Rich timber tones, decorative moulding, and stone benchtops that create a warm, sophisticated feel.
@@ -98,4 +98,4 @@ While it may be tempting to purchase a vanity online, working with a bathroom ca
 
 Choosing a specialist also means you benefit from a more collaborative process. From the initial design consultation to the final installation, you have a partner who understands your vision and can translate it into a practical, beautifully crafted result. This hands-on approach ensures your vanity not only fits the exact measurements of your bathroom but also reflects your personal style, making the end product truly one of a kind.
 
-For Australian homeowners seeking exceptional quality and craftsmanship, Magri Cabinets offers custom luxury bathroom vanities designed to your exact specifications. With their expertise in premium materials and bespoke designs, they can help you create a bathroom that combines elegance, functionality, and durability. Visiting their showroom or exploring their website is the perfect next step toward bringing your dream bathroom to life. Contact us today to start designing your perfect luxury bathroom vanity.
+For Australian homeowners seeking exceptional quality and craftsmanship, Magri Cabinets offers custom luxury [bathroom vanities](/bathroom-vanities) designed to your exact specifications. With their expertise in premium materials and bespoke designs, they can help you create a bathroom that combines elegance, functionality, and durability. Visiting their showroom or exploring their website is the perfect next step toward bringing your dream bathroom to life. [Contact us](/contact) today to start designing your perfect luxury bathroom vanity.

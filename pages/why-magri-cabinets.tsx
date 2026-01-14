@@ -65,7 +65,7 @@ export default function WhyMagriCabinets() {
             <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-4">
+                        <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-4">
                             Our Values
                         </span>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -93,7 +93,7 @@ export default function WhyMagriCabinets() {
                                     <p className="text-gray-600 leading-relaxed">
                                         {item.description}
                                     </p>
-                                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-400/10 to-amber-500/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-400/10 to-orange-500/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 </CardContent>
                             </Card>
                         ))}
@@ -114,29 +114,29 @@ export default function WhyMagriCabinets() {
                                 <div className="space-y-6">
                                     <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                                         <span className="text-white/80">Years of Experience</span>
-                                        <span className="text-3xl font-bold text-amber-400">30+</span>
+                                        <span className="text-3xl font-bold text-orange-500">30+</span>
                                     </div>
                                     <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                                         <span className="text-white/80">Projects Completed</span>
-                                        <span className="text-3xl font-bold text-amber-400">1000+</span>
+                                        <span className="text-3xl font-bold text-orange-500">1000+</span>
                                     </div>
                                     <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                                         <span className="text-white/80">Happy Clients</span>
-                                        <span className="text-3xl font-bold text-amber-400">500+</span>
+                                        <span className="text-3xl font-bold text-orange-500">500+</span>
                                     </div>
                                     <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                                         <span className="text-white/80">Client Satisfaction</span>
-                                        <span className="text-3xl font-bold text-amber-400">100%</span>
+                                        <span className="text-3xl font-bold text-orange-500">100%</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-400 rounded-2xl -z-10" />
+                            <div className="absolute -top-4 -left-4 w-24 h-24 bg-orange-500 rounded-2xl -z-10" />
                             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gray-200 rounded-2xl -z-10" />
                         </div>
 
                         {/* Content */}
                         <div className="order-1 lg:order-2">
-                            <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-6">
+                            <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-6">
                                 Our Story
                             </span>
                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -173,7 +173,7 @@ export default function WhyMagriCabinets() {
             <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-4">
+                        <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-4">
                             Our Process
                         </span>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">

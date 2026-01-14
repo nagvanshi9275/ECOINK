@@ -101,6 +101,6 @@ Choosing between handles and handleless cabinetry isn’t always easy. Both opti
 
 Magri Cabinets is here to help you get it right. Our team offers expert guidance, tailored solutions, and craftsmanship you can rely on to create a space that looks stunning and functions beautifully in everyday life.
 
-We design and build custom kitchens, bathroom vanities, wardrobes, and feature joinery that elevate your home with purpose and style.
+We design and build custom [kitchens](/kitchen-cabinets), [bathroom vanities](/bathroom-vanities), [wardrobes](/wardrobes), and feature joinery that elevate your home with purpose and style.
 
-Let’s bring your ideas to life. Contact us and see how Magri Cabinets can make your next project seamless from start to finish.
+Let’s bring your ideas to life. [Contact us](/contact) and see how Magri Cabinets can make your next project seamless from start to finish.
