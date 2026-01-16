@@ -53,7 +53,7 @@ export default function ServiceContactForm({ defaultService = "General Enquiry" 
     }
 
     return (
-        <Card className="border border-orange-100 shadow-xl overflow-hidden sticky top-24 p-0 gap-0">
+        <Card className="border border-orange-100 shadow-xl overflow-hidden sticky top-32 p-0 gap-0">
             <CardHeader className="bg-orange-500 text-white p-6">
                 <CardTitle className="text-xl font-bold flex items-center gap-2">
                     Get A Free Quote

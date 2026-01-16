@@ -100,7 +100,7 @@ const PageRenderer: React.FC<{ content: SectionProps[] }> = ({ content }) => {
                                             {section.data.sidebarType === 'form' ? (
                                                 <ServiceContactForm defaultService={section.data.serviceName} />
                                             ) : (
-                                                <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 sticky top-24">
+                                                <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 sticky top-32">
                                                     <h3 className="text-xl font-bold text-gray-900 mb-6">{section.data.sidebarTitle || 'Details'}</h3>
                                                     <div className="space-y-6">
                                                         {(section.data.details || []).map((detail: any, dIdx: number) => (

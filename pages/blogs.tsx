@@ -170,33 +170,6 @@ export default function Blogs({ blogPosts }: BlogsProps) {
                 </div>
             </section>
 
-            {/* Newsletter Section */}
-            <section className="py-16 lg:py-24 bg-gray-50">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <span className="inline-block px-4 py-2 bg-orange-100 text-orange-600 text-sm font-semibold rounded-full mb-6">
-                        Stay Updated
-                    </span>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        Subscribe to Our Newsletter
-                    </h2>
-                    <p className="text-lg text-gray-600 mb-8">
-                        Get the latest tips, trends, and inspiration delivered straight to your inbox.
-                    </p>
-                    <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            className="flex-1 px-6 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition-all"
-                        />
-                        <button
-                            type="submit"
-                            className="px-8 py-4 bg-orange-500 text-white font-bold rounded-xl hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25"
-                        >
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
-            </section>
 
             {/* CTA Section */}
             <ServiceCTA

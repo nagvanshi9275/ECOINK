@@ -91,7 +91,7 @@ export default function BlogDetail({ blog, relatedBlogs, seoSettings }: { blog: 
 
                         {/* Social Sidebar (Hidden on mobile) */}
                         <div className="hidden lg:block lg:col-span-1">
-                            <div className="sticky top-24 flex flex-col gap-4 text-center">
+                            <div className="sticky top-32 flex flex-col gap-4 text-center">
                                 <span className="text-xs font-bold text-gray-400 tracking-wider uppercase mb-2">Share</span>
                                 <ShareButton platform="facebook" url={`https://magricabinets.com/blogs/${blog.slug}`} icon={<FacebookIcon className="w-5 h-5" />} />
                                 <ShareButton platform="twitter" url={`https://magricabinets.com/blogs/${blog.slug}`} title={blog.title} icon={<TwitterIcon className="w-5 h-5" />} />
@@ -141,7 +141,7 @@ export default function BlogDetail({ blog, relatedBlogs, seoSettings }: { blog: 
 
                         {/* Recent Sidebar */}
                         <div className="lg:col-span-4">
-                            <div className="sticky top-24">
+                            <div className="sticky top-32">
                                 <div className="mb-8">
                                     <h3 className="text-xl font-bold text-[#0F172A]">Recent</h3>
                                 </div>
@@ -201,7 +201,7 @@ const ShareButton = ({ platform, url, title, media, icon, className = "w-10 h-10
         case 'twitter': link = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`; break;
         case 'pinterest': link = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(media || '')}&description=${encodeURIComponent(title || '')}`; break;
         case 'linkedin': link = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`; break;
-        case 'instagram': link = `https://www.instagram.com/magris_cabinets/`; break; // IG doesn't support direct URL sharing on web, linking to profile
+        case 'instagram': link = `https://www.instagram.com/`; break; // Instagram doesn't support direct URL sharing on web, redirecting to main site per PM request
     }
 
     return (

@@ -290,7 +290,7 @@ export default function ProjectDetail({ project, seoSettings, globalFaqs, testim
 
                         {/* 3️⃣ Project Information (Right) */}
                         <div className="lg:col-span-5 xl:col-span-4">
-                            <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 sticky top-24">
+                            <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 sticky top-32">
                                 <h3 className="text-xl font-bold text-gray-900 mb-6">Project Details</h3>
                                 <div className="space-y-6">
                                     <div className="flex items-start gap-4">
