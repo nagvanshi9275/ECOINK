@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  ecoink-db:
+    image: postgres:15-alpine
+    container_name: ecoink_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ecoink_user
+      POSTGRES_PASSWORD: ecoink_password
+      POSTGRES_DB: ecoink_db
+    ports:
+      - "5435:5432"
+    volumes:
+      - ecoink_pgdata:/var/lib/postgresql/data
+
+volumes:
+  ecoink_pgdata:

@@ -234,10 +234,14 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 );
 
 export const getServerSideProps = async (context: any) => {
-    const { slug } = context.params;
-    const { PrismaClient } = require('@prisma/client');
-    const prisma = new PrismaClient();
     try {
+        const { slug } = context.params;
+        const { PrismaClient } = require('@prisma/client');
+        const prisma = new PrismaClient();
+
+        // Mock DB failure for build
+        // if (process.env.NODE_ENV === 'production') throw new Error("No DB");
+
         const [blog, relatedBlogs, seoSettings] = await Promise.all([
             prisma.blogPost.findUnique({
                 where: { slug },
@@ -266,8 +270,8 @@ export const getServerSideProps = async (context: any) => {
             }
         };
     } catch (e) {
-        console.error(e);
-        await prisma.$disconnect();
+        console.error("Blog DB Error (handled):", e);
+        // await prisma.$disconnect(); // might fail if prisma not init
         return { notFound: true };
     }
 };

@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
             props: { projects },
         };
     } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.error("Error fetching projects (returning empty):", error);
         return {
             props: { projects: [] },
         };

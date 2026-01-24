@@ -2,38 +2,16 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" className="dark">
       <Head>
-        {/* Favicon */}
-        {/* Favicon */}
-        <link rel="icon" href="/Magri-Cabinets-removebg-preview.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/Magri-Cabinets-removebg-preview.png" />
-
-        {/* Theme Color */}
-        <meta name="theme-color" content="#0f172a" />
-
-        {/* Open Graph defaults */}
-        <meta property="og:site_name" content="Magri Cabinets" />
-        <meta property="og:locale" content="en_AU" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Magri Cabinets | Custom Cabinet Maker Melbourne" />
-        <meta name="twitter:description" content="Melbourne's trusted custom cabinet makers. Premium kitchen cabinets, bathroom vanities, wardrobes & custom furniture." />
-
-        {/* Geo tags for local SEO */}
-        <meta name="geo.region" content="AU-VIC" />
-        <meta name="geo.placename" content="Melbourne" />
-        <meta name="geo.position" content="-37.8136;144.9631" />
-        <meta name="ICBM" content="-37.8136, 144.9631" />
-
-        {/* Author */}
-        <meta name="author" content="Magri Cabinets" />
-
-        {/* Robots */}
-        <meta name="robots" content="index, follow" />
+        <link rel="icon" href="/logo/logo.png" type="image/png" />
+        <meta name="theme-color" content="#0a0a0a" />
+        
+        {/* Fonts are imported in globals.css, but preconnect helps */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
-      <body className="antialiased">
+      <body className="antialiased bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
         <Main />
         <NextScript />
       </body>
