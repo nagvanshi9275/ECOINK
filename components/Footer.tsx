@@ -23,7 +23,7 @@ const Footer = () => {
                         className="relative w-40 h-12"
                     >
                         <Image
-                            src="/logo/WhatsApp_Image_2026-01-24_at_5.03.49_AM-removebg-preview.png"
+                            src="https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png"
                             alt="EcoInk"
                             fill
                             className="object-contain object-left"

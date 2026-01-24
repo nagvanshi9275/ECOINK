@@ -3,13 +3,13 @@ import "@/styles/globals.css";
 
 export const metadata: Metadata = {
     title: {
-        default: 'Magri Cabinets | Custom Cabinet Maker Melbourne',
-        template: '%s | Magri Cabinets',
+        default: 'EcoInk | AI-Powered Growth Engine',
+        template: '%s | EcoInk',
     },
-    description: "Melbourne's trusted custom cabinet makers. Premium kitchen cabinets, bathroom vanities, wardrobes & custom furniture.",
+    description: "The AI-powered growth engine for service businesses. Combine Ads + Voice for predictable, automated growth.",
     icons: {
-        icon: '/Magri-Cabinets-removebg-preview.png',
-        apple: '/Magri-Cabinets-removebg-preview.png',
+        icon: 'https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png',
+        apple: 'https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png',
     },
 };
 
