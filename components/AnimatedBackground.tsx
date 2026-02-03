@@ -13,7 +13,7 @@ interface AnimatedBackgroundProps {
 }
 
 const AnimatedBackground = ({
-    color = "#00ff00", // Neon Gre
+    color = "#00ff00", // Neon Gr
     particleCount = 80,
     speed = 1.2,
     lineOpacity = 0.5,
