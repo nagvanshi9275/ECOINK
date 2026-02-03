@@ -20,14 +20,15 @@ const Footer = () => {
                 <div className="flex flex-col gap-6">
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="relative w-40 h-12"
+                        className="flex flex-col justify-center mb-2"
                     >
-                        <Image
-                            src="https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png"
-                            alt="EcoInk"
-                            fill
-                            className="object-contain object-left"
-                        />
+                        <div className="flex items-center leading-none">
+                            <span className="text-3xl font-[900] text-[#7FFF00] tracking-tight" style={{ fontFamily: 'Inter, sans-serif' }}>ECO</span>
+                            <span className="text-3xl font-[900] text-white italic tracking-tight" style={{ fontFamily: 'Inter, sans-serif' }}>INK</span>
+                        </div>
+                        <span className="text-[10px] font-bold tracking-[0.35em] text-white uppercase mt-1 pl-1">
+                            AI SOLUTIONS
+                        </span>
                     </motion.div>
                     <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
                         The AI-powered growth engine for service businesses. Combine Ads + Voice for predictable, automated growth.

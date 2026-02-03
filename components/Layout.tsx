@@ -16,7 +16,7 @@ export default function Layout({ children, pageProps }: LayoutProps) {
     const isHome = router.pathname === "/";
 
     return (
-        <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
             <Head>
                 <title>EcoInk | AI-Powered Growth Engine</title>
                 <meta name="description" content="Turn demand into booked jobs automatically." />

@@ -31,42 +31,56 @@
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
   }
 }
 
 :root {
   --background: #0a0a0a;
   --foreground: #ffffff;
-  
+
   --card: #141414;
   --card-foreground: #ffffff;
-  
+
   --popover: #141414;
   --popover-foreground: #ffffff;
-  
-  --primary: #7FFF00; /* Neon Green */
+
+  --primary: #7FFF00;
+  /* Neon Green */
   --primary-foreground: #0a0a0a;
-  
+
   --secondary: #1e1e1e;
   --secondary-foreground: #ffffff;
-  
+
   --muted: #252525;
   --muted-foreground: #999999;
-  
-  --accent: #00ffcc; /* Teal/Cyan */
+
+  --accent: #00ffcc;
+  /* Teal/Cyan */
   --accent-foreground: #0a0a0a;
-  
+
   --destructive: #7f1d1d;
   --destructive-foreground: #ffffff;
-  
+
   --border: #262626;
   --input: #262626;
   --ring: #7FFF00;
-  
+
   --radius: 0.75rem;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 body {
@@ -76,7 +90,12 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
 }
 
@@ -114,13 +133,57 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #0a0a0a;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #262626;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #7FFF00;
+}
+
+/* Phone Input Custom Styling */
+.PhoneInputCountrySelect {
+  background-color: #0a0a0a !important;
+  color: white !important;
+}
+
+.PhoneInputCountrySelect option {
+  background-color: #1a1a1a !important;
+  color: white !important;
+}
+
+/* Specific fix for the white box issue in the screenshot */
+.PhoneInputCountrySelect {
+  background-color: transparent !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* Dark theme for native select dropdown */
+select {
+  color-scheme: dark;
+}
+
+.PhoneInputInput:focus {
+  outline: none;
+}
+
+/* Ensure the country icon container doesn't have a white background */
+.PhoneInputCountryIcon {
+  background-color: transparent !important;
+}
+
+/* Fix for potential white background on the input itself when autofilled */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

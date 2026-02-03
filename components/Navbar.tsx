@@ -38,47 +38,82 @@ const Navbar = () => {
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    {/* Logo */}
+                    {/* Logo (Left) */}
                     <Link href="/" className="flex items-center gap-2 z-50">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="relative w-48 h-14 md:w-56 md:h-16"
+                            className="flex flex-col justify-center"
                         >
-                            <Image
-                                src="https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png"
-                                alt="EcoInk"
-                                fill
-                                className="object-contain object-left"
-                                priority
-                            />
+                            <div className="flex items-center leading-none">
+                                <span className="text-4xl md:text-5xl font-[900] text-[#7FFF00] tracking-tighter" style={{ fontFamily: 'Inter, sans-serif' }}>ECO</span>
+                                <span className="text-4xl md:text-5xl font-[900] text-white italic tracking-tighter" style={{ fontFamily: 'Inter, sans-serif' }}>INK</span>
+                            </div>
+                            <span className="text-[12px] md:text-[13px] font-bold tracking-[0.4em] text-white uppercase mt-1 pl-1">
+                                AI SOLUTIONS
+                            </span>
                         </motion.div>
                     </Link>
 
-                    {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="relative group"
-                            >
-                                <span className={`text-sm font-medium transition-colors group-hover:text-primary ${pathname === link.href ? "text-primary" : "text-gray-300"
-                                    }`}>
-                                    {link.name}
-                                </span>
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 w-0 group-hover:w-full opacity-0 group-hover:opacity-100" />
-                            </Link>
-                        ))}
-                    </nav>
+                    {/* Right Side Group (Nav + CTA) */}
+                    {/* Right Side Group (Nav + CTA) */}
+                    <div className="hidden md:flex items-center gap-6">
 
-                    {/* Desktop CTA */}
-                    <div className="hidden md:flex items-center gap-4">
+                        {/* Navigation Pill */}
+                        <nav className="flex items-center gap-8 px-8 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+                            {navLinks.map((link) => {
+                                const isActive = pathname === link.href;
+                                // Determine active color based on link: if it's the Voice page, use Cyan, otherwise Green (or default theme)
+                                // Actually, user request: "ecoink-voice iss route pr cta ka colro shold be like this".
+                                // This implies checking the CURRENT PAGE.
+                                const isVoicePage = pathname === "/ecoink-voice";
+                                const themeColor = isVoicePage ? "#00ffcc" : "#7FFF00"; // Cyan vs Neon Green
+
+                                return (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        className="relative group"
+                                    >
+                                        <span
+                                            className="text-sm font-medium transition-colors"
+                                            style={{
+                                                color: isActive ? themeColor : "rgb(209 213 219)", // gray-300
+                                            }}
+                                            onMouseEnter={(e) => e.currentTarget.style.color = themeColor}
+                                            onMouseLeave={(e) => e.currentTarget.style.color = isActive ? themeColor : "rgb(209 213 219)"}
+                                        >
+                                            {link.name}
+                                        </span>
+                                    </Link>
+                                );
+                            })}
+                        </nav>
+
+                        {/* CTA Button - Dynamic Color */}
                         <Link href="/contact">
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <Button variant="glow" size="default">
-                                    Get Started
-                                </Button>
+                                {(() => {
+                                    const isVoicePage = pathname === "/ecoink-voice";
+                                    const themeColor = isVoicePage ? "#00ffcc" : "#7FFF00";
+                                    const shadowColor = isVoicePage ? "rgba(0, 255, 204, 0.5)" : "rgba(127, 255, 0, 0.5)";
+
+                                    return (
+                                        <Button
+                                            variant="glow"
+                                            size="lg"
+                                            className="rounded-xl px-8 tracking-wide font-bold border-white"
+                                            style={{
+                                                backgroundColor: themeColor,
+                                                borderColor: themeColor,
+                                                boxShadow: `0 0 20px ${shadowColor}`,
+                                                color: 'black'
+                                            }}
+                                        >
+                                            GET STARTED
+                                        </Button>
+                                    );
+                                })()}
                             </motion.div>
                         </Link>
                     </div>

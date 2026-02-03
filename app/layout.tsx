@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     },
     description: "The AI-powered growth engine for service businesses. Combine Ads + Voice for predictable, automated growth.",
     icons: {
-        icon: 'https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png',
-        apple: 'https://i.ibb.co/nqhJFpjw/Whats-App-Image-2026-01-24-at-5-03-49-AM-removebg-preview.png',
+        icon: '/Logo/logo.png',
+        apple: '/Logo/logo.png',
     },
 };
 

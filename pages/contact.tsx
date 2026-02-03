@@ -50,9 +50,9 @@ export default function Contact() {
                 </motion.div>
             </section>
 
-            <section className="pb-24">
+            <section className="pb-24 relative z-30 -mt-32">
                 <div className="max-w-3xl mx-auto px-6">
-                    <div className="glass-card p-8 md:p-12 rounded-2xl border border-white/10">
+                    <div className="glass-card p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl bg-black/80 backdrop-blur-xl">
                         <h2 className="text-2xl font-bold mb-8">Send us a message</h2>
                         <form className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1,12 +1,15 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import ProductIcon from "@/components/ProductIcon";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card"; // It will use my updated glass card
 import { ArrowRight, Check, Zap, Mic, BarChart3, Layers, Target } from "lucide-react";
 import AnimatedFunnel from "@/components/AnimatedFunnel";
 import EnquiryForm from "@/components/EnquiryForm";
 import ReviewsSlider from "@/components/ReviewsSlider";
+import SeamlessIntegrationDiagram from "@/components/SeamlessIntegrationDiagram";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -21,11 +24,13 @@ export default function Home() {
       <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/images/hero-background.jpg')" }}
+          <AnimatedBackground
+            color="#7FFF00"
+            particleCount={120}
+            speed={1.2}
+            lineOpacity={0.4}
           />
-          <div className="absolute inset-0 bg-black/50 z-10" /> {/* Re-added dark overlay */}
+          <div className="absolute inset-0 bg-black/40 z-10" />
         </div>
 
         {/* Content */}
@@ -77,39 +82,39 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 whileHover={{ y: -10 }}
               >
-                <Card className="h-full hover:border-primary/50 transition-colors relative overflow-hidden bg-white/5 border-white/10 p-8">
+                <Card className="h-full hover:border-primary/50 transition-colors relative overflow-hidden bg-transparent border-none p-8">
                   {/* Hover Glow */}
                   <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-32 h-32 relative mb-6 group-hover:scale-105 transition-transform duration-300">
-                      <Image
-                        src="/images/ads-icon.png"
+                  <div className="flex flex-col items-start text-left px-2">
+                    <div className="mb-6 self-center sm:self-start group-hover:scale-105 transition-transform duration-700">
+                      <ProductIcon
+                        iconType="ads"
                         alt="EcoInk Ads"
-                        fill
-                        className="object-contain drop-shadow-[0_0_15px_rgba(127,255,0,0.3)]"
+                        glowColor="#7FFF00"
+                        className="w-40 h-40"
                       />
                     </div>
 
                     <h3 className="text-2xl font-bold text-white mb-2">EcoInk Ads</h3>
                     <p className="text-primary font-medium mb-6">High-intent demand, engineered for ROI.</p>
+
+                    <ul className="space-y-4 mb-8 text-gray-400">
+                      {[
+                        "Google Ads built for service businesses",
+                        "Conversion-first tracking",
+                        "Optimised for high-value jobs",
+                        "Designed to plug into EcoInk Voice"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-sm leading-relaxed">
+                          <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <ul className="space-y-3 mb-8 text-gray-400">
-                    {[
-                      "Google Ads built for service businesses",
-                      "Conversion-first tracking",
-                      "Optimised for high-value jobs",
-                      "Designed to plug into EcoInk Voice"
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="text-primary flex items-center justify-center gap-2 font-semibold group-hover:gap-4 transition-all mt-auto">
+                  <div className="text-primary flex items-center justify-start gap-2 font-semibold group-hover:gap-4 transition-all mt-auto px-2">
                     Explore EcoInk Ads <ArrowRight size={18} />
                   </div>
                 </Card>
@@ -125,39 +130,39 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 whileHover={{ y: -10 }}
               >
-                <Card className="h-full hover:border-accent/50 transition-colors relative overflow-hidden bg-white/5 border-white/10 p-8">
+                <Card className="h-full hover:border-accent/50 transition-colors relative overflow-hidden bg-transparent border-none p-8">
                   {/* Hover Glow */}
                   <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-32 h-32 relative mb-6 group-hover:scale-105 transition-transform duration-300">
-                      <Image
-                        src="/images/voice-icon.png"
+                  <div className="flex flex-col items-start text-left px-2">
+                    <div className="mb-6 self-center sm:self-start group-hover:scale-105 transition-transform duration-700">
+                      <ProductIcon
+                        iconType="voice"
                         alt="EcoInk Voice"
-                        fill
-                        className="object-contain drop-shadow-[0_0_15px_rgba(0,255,204,0.3)]"
+                        glowColor="#00ffcc"
+                        className="w-40 h-40"
                       />
                     </div>
 
                     <h3 className="text-2xl font-bold text-white mb-2">EcoInk Voice</h3>
                     <p className="text-accent font-medium mb-6">AI pre-qualification & job handling — 24/7.</p>
+
+                    <ul className="space-y-4 mb-8 text-gray-400">
+                      {[
+                        "Answers calls instantly",
+                        "Pre-qualifies leads",
+                        "Books jobs or routes intelligently",
+                        "Handles follow-ups automatically"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-sm leading-relaxed">
+                          <Check className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <ul className="space-y-3 mb-8 text-gray-400">
-                    {[
-                      "Answers calls instantly",
-                      "Pre-qualifies leads",
-                      "Books jobs or routes intelligently",
-                      "Handles follow-ups automatically"
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="text-accent flex items-center justify-center gap-2 font-semibold group-hover:gap-4 transition-all mt-auto">
+                  <div className="text-accent flex items-center justify-start gap-2 font-semibold group-hover:gap-4 transition-all mt-auto px-2">
                     Explore EcoInk Voice <ArrowRight size={18} />
                   </div>
                 </Card>
@@ -227,19 +232,8 @@ export default function Home() {
           </div>
 
           {/* Visual: Bundle System */}
-          <div className="relative h-[400px] w-full flex items-center justify-center">
-            <motion.div
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full max-w-md aspect-square"
-            >
-              <Image
-                src="/images/bundle-system.png"
-                alt="EcoInk Bundle System"
-                fill
-                className="object-contain drop-shadow-[0_0_30px_rgba(127,255,0,0.2)]"
-              />
-            </motion.div>
+          <div className="relative w-full flex items-center justify-center">
+            <SeamlessIntegrationDiagram />
           </div>
         </motion.div>
       </section>

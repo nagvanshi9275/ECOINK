@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Phone, CheckCircle, Calendar, Clock, RotateCcw, Zap, Database, Globe, ArrowRight } from "lucide-react";
 import EnquiryForm from "@/components/EnquiryForm";
+import VoiceWaveBackground from "@/components/VoiceWaveBackground";
+import AnimatedFunnel from "@/components/AnimatedFunnel";
 import { motion } from "framer-motion";
 
 export default function EcoInkVoice() {
@@ -16,14 +18,11 @@ export default function EcoInkVoice() {
 
             {/* SECTION 1: HEADER - INTEGRATED */}
             <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                        style={{ backgroundImage: "url('/images/hero-background.jpg')" }}
-                    />
-                    <div className="absolute inset-0 bg-black/40 z-10" /> {/* Re-added dark overlay */}
-                    <div className="absolute inset-0 bg-accent/5 z-10 mix-blend-overlay" /> {/* Teal Overlay Tint */}
+                {/* ADVANCED AI VOICE WAVE BACKGROUND */}
+                <VoiceWaveBackground />
+
+                <div className="absolute inset-0 z-10 pointer-events-none">
+                    <div className="absolute inset-0 bg-black/30" /> {/* Subtle dimming for text focus */}
                 </div>
 
                 <motion.div
@@ -74,9 +73,9 @@ export default function EcoInkVoice() {
             {/* SECTION 2: WHAT ECOINK VOICE HANDLES */}
             <section id="how-it-works" className="py-24 bg-black">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-4">EcoInk Voice handles inbound demand — <span className="text-white">end to end</span></h2>
-                        <p className="text-gray-400">Designed to manage real customer interactions, not just answer phones.</p>
+                    <div className="text-center mb-16 max-w-4xl mx-auto">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-4">EcoInk Voice handles inbound <span className="text-gradient">Demand</span> — end to end</h2>
+                        <p className="text-gray-400 text-lg">Designed to manage real customer interactions, not just answer phones.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -85,7 +84,8 @@ export default function EcoInkVoice() {
                             { icon: CheckCircle, title: "Pre-qualifies enquiries intelligently", desc: "Asks the right questions, filters low-quality enquiries, and identifies real jobs before they reach your team." },
                             { icon: Calendar, title: "Books jobs or routes leads cleanly", desc: "Schedules appointments, escalates urgent cases, or hands off qualified leads with full context." },
                             { icon: Clock, title: "Handles after-hours demand", desc: "Captures enquiries, provides accurate information, and queues follow-ups for business hours." },
-                            { icon: RotateCcw, title: "Manages follow-ups", desc: "Triggers calls, SMS, or internal actions based on what actually happened in the conversation." }
+                            { icon: RotateCcw, title: "Manages follow-ups", desc: "Triggers calls, SMS, or internal actions based on what actually happened in the conversation." },
+                            { icon: Database, title: "Custom-trained knowledge", desc: "Trained on your services, pricing rules, service areas, and internal workflows — so every response is accurate and on-brand." }
                         ].map((item, i) => (
                             <div key={i} className="glass-card p-8 rounded-2xl hover:bg-white/5 transition-colors group">
                                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
@@ -151,39 +151,63 @@ export default function EcoInkVoice() {
                 </div>
             </section>
 
-            {/* SECTION 4: INTEGRATIONS (Marquee) */}
+            {/* SECTION 4: INTEGRATIONS (Dual Marquee) */}
             <section className="py-24 bg-white/[0.02] border-y border-white/5 overflow-hidden">
                 <div className="max-w-4xl mx-auto px-6 text-center mb-12">
-                    <h2 className="text-3xl font-bold mb-4">Deep integrations. Real-time sync.</h2>
+                    <h2 className="text-3xl font-bold mb-4 text-white">Deep integrations. <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Real-time sync.</span></h2>
                     <p className="text-gray-400">EcoInk Voice connects directly to your existing systems.</p>
                 </div>
 
-                {/* Infinite Marquee */}
-                <div className="relative w-full overflow-hidden py-8">
-                    <motion.div
-                        className="flex gap-12 w-max px-4"
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{ duration: 40, ease: "linear", repeat: Infinity }}
-                    >
-                        {[...[
-                            "ServiceM8", "GoHighLevel", "HubSpot", "Salesforce", "Zoho CRM", "Pipedrive", "Monday CRM",
-                            "Freshsales", "Google Workspace", "Google Calendar", "Gmail", "Outlook",
-                            "Vonage", "Twilio", "Stripe", "Xero", "Zapier", "OpenAI"
-                        ], ...[
-                            "ServiceM8", "GoHighLevel", "HubSpot", "Salesforce", "Zoho CRM", "Pipedrive", "Monday CRM",
-                            "Freshsales", "Google Workspace", "Google Calendar", "Gmail", "Outlook",
-                            "Vonage", "Twilio", "Stripe", "Xero", "Zapier", "OpenAI"
-                        ]].map((name, i) => (
-                            <span key={i} className="text-xl font-bold text-gray-500 whitespace-nowrap hover:text-white transition-colors cursor-default">
-                                {name}
-                            </span>
-                        ))}
-                    </motion.div>
-                    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-                    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+                <div className="flex flex-col gap-8">
+                    {/* Marquee Line 1 */}
+                    <div className="relative w-full overflow-hidden">
+                        <motion.div
+                            className="flex gap-12 w-max px-4"
+                            animate={{ x: ["0%", "-50%"] }}
+                            transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+                        >
+                            {[...[
+                                "ServiceM8", "GoHighLevel", "HubSpot", "Salesforce", "Zoho CRM", "Pipedrive", "Monday CRM",
+                                "Freshsales", "Google Workspace", "Google Calendar"
+                            ], ...[
+                                "ServiceM8", "GoHighLevel", "HubSpot", "Salesforce", "Zoho CRM", "Pipedrive", "Monday CRM",
+                                "Freshsales", "Google Workspace", "Google Calendar"
+                            ]].map((name, i) => (
+                                <span key={i} className="text-xl font-bold text-gray-500 whitespace-nowrap hover:text-white transition-colors cursor-default">
+                                    {name}
+                                </span>
+                            ))}
+                        </motion.div>
+                    </div>
+
+                    {/* Marquee Line 2 (Different systems, reverse or offset) */}
+                    <div className="relative w-full overflow-hidden">
+                        <motion.div
+                            className="flex gap-12 w-max px-4"
+                            animate={{ x: ["-20%", "-70%"] }} // Different start/end to simulate offset/different flow
+                            transition={{ duration: 45, ease: "linear", repeat: Infinity }}
+                        >
+                            {[...[
+                                "Gmail", "Outlook", "Vonage", "Twilio", "Stripe", "Xero", "Zapier", "OpenAI",
+                                "Slack", "Microsoft Teams", "Jobber", "Housecall Pro"
+                            ], ...[
+                                "Gmail", "Outlook", "Vonage", "Twilio", "Stripe", "Xero", "Zapier", "OpenAI",
+                                "Slack", "Microsoft Teams", "Jobber", "Housecall Pro"
+                            ]].map((name, i) => (
+                                <span key={i} className="text-xl font-bold text-gray-500 whitespace-nowrap hover:text-white transition-colors cursor-default">
+                                    {name}
+                                </span>
+                            ))}
+                        </motion.div>
+                    </div>
                 </div>
-                <div className="text-center mt-8">
-                    <Link href="#contact" className="text-sm text-accent hover:underline">Request custom integration</Link>
+
+                <div className="text-center mt-12">
+                    <Link href="#contact">
+                        <Button variant="outline" className="border-accent/50 text-accent hover:bg-accent hover:text-black transition-all">
+                            Request Custom Integration
+                        </Button>
+                    </Link>
                 </div>
             </section>
 
@@ -223,20 +247,22 @@ export default function EcoInkVoice() {
                 <div className="max-w-4xl mx-auto px-6">
                     <h2 className="text-3xl font-bold mb-6">Works on its own. <span className="text-gradient">Even stronger together.</span></h2>
 
-                    <div className="relative w-full max-w-lg aspect-square mx-auto mb-8">
-                        <Image
-                            src="/images/bundle-system.png"
-                            alt="EcoInk Bundle System"
-                            fill
-                            className="object-contain drop-shadow-[0_0_30px_rgba(127,255,0,0.2)]"
-                        />
+                    <div className="relative w-full h-[650px] flex items-center justify-center mb-12">
+                        <AnimatedFunnel />
                     </div>
 
                     <p className="text-gray-400 text-lg mb-10">
                         EcoInk Voice can operate independently, or act as the conversion layer that captures every opportunity generated through EcoInk Ads.
                     </p>
                     <Link href="/#enquiry">
-                        <Button variant="outline" className="border-white/20 hover:bg-white/10">Explore the full system</Button>
+                        <div className="inline-block relative group">
+                            <motion.div
+                                animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.05, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute -inset-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-200"
+                            />
+                            <Button variant="outline" className="relative border-white/20 hover:bg-black bg-black text-white px-8 py-6 text-lg">Explore the full system</Button>
+                        </div>
                     </Link>
                 </div>
             </section>
