@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, CheckCircle, Calendar, Clock, RotateCcw, Zap, Database, Globe, ArrowRight } from "lucide-react";
 import EnquiryForm from "@/components/EnquiryForm";
 import VoiceWaveBackground from "@/components/VoiceWaveBackground";
-import AnimatedFunnel from "@/components/AnimatedFunnel";
+import SeamlessIntegrationDiagram from "@/components/SeamlessIntegrationDiagram";
 import { motion } from "framer-motion";
 
 export default function EcoInkVoice() {
@@ -29,13 +29,13 @@ export default function EcoInkVoice() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="relative z-20 max-w-4xl mx-auto px-6 text-center pt-20"
+                    className="relative z-20 max-w-4xl mx-auto px-6 text-center pt-32 md:pt-20"
                 >
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-5xl md:text-6xl font-bold mb-6 text-white text-shadow-lg"
+                        className="text-3xl md:text-6xl font-bold mb-6 text-white text-shadow-lg leading-tight md:leading-normal"
                     >
                         AI voice systems, <span className="text-accent">custom-built</span> for your business
                     </motion.h1>
@@ -43,7 +43,7 @@ export default function EcoInkVoice() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto text-shadow-sm"
+                        className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto text-shadow-sm"
                     >
                         EcoInk Voice is a fully custom AI call handling, pre-qualification, and job management system — designed to integrate seamlessly with your existing tools and workflows.
                     </motion.p>
@@ -248,7 +248,7 @@ export default function EcoInkVoice() {
                     <h2 className="text-3xl font-bold mb-6">Works on its own. <span className="text-gradient">Even stronger together.</span></h2>
 
                     <div className="relative w-full h-[650px] flex items-center justify-center mb-12">
-                        <AnimatedFunnel />
+                        <SeamlessIntegrationDiagram />
                     </div>
 
                     <p className="text-gray-400 text-lg mb-10">

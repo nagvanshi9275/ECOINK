@@ -44,7 +44,7 @@ const EnquiryForm = () => {
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-4">You're on the list!</h3>
                 <p className="text-gray-400 mb-8 max-w-lg text-lg">
-                    Thanks {formData.firstName}. Sarah from EcoInk will check your details and give you a call at {formData.phone} shortly.
+                    Thanks {formData.firstName}. Ivy from EcoInk will check your details and give you a call at {formData.phone} shortly.
                     <br /><span className="text-sm opacity-60 mt-2 block">(Yes, she's an AI, but she's very polite.)</span>
                 </p>
                 <Button onClick={() => setIsSuccess(false)} variant="outline" size="lg">
@@ -64,7 +64,7 @@ const EnquiryForm = () => {
                 <div className="flex-1 p-8 md:p-12 lg:p-16 relative z-10 flex flex-col justify-center border-r border-white/5">
                     <div className="mb-10">
                         <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                            Receive a phone call from <span className="text-primary text-gradient">Sarah</span>
+                            Receive a phone call from <span className="text-primary text-gradient">Ivy</span>
                         </h3>
                         <p className="text-gray-400 text-lg">
                             Experience the speed of EcoInk Voice firsthand. Enter your details and our AI agent will call you within 60 seconds.
@@ -143,10 +143,10 @@ const EnquiryForm = () => {
                                 {isLoading ? (
                                     <>
                                         <Loader2 className="animate-spin mr-2" />
-                                        Connecting to Sarah...
+                                        Connecting to Ivy...
                                     </>
                                 ) : (
-                                    "Get Sarah to Call Me"
+                                    "Get Ivy to Call Me"
                                 )}
                             </Button>
                             <p className="text-center text-xs text-gray-500 mt-4">
@@ -194,7 +194,7 @@ const EnquiryForm = () => {
 
                         {/* Bottom: Information & Controls */}
                         <div className="px-8 pb-10 relative z-20 text-center">
-                            <h4 className="text-2xl font-bold text-white mb-1">Sarah</h4>
+                            <h4 className="text-2xl font-bold text-white mb-1">Ivy</h4>
                             <p className="text-white/40 text-xs font-medium mb-10 tracking-widest uppercase">EcoInk Senior Agent</p>
 
                             {/* Control Grid (Mute, Transfer, etc) */}

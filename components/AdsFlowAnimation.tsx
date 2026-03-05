@@ -6,27 +6,12 @@ import { Search, MousePointer2, Smartphone, CheckCircle2 } from "lucide-react";
 const AdsFlowAnimation = () => {
     return (
         <div className="w-full relative py-12 flex flex-col items-center overflow-hidden">
-            {/* 
-                Main Wrapper with horizontal padding
-            */}
             <div className="w-full h-full relative max-w-6xl mx-auto lg:px-20 md:px-12 px-6">
+                <div className="relative flex flex-col md:flex-row justify-between items-center md:items-start gap-16 md:gap-0">
 
-                <div className="relative flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
-
-                    {/* 
-                        CONNECTION LINE: PERCENTAGE-BASED POSITIONING
-                        For 4 items, the center of the first item is at 12.5% width,
-                        and the center of the last item is at 87.5% width.
-                        This ensures the line starts and ends EXACTLY at the center of the first/last icon
-                        no matter the screen size or how flex-grow is distributed.
-                    */}
+                    {/* DESKTOP HORIZONTAL LINE */}
                     <div className="absolute top-[40px] left-[12.5%] right-[12.5%] hidden md:block z-0 pointer-events-none">
-                        {/* Base Dim Line */}
                         <div className="w-full h-[1px] bg-white/5" />
-
-                        {/* 
-                            Animated Progress "Fill" Line
-                        */}
                         <div className="absolute top-0 left-0 w-full h-[2px] origin-left">
                             <motion.div
                                 initial={{ scaleX: 0 }}
@@ -41,33 +26,30 @@ const AdsFlowAnimation = () => {
                                     times: [0, 0.8, 1]
                                 }}
                                 className="w-full h-full bg-primary origin-left"
-                                style={{
-                                    boxShadow: '0 0 15px #7FFF00, 0 0 25px rgba(127,255,0,0.4)',
-                                }}
-                            />
-
-                            {/* Leading Glow Head */}
-                            <motion.div
-                                initial={{ left: "0%" }}
-                                animate={{
-                                    left: ["0%", "100%", "100%"],
-                                    opacity: [0, 1, 0]
-                                }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    times: [0, 0.8, 1]
-                                }}
-                                className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full z-20"
-                                style={{
-                                    boxShadow: '0 0 20px #7FFF00, 0 0 40px #7FFF00',
-                                }}
+                                style={{ boxShadow: '0 0 15px #7FFF00, 0 0 25px rgba(127,255,0,0.4)' }}
                             />
                         </div>
                     </div>
 
-                    {/* Step 1: Search */}
+                    {/* MOBILE VERTICAL LINE */}
+                    <div className="absolute top-[40px] bottom-[100px] left-1/2 -translate-x-1/2 w-[1px] bg-white/5 md:hidden pointer-events-none">
+                        <motion.div
+                            initial={{ scaleY: 0 }}
+                            animate={{
+                                scaleY: [0, 1, 1],
+                                opacity: [1, 1, 0]
+                            }}
+                            transition={{
+                                duration: 4,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                times: [0, 0.8, 1]
+                            }}
+                            className="w-full h-full bg-primary origin-top"
+                            style={{ boxShadow: '0 0 15px #7FFF00, 0 0 25px rgba(127,255,0,0.4)' }}
+                        />
+                    </div>
+
                     <StepItem
                         icon={Search}
                         title="High Intent Search"
@@ -76,7 +58,6 @@ const AdsFlowAnimation = () => {
                         glow="rgba(255,255,255,0.05)"
                     />
 
-                    {/* Step 2: Ad Display */}
                     <StepItem
                         icon={MousePointer2}
                         title="EcoInk Ad"
@@ -86,7 +67,6 @@ const AdsFlowAnimation = () => {
                         hasPulse
                     />
 
-                    {/* Step 3: Conversion */}
                     <StepItem
                         icon={Smartphone}
                         title="Landing & Call"
@@ -95,7 +75,6 @@ const AdsFlowAnimation = () => {
                         glow="rgba(59,130,246,0.1)"
                     />
 
-                    {/* Step 4: Booked Job */}
                     <StepItem
                         icon={CheckCircle2}
                         title="Booked Job"
@@ -126,10 +105,10 @@ const StepItem = ({ icon: Icon, title, subtitle, color, glow, hasPulse, isFinal 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative z-20 flex flex-col items-center flex-1"
+            className="relative z-20 flex flex-col items-center w-full md:flex-1"
         >
             <div
-                className="w-20 h-20 rounded-2xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center mb-6 relative overflow-hidden group shadow-xl z-30"
+                className="w-20 h-20 rounded-2xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center mb-6 relative overflow-hidden group shadow-xl z-30 shrink-0"
                 style={{
                     boxShadow: `0 0 20px ${glow}`
                 }}
@@ -143,9 +122,9 @@ const StepItem = ({ icon: Icon, title, subtitle, color, glow, hasPulse, isFinal 
                 {hasPulse && <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-primary rounded-full opacity-60" />}
             </div>
 
-            <div className="text-center">
-                <h3 className="text-white font-bold mb-1 whitespace-nowrap">{title}</h3>
-                <p className={`text-xs ${isFinal ? 'text-primary font-medium' : 'text-gray-500'}`}>{subtitle}</p>
+            <div className="text-center px-4">
+                <h3 className="text-white font-bold mb-1 text-sm md:text-base leading-tight">{title}</h3>
+                <p className={`text-[10px] md:text-xs ${isFinal ? 'text-primary font-medium' : 'text-gray-500'}`}>{subtitle}</p>
             </div>
         </motion.div>
     );

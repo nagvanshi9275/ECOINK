@@ -6,10 +6,9 @@ import ProductIcon from "@/components/ProductIcon";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card"; // It will use my updated glass card
 import { ArrowRight, Check, Zap, Mic, BarChart3, Layers, Target } from "lucide-react";
-import AnimatedFunnel from "@/components/AnimatedFunnel";
+import SeamlessIntegrationDiagram from "@/components/SeamlessIntegrationDiagram";
 import EnquiryForm from "@/components/EnquiryForm";
 import ReviewsSlider from "@/components/ReviewsSlider";
-import SeamlessIntegrationDiagram from "@/components/SeamlessIntegrationDiagram";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -89,10 +88,10 @@ export default function Home() {
                   <div className="flex flex-col items-start text-left px-2">
                     <div className="mb-6 self-center sm:self-start group-hover:scale-105 transition-transform duration-700">
                       <ProductIcon
-                        iconType="ads"
+                        src="/ECOINK/WhatsApp_Image_2026-02-14_at_12.48.07_AM-removebg-preview.png"
                         alt="EcoInk Ads"
                         glowColor="#7FFF00"
-                        className="w-40 h-40"
+                        className="w-64 h-64"
                       />
                     </div>
 
@@ -137,10 +136,10 @@ export default function Home() {
                   <div className="flex flex-col items-start text-left px-2">
                     <div className="mb-6 self-center sm:self-start group-hover:scale-105 transition-transform duration-700">
                       <ProductIcon
-                        iconType="voice"
+                        src="/ECOINK/WhatsApp_Image_2026-02-14_at_12.48.08_AM-removebg-preview.png"
                         alt="EcoInk Voice"
                         glowColor="#00ffcc"
-                        className="w-40 h-40"
+                        className="w-64 h-64"
                       />
                     </div>
 

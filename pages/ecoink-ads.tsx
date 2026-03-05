@@ -30,21 +30,21 @@ export default function EcoInkAds() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="relative z-20 max-w-4xl mx-auto px-6 text-center pt-20"
+                    className="relative z-20 max-w-4xl mx-auto px-6 text-center pt-32 md:pt-20"
                 >
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-5xl md:text-7xl font-bold mb-8 text-white text-shadow-lg leading-[1.4]"
+                        className="text-3xl md:text-7xl font-bold mb-8 text-white text-shadow-lg leading-tight md:leading-[1.4]"
                     >
-                        Google Ads built to generate <span className="bg-gradient-to-r from-[#00bb00] to-[#00cc55] bg-clip-text text-transparent">booked jobs</span> — not junk leads
+                        Google Ads built to generate <span className="text-gradient">booked jobs</span> — not junk leads
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto text-shadow-sm"
+                        className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto text-shadow-sm"
                     >
                         We run high-intent Google Ads for service businesses and build the systems needed to convert demand into real enquiries.
                     </motion.p>
@@ -103,7 +103,7 @@ export default function EcoInkAds() {
 
                     {/* Part 2: Solution Flow */}
                     <div className="text-center mb-16">
-                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-300 px-6">How EcoInk Ads turns search demand into booked jobs</h3>
+                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-300 px-6">How EcoInk Ads turns search demand into <span className="text-gradient">booked jobs</span></h3>
                         <p className="text-gray-400 mb-12 px-6">Every EcoInk Ads campaign is built as a system — not just ads running in isolation.</p>
 
                         <div className="w-full">

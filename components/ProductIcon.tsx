@@ -31,23 +31,24 @@ const ProductIcon: React.FC<ProductIconProps> = ({
             transition={{ duration: 0.8, ease: "easeOut" }}
             whileHover={{ scale: 1.1, y: -5 }}
             className={cn(
-                "relative w-48 h-48 flex items-center justify-center",
+                "relative w-64 h-64 flex items-center justify-center",
                 className
             )}
         >
-            {/* Background Radial Glow */}
-            <div
-                className="absolute inset-0 rounded-full blur-3xl opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
-                style={{
-                    background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`
-                }}
-            />
+            {/* Background Radial Glow - Hidden if using src to let the image's natural glow shine */}
+            {!src && (
+                <div
+                    className="absolute inset-0 rounded-full blur-3xl opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
+                    style={{
+                        background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`
+                    }}
+                />
+            )}
 
             {/* Main Icon Content */}
-            <div className="relative z-10 w-32 h-32 flex items-center justify-center">
+            <div className="relative z-10 w-full h-full flex items-center justify-center">
                 {src ? (
-                    <div className="relative w-full h-full filter cursor-pointer"
-                        style={{ filter: `drop-shadow(0 0 15px ${glowColor}) drop-shadow(0 0 5px ${glowColor})` }}>
+                    <div className="relative w-full h-full cursor-pointer">
                         <Image
                             src={src}
                             alt={alt}
@@ -56,23 +57,23 @@ const ProductIcon: React.FC<ProductIconProps> = ({
                         />
                     </div>
                 ) : iconType === "ads" ? (
-                    <div className="relative w-full h-full flex items-center justify-center"
+                    <div className="relative w-32 h-32 flex items-center justify-center"
                         style={{ filter: `drop-shadow(0 0 15px ${glowColor}) drop-shadow(0 0 5px ${glowColor})` }}>
                         <AdsIcon color={glowColor} />
                     </div>
-                ) : iconType === "voice" ? (
-                    /* 
-                       PREMIUM UPGRADE: Replaced static VoiceIcon with the high-fidelity AnimatedOrb
-                       This aligns with the user's request to use the 'orb' animation instead of a 
-                       static representation (the 'girl' or phone icon).
-                    */
-                    <div className="relative w-full h-full scale-[0.8] drop-shadow-[0_0_20px_rgba(0,255,204,0.4)]">
-                        <AnimatedOrb />
-                    </div>
                 ) : (
-                    <div className="relative w-full h-full flex items-center justify-center text-white"
-                        style={{ filter: `drop-shadow(0 0 15px ${glowColor})` }}>
-                        {children}
+                    /* Default or Voice (Voice uses AnimatedOrb if no src) */
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                        {iconType === "voice" ? (
+                            <div className="relative w-full h-full scale-[0.8] drop-shadow-[0_0_20px_rgba(0,255,204,0.4)]">
+                                <AnimatedOrb />
+                            </div>
+                        ) : (
+                            <div className="relative w-full h-full flex items-center justify-center text-white"
+                                style={{ filter: `drop-shadow(0 0 15px ${glowColor})` }}>
+                                {children}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
