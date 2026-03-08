@@ -247,7 +247,7 @@ export default function EcoInkVoice() {
                 <div className="max-w-4xl mx-auto px-6">
                     <h2 className="text-3xl font-bold mb-6">Works on its own. <span className="text-gradient">Even stronger together.</span></h2>
 
-                    <div className="relative w-full h-[650px] flex items-center justify-center mb-12">
+                    <div className="relative w-full h-[750px] md:h-[850px] flex items-center justify-center mb-24 mt-20 pt-10">
                         <SeamlessIntegrationDiagram />
                     </div>
 

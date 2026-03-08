@@ -6,153 +6,153 @@ import { Search, Smartphone, CheckCircle2 } from "lucide-react";
 /**
  * GrowthEngineFlow Component
  * 
- * Visualizes the synergy between EcoInk Ads and EcoInk Voice using the U-shaped arc.
+ * Recreated to match the EXACT arc design requested by the user.
  * Features:
- * - Centered icons in top cards
- * - Precise SVG paths for particle flow
- * - Converging particles at a central node
- * - Pulsing CTA "Booked Jobs" card
+ * - Two top cards (Ads & Voice)
+ * - A central U-shaped glowing arc
+ * - Converging particles at the center
+ * - A bottom "Booked Jobs" card
  */
 const GrowthEngineFlow = () => {
     return (
-        <div className="relative w-full max-w-4xl mx-auto pt-10 pb-20 px-4 mt-8 scale-90 md:scale-100">
+        <div className="relative w-full max-w-5xl mx-auto py-20 px-4 flex flex-col items-center select-none overflow-hidden">
             {/* Top Cards Section */}
-            <div className="flex justify-between items-start mb-32 relative z-20">
+            <div className="flex justify-between w-full mb-32 relative z-20 px-10">
                 {/* EcoInk Ads Card */}
                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="glass-card p-8 rounded-2xl border-primary/20 bg-[#0a0a0a]/80 backdrop-blur-md w-[45%] md:w-[260px] shadow-xl relative group flex flex-col items-center"
+                    className="glass-card p-10 rounded-3xl border border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl w-[280px] flex flex-col items-center text-center shadow-2xl relative group"
                 >
-                    <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-5 shadow-[inset_0_0_15px_rgba(127,255,0,0.1)]">
-                        <Search size={28} />
+                    <div className="w-16 h-16 bg-[#7fff00]/10 rounded-2xl flex items-center justify-center text-[#7fff00] mb-6 shadow-[inset_0_0_15px_rgba(127,255,0,0.1)] group-hover:shadow-[inset_0_0_25px_rgba(127,255,0,0.2)] transition-shadow">
+                        <Search size={32} />
                     </div>
-                    <h3 className="text-white font-bold text-xl mb-1 text-center">EcoInk Ads</h3>
-                    <p className="text-gray-400 text-sm text-center">High-Intent Traffic</p>
+                    <h3 className="text-white font-bold text-2xl mb-2">EcoInk Ads</h3>
+                    <p className="text-gray-400 text-sm">High-Intent Traffic</p>
+                    <div className="absolute inset-0 border border-[#7fff00]/0 group-hover:border-[#7fff00]/20 rounded-3xl transition-all duration-500" />
                 </motion.div>
 
                 {/* EcoInk Voice Card */}
                 <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="glass-card p-8 rounded-2xl border-accent/20 bg-[#0a0a0a]/80 backdrop-blur-md w-[45%] md:w-[260px] shadow-xl relative group flex flex-col items-center"
+                    className="glass-card p-10 rounded-3xl border border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl w-[280px] flex flex-col items-center text-center shadow-2xl relative group"
                 >
-                    <div className="absolute inset-0 bg-accent/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-5 shadow-[inset_0_0_15px_rgba(0,255,204,0.1)]">
-                        <Smartphone size={28} />
+                    <div className="w-16 h-16 bg-[#00ffcc]/10 rounded-2xl flex items-center justify-center text-[#00ffcc] mb-6 shadow-[inset_0_0_15px_rgba(0,255,204,0.1)] group-hover:shadow-[inset_0_0_25px_rgba(0,255,204,0.2)] transition-shadow">
+                        <Smartphone size={32} />
                     </div>
-                    <h3 className="text-white font-bold text-xl mb-1 text-center">EcoInk Voice</h3>
-                    <p className="text-gray-400 text-sm text-center">AI Job Handling</p>
+                    <h3 className="text-white font-bold text-2xl mb-2">EcoInk Voice</h3>
+                    <p className="text-gray-400 text-sm">AI Job Handling</p>
+                    <div className="absolute inset-0 border border-[#00ffcc]/0 group-hover:border-[#00ffcc]/20 rounded-3xl transition-all duration-500" />
                 </motion.div>
             </div>
 
-            {/* SVG CONNECTION LAYER - PARTICLES & LINES */}
-            <div className="absolute inset-0 pointer-events-none z-10">
-                <svg className="w-full h-full" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* SVG Arc Layer */}
+            <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+                <svg className="w-full h-full max-h-[600px]" viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <filter id="flow-glow-green" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur stdDeviation="8" result="blur" />
-                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                        </filter>
-                        <filter id="flow-glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur stdDeviation="8" result="blur" />
+                        <linearGradient id="arc-gradient-left" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#7fff00" stopOpacity="0" />
+                            <stop offset="100%" stopColor="#7fff00" stopOpacity="0.4" />
+                        </linearGradient>
+                        <linearGradient id="arc-gradient-right" x1="100%" y1="0%" x2="0%" y2="0%">
+                            <stop offset="0%" stopColor="#00ffcc" stopOpacity="0" />
+                            <stop offset="100%" stopColor="#00ffcc" stopOpacity="0.4" />
+                        </linearGradient>
+                        <filter id="arc-glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="10" result="blur" />
                             <feComposite in="SourceGraphic" in2="blur" operator="over" />
                         </filter>
                     </defs>
 
-                    {/* PATHS */}
+                    {/* Main U-Arc Path */}
                     <path
-                        d="M 130 200 C 130 380, 400 380, 400 380"
-                        stroke="rgba(127, 255, 0, 0.3)"
+                        d="M 180 200 C 180 450, 820 450, 820 200"
+                        stroke="rgba(255, 255, 255, 0.05)"
                         strokeWidth="2"
-                        filter="url(#flow-glow-green)"
-                        className="opacity-40"
                     />
+
+                    {/* Left Side Glow Arc */}
                     <path
-                        d="M 670 200 C 670 380, 400 380, 400 380"
-                        stroke="rgba(0, 255, 204, 0.3)"
-                        strokeWidth="2"
-                        filter="url(#flow-glow-cyan)"
-                        className="opacity-40"
+                        d="M 180 200 C 180 450, 500 450, 500 450"
+                        stroke="url(#arc-gradient-left)"
+                        strokeWidth="3"
+                        filter="url(#arc-glow)"
                     />
+
+                    {/* Right Side Glow Arc */}
                     <path
-                        d="M 400 380 L 400 500"
-                        stroke="rgba(255, 255, 255, 0.15)"
+                        d="M 820 200 C 820 450, 500 450, 500 450"
+                        stroke="url(#arc-gradient-right)"
+                        strokeWidth="3"
+                        filter="url(#arc-glow)"
+                    />
+
+                    {/* FLOW PARTICLES */}
+                    <FlowParticle path="M 180 200 C 180 450, 500 450, 500 450" color="#7fff00" delay={0} />
+                    <FlowParticle path="M 180 200 C 180 450, 500 450, 500 450" color="#7fff00" delay={1.5} />
+
+                    <FlowParticle path="M 820 200 C 820 450, 500 450, 500 450" color="#00ffcc" delay={0.75} />
+                    <FlowParticle path="M 820 200 C 820 450, 500 450, 500 450" color="#00ffcc" delay={2.25} />
+
+                    {/* Center Convergence Line */}
+                    <path
+                        d="M 500 450 V 550"
+                        stroke="rgba(127, 255, 0, 0.4)"
                         strokeWidth="2"
                         strokeDasharray="4 4"
                     />
-
-                    {/* GLOWING PARTICLES - LEFT (GREEN) */}
-                    <Particle path="M 130 200 C 130 380, 400 380, 400 380" color="#7fff00" delay={0} />
-                    <Particle path="M 130 200 C 130 380, 400 380, 400 380" color="#7fff00" delay={1.2} />
-                    <Particle path="M 130 200 C 130 380, 400 380, 400 380" color="#7fff00" delay={2.4} />
-
-                    {/* GLOWING PARTICLES - RIGHT (CYAN) */}
-                    <Particle path="M 670 200 C 670 380, 400 380, 400 380" color="#00ffcc" delay={0.6} />
-                    <Particle path="M 670 200 C 670 380, 400 380, 400 380" color="#00ffcc" delay={1.8} />
-                    <Particle path="M 670 200 C 670 380, 400 380, 400 380" color="#00ffcc" delay={3.0} />
-
-                    {/* PARTICLES DOWN TO RESULT */}
-                    <Particle path="M 400 380 L 400 500" color="#7fff00" delay={2.1} duration={1.5} />
-                    <Particle path="M 400 380 L 400 500" color="#00ffcc" delay={2.7} duration={1.5} />
                 </svg>
             </div>
 
-            {/* CONVERGENCE POINT */}
-            <div className="absolute" style={{ left: '50%', top: '380px', transform: 'translate(-50%, -50%)', zIndex: 20 }}>
+            {/* Convergence Point Glow */}
+            <div className="absolute top-[450px] left-1/2 -translate-x-1/2 z-20 pointer-events-none">
                 <motion.div
-                    animate={{
-                        boxShadow: [
-                            '0 0 15px rgba(127, 255, 0, 0.4)',
-                            '0 0 30px rgba(0, 255, 204, 0.4)',
-                            '0 0 15px rgba(127, 255, 0, 0.4)'
-                        ],
-                        scale: [1, 1.15, 1]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-12 h-12 bg-black/80 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-md"
-                >
-                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_10px_#fff]" />
-                </motion.div>
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-12 h-12 bg-[#7fff00]/20 rounded-full blur-xl"
+                />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_#fff]" />
             </div>
 
-            {/* Bottom CTA Card Section */}
-            <div className="relative mt-28 flex justify-center z-20">
-                <div className="relative group cursor-pointer">
+            {/* Bottom Card: Booked Jobs */}
+            <div className="relative mt-20 z-20">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-12 rounded-[2rem] border border-white/5 bg-[#0a0a0a]/95 backdrop-blur-2xl w-[360px] flex flex-col items-center text-center shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden"
+                >
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-[#7fff00]/10 blur-[80px] rounded-full" />
+
+                    <div className="w-20 h-20 bg-[#7fff00]/10 border border-[#7fff00]/30 rounded-full flex items-center justify-center text-[#7fff00] mb-8 relative z-10 shadow-[0_0_20px_rgba(127,255,0,0.2)]">
+                        <CheckCircle2 size={40} />
+                    </div>
+
+                    <h3 className="text-4xl font-black text-white mb-3 tracking-tight relative z-10">Booked Jobs</h3>
+                    <p className="text-[#7fff00] font-bold tracking-[0.3em] text-xs uppercase opacity-90 relative z-10">Revenue Generated</p>
+
+                    {/* Animated bottom line */}
                     <motion.div
-                        className="absolute -inset-6 rounded-[32px] bg-primary/20 blur-3xl z-0"
-                        animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0.6, 0.3] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        animate={{ scaleX: [0, 1, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        className="h-[2px] w-1/2 bg-gradient-to-r from-transparent via-[#7fff00] to-transparent mt-10"
                     />
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="relative z-10 glass-card p-10 rounded-2xl border-primary/30 bg-[#0a0a0a] min-w-[320px] text-center shadow-[0_0_30px_rgba(127,255,0,0.1)] border-t border-t-white/10"
-                    >
-                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-5 shadow-[inset_0_0_20px_rgba(127,255,0,0.15)]">
-                            <CheckCircle2 size={36} />
-                        </div>
-                        <h3 className="text-3xl font-bold text-white mb-2">Booked Jobs</h3>
-                        <p className="text-primary font-bold tracking-[0.2em] text-xs uppercase opacity-80">Revenue Generated</p>
-                        <motion.div
-                            className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent mt-6 w-full"
-                            animate={{ opacity: [0.2, 0.8, 0.2], scaleX: [0.6, 1, 0.6] }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                        />
-                    </motion.div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
 };
 
-const Particle = ({ color, delay, path, duration = 3 }: { color: string, delay: number, path: string, duration?: number }) => {
+/**
+ * FlowParticle Subcomponent
+ * Animates a glowing dot along a specified path.
+ */
+const FlowParticle = ({ path, color, delay, duration = 3 }: { path: string; color: string; delay: number; duration?: number }) => {
     return (
-        <motion.circle r="3" fill={color} style={{ filter: `drop-shadow(0 0 8px ${color})` }}>
+        <motion.circle r="4" fill={color} style={{ filter: `drop-shadow(0 0 10px ${color})` }}>
             <animateMotion
                 path={path}
                 begin={`${delay}s`}

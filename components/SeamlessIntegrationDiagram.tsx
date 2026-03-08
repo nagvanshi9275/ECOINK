@@ -1,249 +1,134 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { Search, Smartphone, CheckCircle2 } from "lucide-react";
 
+/**
+ * SeamlessIntegrationDiagram Component
+ * 
+ * High-fidelity, perfectly proportioned recreation of the Growth Engine.
+ * Balanced sizes for all cards as requested by the user.
+ */
 const SeamlessIntegrationDiagram = () => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-
-        let animationFrameId: number;
-        const particles: Particle[] = [];
-
-        /**
-         * PRECISE PATH COORDINATES (Normalized 0-1000)
-         * Traced to match the geometry of 'bundle-system.png' exactly.
-         */
-        const paths = {
-            // Green Path 1: Outer loop leaving Ads left side, entering Results sphere
-            adsOuter: [
-                { x: 245, y: 255 }, // Ads Box Left Exit
-                { x: 135, y: 255 }, // Outer Left Edge
-                { x: 135, y: 780 }, // Bottom Left Corner
-                { x: 440, y: 780 }, // Bottom Center-Left
-                { x: 440, y: 820 }, // Enters Results Sphere Side
-            ],
-            // Green Path 2: Inner curve leaving Ads right side, entering Funnel top
-            adsInner: [
-                { x: 345, y: 255 }, // Ads Box Right Exit
-                { x: 450, y: 255 }, // Toward Funnel
-                { x: 475, y: 450 }, // Down into Funnel Left Top
-            ],
-            // Cyan Path 1: Outer loop leaving Voice right side, entering Results sphere
-            voiceOuter: [
-                { x: 755, y: 255 }, // Voice Box Right Exit
-                { x: 865, y: 255 }, // Outer Right Edge
-                { x: 865, y: 780 }, // Bottom Right Corner
-                { x: 560, y: 780 }, // Bottom Center-Right
-                { x: 560, y: 820 }, // Enters Results Sphere Side
-            ],
-            // Cyan Path 2: Inner curve leaving Voice left side, entering Funnel top
-            voiceInner: [
-                { x: 655, y: 255 }, // Voice Box Left Exit
-                { x: 550, y: 255 }, // Toward Funnel
-                { x: 525, y: 450 }, // Down into Funnel Right Top
-            ],
-            // White Path: Dropping from Funnel neck to Results center
-            funnelDrop: [
-                { x: 500, y: 550 }, // Funnel Neck
-                { x: 500, y: 820 }, // Results Sphere Center
-            ]
-        };
-
-        class Particle {
-            x: number = 0;
-            y: number = 0;
-            path: { x: number; y: number }[];
-            progress: number = 0;
-            speed: number;
-            color: string;
-            size: number;
-            opacity: number;
-            offset: { x: number; y: number };
-
-            constructor(path: { x: number; y: number }[], color: string, speedMult: number = 1) {
-                this.path = path;
-                this.color = color;
-                this.speed = (Math.random() * 0.001 + 0.002) * speedMult;
-                this.size = Math.random() * 1.5 + 1.5;
-                this.opacity = 0;
-                // Tiny random offset to simulate flow volume while staying INSIDE the tube
-                this.offset = {
-                    x: (Math.random() - 0.5) * 8,
-                    y: (Math.random() - 0.5) * 8
-                };
-                this.reset();
-            }
-
-            reset() {
-                this.progress = -Math.random() * 0.8; // Randomize start delay
-                this.opacity = 0;
-            }
-
-            update() {
-                this.progress += this.speed;
-                if (this.progress > 1) {
-                    this.reset();
-                }
-
-                if (this.progress <= 0) return;
-
-                // Simple path segment interpolation
-                const segmentCount = this.path.length - 1;
-                const segmentProgress = this.progress * segmentCount;
-                const segmentIndex = Math.floor(segmentProgress);
-                const t = segmentProgress - segmentIndex;
-
-                if (segmentIndex < segmentCount) {
-                    const p1 = this.path[segmentIndex];
-                    const p2 = this.path[segmentIndex + 1];
-                    this.x = p1.x + (p2.x - p1.x) * t + this.offset.x;
-                    this.y = p1.y + (p2.y - p1.y) * t + this.offset.y;
-                }
-
-                // Smooth fade
-                if (this.progress < 0.1) this.opacity = this.progress * 10;
-                else if (this.progress > 0.9) this.opacity = (1 - this.progress) * 10;
-                else this.opacity = 1;
-            }
-
-            draw(context: CanvasRenderingContext2D, width: number, height: number) {
-                if (this.opacity <= 0) return;
-
-                const drawX = (this.x / 1000) * width;
-                const drawY = (this.y / 1000) * height;
-
-                context.shadowBlur = 10;
-                context.shadowColor = this.color;
-                context.fillStyle = this.color;
-                context.globalAlpha = this.opacity * 0.8;
-
-                context.beginPath();
-                context.arc(drawX, drawY, this.size, 0, Math.PI * 2);
-                context.fill();
-
-                // Motion trail
-                context.shadowBlur = 0;
-                context.globalAlpha = this.opacity * 0.2;
-                context.beginPath();
-                context.arc(drawX, drawY, this.size * 1.8, 0, Math.PI * 2);
-                context.fill();
-            }
-        }
-
-        const initParticles = () => {
-            for (let i = 0; i < 4; i++) {
-                particles.push(new Particle(paths.adsOuter, "#7FFF00"));
-                particles.push(new Particle(paths.adsInner, "#7FFF00", 1.2));
-                particles.push(new Particle(paths.voiceOuter, "#00ffcc"));
-                particles.push(new Particle(paths.voiceInner, "#00ffcc", 1.2));
-                particles.push(new Particle(paths.funnelDrop, "#ffffff", 2.0));
-            }
-        };
-
-        const resize = () => {
-            const parent = canvas.parentElement;
-            if (parent) {
-                const rect = parent.getBoundingClientRect();
-                const dpr = window.devicePixelRatio || 1;
-                canvas.width = rect.width * dpr;
-                canvas.height = rect.height * dpr;
-                ctx.scale(dpr, dpr);
-                canvas.style.width = `${rect.width}px`;
-                canvas.style.height = `${rect.height}px`;
-            }
-        };
-
-        const animate = () => {
-            if (!ctx || !canvas) return;
-            const w = canvas.width / (window.devicePixelRatio || 1);
-            const h = canvas.height / (window.devicePixelRatio || 1);
-            ctx.clearRect(0, 0, w, h);
-
-            // OPTIONAL: Debugging - uncomment to see the paths
-            /*
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgba(255,0,0,0.2)';
-            Object.values(paths).forEach(path => {
-                ctx.beginPath();
-                path.forEach((p, i) => i === 0 ? ctx.moveTo((p.x/1000)*w, (p.y/1000)*h) : ctx.lineTo((p.x/1000)*w, (p.y/1000)*h));
-                ctx.stroke();
-            });
-            */
-
-            particles.forEach(p => {
-                p.update();
-                p.draw(ctx, w, h);
-            });
-
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        window.addEventListener("resize", resize);
-        resize();
-        initParticles();
-        animate();
-
-        return () => {
-            window.removeEventListener("resize", resize);
-            cancelAnimationFrame(animationFrameId);
-        };
-    }, []);
-
     return (
-        <div className="relative w-full max-w-5xl mx-auto aspect-square flex items-center justify-center overflow-hidden">
-            {/* Tech Grid Background */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                style={{
-                    backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
-                    backgroundSize: "60px 60px"
-                }}
-            />
+        <div className="relative w-full max-w-5xl mx-auto py-12 px-4 flex flex-col items-center select-none overflow-visible">
 
-            {/* Premium Illustration Container */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2 }}
-                className="relative w-full h-full p-4 md:p-8 flex items-center justify-center"
-            >
-                <div className="relative w-full aspect-square max-w-[800px]">
-                    {/* The Image (Enforced square to match coordinate grid) */}
-                    <Image
-                        src="/images/bundle-system.png"
-                        alt="Seamless Integration Diagram"
-                        fill
-                        className="object-contain filter contrast-[1.1] brightness-110 drop-shadow-[0_0_50px_rgba(127,255,0,0.05)] mix-blend-lighten pointer-events-none"
-                        priority
-                    />
+            {/* Top Cards Section */}
+            <div className="flex justify-center items-center w-full mb-32 relative z-20 gap-8 md:gap-24">
+                {/* EcoInk Ads Card */}
+                <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card w-[150px] md:w-[240px] h-[180px] md:h-[280px] rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-[#0d0d0d]/80 backdrop-blur-xl flex flex-col items-center justify-center text-center shadow-[0_0_40px_rgba(0,0,0,0.4)] relative group flex-shrink-0"
+                >
+                    <div className="w-12 h-12 md:w-20 md:h-20 bg-[#7fff00]/10 rounded-2xl flex items-center justify-center text-[#7fff00] mb-4 shadow-[inset_0_0_15px_rgba(127,255,0,0.1)] group-hover:shadow-[inset_0_0_30px_rgba(127,255,0,0.3)] transition-all duration-500">
+                        <Search className="w-6 h-6 md:w-10 md:h-10" strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-white font-black text-base md:text-2xl mb-1 tracking-tight">EcoInk Ads</h3>
+                    <p className="text-gray-400 text-[10px] md:text-sm font-bold opacity-50 uppercase tracking-widest">High-Intent Traffic</p>
+                    <div className="absolute inset-0 border border-[#7fff00]/0 group-hover:border-[#7fff00]/20 rounded-[2rem] md:rounded-[3rem] transition-all duration-500" />
+                </motion.div>
 
-                    {/* Animated atmospheric glows */}
-                    <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-[28%] left-[30%] w-24 h-24 bg-primary/15 rounded-full blur-[50px] animate-pulse" />
-                        <div className="absolute top-[28%] right-[30%] w-24 h-24 bg-accent/15 rounded-full blur-[50px] animate-pulse" />
+                {/* EcoInk Voice Card */}
+                <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card w-[150px] md:w-[240px] h-[180px] md:h-[280px] rounded-[2rem] md:rounded-[3rem] border border-white/10 bg-[#0d0d0d]/80 backdrop-blur-xl flex flex-col items-center justify-center text-center shadow-[0_0_40px_rgba(0,0,0,0.4)] relative group flex-shrink-0"
+                >
+                    <div className="w-12 h-12 md:w-20 md:h-20 bg-[#00ffcc]/10 rounded-2xl flex items-center justify-center text-[#00ffcc] mb-4 shadow-[inset_0_0_15px_rgba(0,255,204,0.1)] group-hover:shadow-[inset_0_0_30px_rgba(0,255,204,0.3)] transition-all duration-500">
+                        <Smartphone className="w-6 h-6 md:w-10 md:h-10" strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-white font-black text-base md:text-2xl mb-1 tracking-tight">EcoInk Voice</h3>
+                    <p className="text-gray-400 text-[10px] md:text-sm font-bold opacity-50 uppercase tracking-widest">AI Job Handling</p>
+                    <div className="absolute inset-0 border border-[#00ffcc]/0 group-hover:border-[#00ffcc]/20 rounded-[2rem] md:rounded-[3rem] transition-all duration-500" />
+                </motion.div>
+            </div>
+
+            {/* SVG Arc Layer */}
+            <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+                <svg className="w-full h-full" viewBox="0 0 1000 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="arc-gradient-left" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="15%" stopColor="#7fff00" stopOpacity="0" />
+                            <stop offset="25%" stopColor="#7fff00" stopOpacity="1" />
+                            <stop offset="100%" stopColor="#7fff00" stopOpacity="1" />
+                        </linearGradient>
+                        <linearGradient id="arc-gradient-right" x1="100%" y1="0%" x2="0%" y2="0%">
+                            <stop offset="15%" stopColor="#00ffcc" stopOpacity="0" />
+                            <stop offset="25%" stopColor="#00ffcc" stopOpacity="1" />
+                            <stop offset="100%" stopColor="#00ffcc" stopOpacity="1" />
+                        </linearGradient>
+                        <filter id="arc-glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="10" result="blur" />
+                        </filter>
+                    </defs>
+
+                    {/* Arc Paths calibrated to card centers (approx 280, 720) */}
+                    <path d="M 280 250 C 280 500, 500 500, 500 500" stroke="url(#arc-gradient-left)" strokeWidth="4" strokeLinecap="round" />
+                    <path d="M 280 250 C 280 500, 500 500, 500 500" stroke="#7fff00" strokeWidth="12" strokeOpacity="0.1" filter="url(#arc-glow)" />
+
+                    <path d="M 720 250 C 720 500, 500 500, 500 500" stroke="url(#arc-gradient-right)" strokeWidth="4" strokeLinecap="round" />
+                    <path d="M 720 250 C 720 500, 500 500, 500 500" stroke="#00ffcc" strokeWidth="12" strokeOpacity="0.1" filter="url(#arc-glow)" />
+
+                    <FlowParticle path="M 280 250 C 280 500, 500 500, 500 500" color="#7fff00" delay={0} size={5} />
+                    <FlowParticle path="M 720 250 C 720 500, 500 500, 500 500" color="#00ffcc" delay={1.5} size={5} />
+                </svg>
+            </div>
+
+            {/* Convergence Point */}
+            <div className="absolute top-[500px] left-1/2 -translate-x-1/2 z-20">
+                <div className="w-4 h-4 bg-white rounded-full shadow-[0_0_20px_#fff,0_0_40px_#7fff00]" />
+            </div>
+
+            {/* Bottom Card: Booked Jobs */}
+            <div className="relative mt-20 z-20">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-8 md:p-10 rounded-[2.5rem] border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-2xl w-[280px] md:w-[400px] flex flex-col items-center text-center shadow-[0_0_60px_rgba(0,0,0,0.6)] relative overflow-hidden"
+                >
+                    <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-[#7fff00]/10 blur-[80px] rounded-full pointer-events-none" />
+
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-[#7fff00]/10 border border-[#7fff00]/40 rounded-full flex items-center justify-center text-[#7fff00] mb-6 relative z-10 shadow-[0_0_20px_rgba(127,255,0,0.2)]">
+                        <CheckCircle2 className="w-8 h-8 md:w-10 md:h-10" strokeWidth={2.5} />
                     </div>
 
-                    {/* The Animation Layer */}
-                    <canvas
-                        ref={canvasRef}
-                        className="absolute inset-0 z-10 pointer-events-none"
-                    />
-                </div>
-            </motion.div>
+                    <h3 className="text-3xl md:text-5xl font-black text-white mb-2 tracking-tighter relative z-10">Booked Jobs</h3>
+                    <p className="text-[#7fff00] font-bold tracking-[0.4em] text-[10px] md:text-xs uppercase opacity-90 relative z-10">Revenue Generated</p>
 
-            {/* Overlay Title */}
-            <div className="absolute top-10 inset-x-0 text-center pointer-events-none">
-                <span className="text-white/30 font-heading tracking-[15px] text-[10px] md:text-sm uppercase font-bold">
-                    Seamless System Integration
-                </span>
+                    <div className="h-0.5 w-32 bg-gradient-to-r from-transparent via-[#7fff00] to-transparent mt-8 opacity-30" />
+                </motion.div>
             </div>
         </div>
+    );
+};
+
+/**
+ * FlowParticle Subcomponent
+ */
+const FlowParticle = ({ path, color, delay, duration = 3.5, size = 4 }: { path: string; color: string; delay: number; duration?: number; size?: number }) => {
+    return (
+        <motion.circle r={size} fill={color} style={{ filter: `drop-shadow(0 0 10px ${color})` }}>
+            <animateMotion
+                path={path}
+                begin={`${delay}s`}
+                dur={`${duration}s`}
+                repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0.4 0 0.6 1"
+            />
+            <animate
+                attributeName="opacity"
+                values="0;1;1;0"
+                keyTimes="0;0.1;0.9;1"
+                dur={`${duration}s`}
+                begin={`${delay}s`}
+                repeatCount="indefinite"
+            />
+        </motion.circle>
     );
 };
 
