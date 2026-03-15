@@ -86,12 +86,12 @@ export default function Home() {
                   <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="flex flex-col items-start text-left px-2">
-                    <div className="mb-6 self-center sm:self-start group-hover:scale-105 transition-transform duration-700">
+                    <div className="mb-6 self-center w-full flex justify-center group-hover:scale-105 transition-transform duration-700">
                       <ProductIcon
-                        src="/ECOINK/WhatsApp_Image_2026-02-14_at_12.48.07_AM-removebg-preview.png"
+                        src="/ECOINK/2 (4).png"
                         alt="EcoInk Ads"
                         glowColor="#7FFF00"
-                        className="w-64 h-64"
+                        className="w-40 h-40"
                       />
                     </div>
 
@@ -134,12 +134,12 @@ export default function Home() {
                   <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="flex flex-col items-start text-left px-2">
-                    <div className="mb-6 self-center sm:self-start group-hover:scale-105 transition-transform duration-700">
+                    <div className="mb-6 self-center w-full flex justify-center group-hover:scale-105 transition-transform duration-700">
                       <ProductIcon
-                        src="/ECOINK/WhatsApp_Image_2026-02-14_at_12.48.08_AM-removebg-preview.png"
+                        src="/ECOINK/1 (1).png"
                         alt="EcoInk Voice"
                         glowColor="#00ffcc"
-                        className="w-64 h-64"
+                        className="w-40 h-40"
                       />
                     </div>
 

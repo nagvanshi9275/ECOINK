@@ -35,15 +35,13 @@ const ProductIcon: React.FC<ProductIconProps> = ({
                 className
             )}
         >
-            {/* Background Radial Glow - Hidden if using src to let the image's natural glow shine */}
-            {!src && (
-                <div
-                    className="absolute inset-0 rounded-full blur-3xl opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
-                    style={{
-                        background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`
-                    }}
-                />
-            )}
+            {/* Background Radial Glow */}
+            <div
+                className="absolute inset-0 rounded-full blur-3xl opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-50"
+                style={{
+                    background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`
+                }}
+            />
 
             {/* Main Icon Content */}
             <div className="relative z-10 w-full h-full flex items-center justify-center">
